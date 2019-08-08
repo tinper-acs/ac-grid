@@ -45,8 +45,7 @@ class NcGrid extends Component {
                         next
                         size="sm"
                         gap={true}
-                        items={5}
-                        maxButtons={5}
+                        items={0}
                         {...paginationObj}
                     />
                 </div>:''

@@ -47,16 +47,12 @@ var Grid = function (_Component) {
             data = _props.data,
             otherProps = _objectWithoutProperties(_props, ["paginationObj", "data"]);
 
-        return _react2["default"].createElement(
-            "div",
-            { className: "ac-nc-grid-wrapper" },
-            _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
-                className: "ac-nc-grid",
-                data: data,
-                paginationObj: "none"
-
-            }))
-        );
+        return _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
+            className: "ac-nc-grid",
+            data: data,
+            paginationObj: "none",
+            columnFilterAble: false
+        }));
     };
 
     return Grid;

@@ -7505,7 +7505,8 @@ ul {
   height: 50px;
   display: flex;
   justify-content: space-between;
-  padding-top: 9px; }
+  padding-top: 9px;
+  padding-left: 10px; }
   .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-select {
     width: 85px; }
   .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a:hover, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span:hover {
@@ -7516,6 +7517,13 @@ ul {
     background: #fff; }
   .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-total {
     display: none; }
+
+.ac-edit-grid.max {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: #fff;
+  width: 100%; }
 
 .ac-edit-grid .ac-nc-grid-wrapper .u-table td {
   padding: 0 8px;
@@ -7539,10 +7547,25 @@ ul {
   .ac-edit-grid-panel.close {
     margin-left: 8px;
     margin-right: 8px; }
+  .ac-edit-grid-panel .maxmin-btn {
+    padding: 3px; }
+    .ac-edit-grid-panel .maxmin-btn .uf {
+      font-size: 19px !important; }
 
 .ac-edit-grid .copy-to-here {
   cursor: pointer;
   color: #0073E1; }
+
+.ac-edit-grid-inner.show .u-grid {
+  height: auto;
+  min-height: 76px; }
+
+.ac-edit-grid-inner.hide .u-grid {
+  height: 0; }
+
+.ac-edit-grid-inner.max {
+  width: 100%;
+  height: 100%; }
 
 .u-table-filter-column-pop-cont-item > span {
   margin: 0 !important; }

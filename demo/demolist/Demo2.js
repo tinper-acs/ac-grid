@@ -24,7 +24,8 @@ const column = [
     width: 150,
     type:'input',
     required:true,
-    validate:true
+    validate:true,
+    disabled:true
   },
   {
     title: "金额",
@@ -46,13 +47,13 @@ const column = [
     validate:true,
     options:[
       {
-        key:'1',value:'类型1'
+        key:'类型1',value:'1'
       },
       {
-        key:'2',value:'类型2'
+        key:'类型2',value:'2'
       },
       {
-        key:'3',value:'类型3'
+        key:'类型3',value:'3'
       },
     ]
   },
@@ -98,7 +99,7 @@ const dataList = [
     index: 1,
     orderCode: "2343",
     supplierName: "xxx",
-    type_name: "1",
+    type_name: "类型1",
     purchasing: "内行",
     purchasingGroup: "323",
     voucherDate: "kkkk",
@@ -113,7 +114,7 @@ const dataList = [
     index: 2,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "2",
+    type_name: "类型2",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -128,7 +129,7 @@ const dataList = [
     index: 3,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "3",
+    type_name: "类型3",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -143,7 +144,7 @@ const dataList = [
     index: 4,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "3",
+    type_name: "类型3",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -167,8 +168,8 @@ class Demo1 extends Component {
   }
   render() {
     let paginationObj = {
-      items:10,//一页显示多少条
-      total:100,//总共多少条、
+      items:10,
+      // total:20,//总共多少条、
       freshData:this.freshData,//点击下一页刷新的数据
       onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件
       showJump:false,

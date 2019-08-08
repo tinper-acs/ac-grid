@@ -15,15 +15,13 @@ class Grid extends Component {
     render() {
         const { paginationObj, data,  ...otherProps } = this.props;
         return (
-            <div className='ac-nc-grid-wrapper'>
-                <BeeGrid
-                    {...otherProps}
-                    className="ac-nc-grid"
-                    data={data}
-                    paginationObj='none'
-                    
-                />
-            </div>
+            <BeeGrid
+                {...otherProps}
+                className="ac-nc-grid"
+                data={data}
+                paginationObj='none'  
+                columnFilterAble={false}
+            />
         );
     }
 }

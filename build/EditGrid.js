@@ -30,6 +30,10 @@ var _lodash3 = require("lodash.clonedeep");
 
 var _lodash4 = _interopRequireDefault(_lodash3);
 
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _tinperBee = require("tinper-bee");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -50,7 +54,9 @@ var propTypes = {
     onChange: _propTypes2["default"].func, //数据改变回调
     clsfix: _propTypes2["default"].string,
     onOpenChange: _propTypes2["default"].func, //展开收起回调
-    title: _propTypes2["default"].string
+    title: _propTypes2["default"].string,
+    disabled: _propTypes2["default"].bool, //是否可编辑
+    onDel: _propTypes2["default"].func
 };
 
 var defaultProps = {
@@ -59,7 +65,8 @@ var defaultProps = {
     data: [],
     columns: [],
     onChange: function onChange() {},
-    onOpenChange: function onOpenChange() {}
+    onOpenChange: function onOpenChange() {},
+    onDel: function onDel() {}
 };
 
 var EditGrid = function (_Component) {
@@ -104,7 +111,7 @@ var EditGrid = function (_Component) {
         _this.addRow = function () {
             var data = _this.state.data.slice();
             var length = data.length;
-            var obj = (0, _lodash4["default"])(data[0]);
+            var obj = (0, _lodash4["default"])(data[0] || {});
             for (var attr in obj) {
                 if (attr == 'index') {
                     obj.index = length + 1;
@@ -125,11 +132,12 @@ var EditGrid = function (_Component) {
                 selectData = _this$state.selectData,
                 data = _this$state.data;
 
-            data.splice(selectData.index - 1, 1);
+            data.splice(selectData.index - 1, selectData.length);
             _this.setState({
                 data: data
             });
             _this.props.onChange(data);
+            _this.props.onDel(selectData);
         };
 
         _this.copyRow = function () {
@@ -162,7 +170,11 @@ var EditGrid = function (_Component) {
             });
         };
 
-        _this.max = function () {};
+        _this.max = function () {
+            _this.setState({
+                isMax: !_this.state.isMax
+            });
+        };
 
         _this.onRowHover = function (index, record) {
             _this.currentIndex = index;
@@ -204,12 +216,112 @@ var EditGrid = function (_Component) {
             _this.props.onChange(data);
         };
 
+        _this.renderDom = function () {
+            var _this$props = _this.props,
+                exportData = _this$props.exportData,
+                clsfix = _this$props.clsfix,
+                title = _this$props.title,
+                propsData = _this$props.data,
+                cl = _this$props.columns,
+                otherProps = _objectWithoutProperties(_this$props, ["exportData", "clsfix", "title", "data", "columns"]);
+
+            var _this$state3 = _this.state,
+                data = _this$state3.data,
+                open = _this$state3.open,
+                columns = _this$state3.columns,
+                copying = _this$state3.copying,
+                isMax = _this$state3.isMax;
+
+            var _exportData = exportData || data;
+            return _react2["default"].createElement(
+                "div",
+                { className: clsfix + " " + (isMax ? 'max' : '') },
+                _react2["default"].createElement(
+                    "div",
+                    { className: clsfix + "-panel " + (open ? '' : 'close') },
+                    _react2["default"].createElement(
+                        "span",
+                        { onClick: _this.open },
+                        _react2["default"].createElement(
+                            "span",
+                            { className: clsfix + "-panel-icon" },
+                            open ? _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-down" }) : _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-right" })
+                        ),
+                        _react2["default"].createElement(
+                            "span",
+                            { className: clsfix + "-panel-title" },
+                            title
+                        )
+                    ),
+                    open ? _react2["default"].createElement(
+                        "span",
+                        { className: clsfix + "-panel-btns" },
+                        copying ? _react2["default"].createElement(
+                            _tinperBee.ButtonGroup,
+                            null,
+                            _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { bordered: true, onClick: _this.copyToEnd },
+                                "\u7C98\u8D34\u81F3\u672B\u884C"
+                            ),
+                            _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { bordered: true, onClick: _this.cancelCopy },
+                                "\u53D6\u6D88"
+                            )
+                        ) : _react2["default"].createElement(
+                            _tinperBee.ButtonGroup,
+                            null,
+                            _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { bordered: true, onClick: _this.addRow },
+                                "\u589E\u884C"
+                            ),
+                            _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { bordered: true, onClick: _this.delRow },
+                                "\u5220\u884C"
+                            ),
+                            _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { bordered: true, onClick: _this.copyRow },
+                                "\u590D\u5236\u884C"
+                            ),
+                            isMax ? _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { className: "maxmin-btn", bordered: true, onClick: _this.max },
+                                _react2["default"].createElement(_tinperBee.Icon, { type: "uf-minimize" })
+                            ) : _react2["default"].createElement(
+                                _tinperBee.Button,
+                                { className: "maxmin-btn", bordered: true, onClick: _this.max },
+                                _react2["default"].createElement(_tinperBee.Icon, { type: "uf-maxmize" })
+                            )
+                        )
+                    ) : ''
+                ),
+                _react2["default"].createElement(
+                    "div",
+                    { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
+                    _react2["default"].createElement(_NcGrid2["default"], _extends({}, otherProps, {
+                        columns: columns,
+                        data: data,
+                        exportData: _exportData,
+                        paginationObj: "none",
+                        getSelectedDataFunc: _this.getSelectedDataFunc,
+                        hoverContent: _this.hoverContent,
+                        onRowHover: _this.onRowHover
+                    }))
+                )
+            );
+        };
+
         _this.state = {
             columns: props.columns,
-            data: props.data,
+            data: props.data || [],
             selectData: [], //选中的数据
             copying: false, //是否正在拷贝
-            open: props.open || true
+            open: props.defaultOpen || false,
+            isMax: false
         };
         return _this;
     }
@@ -217,6 +329,7 @@ var EditGrid = function (_Component) {
     EditGrid.prototype.componentWillMount = function componentWillMount() {
         var _this2 = this;
 
+        if (this.props.disabled) return;
         var columns = this.state.columns.slice();
         columns.forEach(function (item) {
             if (item.type) {
@@ -240,7 +353,7 @@ var EditGrid = function (_Component) {
 
         //给data加index
         var data = this.state.data.slice();
-        if (data[0].index == 1) return;
+        if (data[0] && data[0].index == 1) return;
         data.forEach(function (item, index) {
             item.index = index + 1;
         });
@@ -255,14 +368,14 @@ var EditGrid = function (_Component) {
     EditGrid.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         if (!(0, _lodash2["default"])(nextProps.data, this.state.data)) {
             this.setState({
-                data: data
+                data: nextProps.data
             });
         }
-        if ('open' in nextProps) {
-            this.setState({
-                open: open
-            });
-        }
+        // if('open' in nextProps){
+        //     this.setState({
+        //         open
+        //     })
+        // }
     };
 
     //打开关闭
@@ -290,111 +403,11 @@ var EditGrid = function (_Component) {
     //粘贴至此处
 
 
-    // resetIndex=(data)=>{
-    //     console.log(this)
-    //     console.log('-----',data)
-    //     let d = data.slice();
-    //     d.forEach((item,i)=>{
-    //         if(item.index+1!==i){
-    //             item.index=i+1;
-    //             item.key=(i+1).toString()
-    //         }
-    //     })
-    //     console.log(d)
-    //     return d;
-    // }
-
     EditGrid.prototype.render = function render() {
-        var _props = this.props,
-            exportData = _props.exportData,
-            clsfix = _props.clsfix,
-            title = _props.title,
-            propsData = _props.data,
-            cl = _props.columns,
-            otherProps = _objectWithoutProperties(_props, ["exportData", "clsfix", "title", "data", "columns"]);
-
-        var _state = this.state,
-            data = _state.data,
-            open = _state.open,
-            columns = _state.columns,
-            copying = _state.copying;
-
-        var _exportData = exportData || data;
         return _react2["default"].createElement(
-            "div",
-            { className: clsfix },
-            _react2["default"].createElement(
-                "div",
-                { className: clsfix + "-panel " + (open ? '' : 'close') },
-                _react2["default"].createElement(
-                    "span",
-                    { onClick: this.open },
-                    _react2["default"].createElement(
-                        "span",
-                        { className: clsfix + "-panel-icon" },
-                        open ? _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-down" }) : _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-right" })
-                    ),
-                    _react2["default"].createElement(
-                        "span",
-                        { className: clsfix + "-panel-title" },
-                        title
-                    )
-                ),
-                _react2["default"].createElement(
-                    "span",
-                    { className: clsfix + "-panel-btns" },
-                    copying ? _react2["default"].createElement(
-                        _tinperBee.ButtonGroup,
-                        null,
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.copyToEnd },
-                            "\u7C98\u8D34\u81F3\u672B\u884C"
-                        ),
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.cancelCopy },
-                            "\u53D6\u6D88"
-                        )
-                    ) : _react2["default"].createElement(
-                        _tinperBee.ButtonGroup,
-                        null,
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.addRow },
-                            "\u589E\u884C"
-                        ),
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.delRow },
-                            "\u5220\u884C"
-                        ),
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.copyRow },
-                            "\u590D\u5236\u884C"
-                        ),
-                        _react2["default"].createElement(
-                            _tinperBee.Button,
-                            { bordered: true, onClick: this.max },
-                            _react2["default"].createElement(_tinperBee.Icon, { type: "uf-maxmize" })
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement(
-                _tinperBee.Collapse,
-                { "in": open },
-                _react2["default"].createElement(_NcGrid2["default"], _extends({}, otherProps, {
-                    columns: columns,
-                    data: data,
-                    exportData: _exportData,
-                    paginationObj: "none",
-                    getSelectedDataFunc: this.getSelectedDataFunc,
-                    hoverContent: this.hoverContent,
-                    onRowHover: this.onRowHover
-                }))
-            )
+            "span",
+            null,
+            this.state.isMax ? _reactDom2["default"].createPortal(this.renderDom(), document.querySelector('body')) : this.renderDom()
         );
     };
 

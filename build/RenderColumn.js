@@ -85,6 +85,7 @@ var RenderColumn = function (_Component) {
                                 } })
                         )
                     );
+
                 case 'input':
                     return _react2["default"].createElement(
                         'div',
@@ -102,6 +103,7 @@ var RenderColumn = function (_Component) {
                                 } })
                         )
                     );
+
                 case 'select':
                     return _react2["default"].createElement(
                         'div',

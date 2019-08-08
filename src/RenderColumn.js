@@ -46,6 +46,7 @@ class RenderColumn extends Component {
                             </RenderCell>
                         }
                     </div>);
+ 
             case 'input':
                 return (<div>
                     {
@@ -59,6 +60,7 @@ class RenderColumn extends Component {
                         </RenderCell>
                     }
                 </div>);
+
             case 'select':
                 return (<div>
                         {

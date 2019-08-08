@@ -1,17 +1,20 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import NcGird, {GridToolBar} from "./NcGrid";
+import NcGird from "./NcGrid";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
-import { Collapse,Button,Icon,ButtonGroup } from 'tinper-bee';
+import ReactDOM from 'react-dom'
+import { Button,Icon,ButtonGroup } from 'tinper-bee';
 
 
 const propTypes = {
     onChange:PropTypes.func,//数据改变回调
     clsfix:PropTypes.string,
     onOpenChange:PropTypes.func,//展开收起回调
-    title:PropTypes.string
+    title:PropTypes.string,
+    disabled:PropTypes.bool,//是否可编辑
+    onDel:PropTypes.func
 }
 
 const defaultProps = {
@@ -21,6 +24,7 @@ const defaultProps = {
     columns:[],
     onChange:()=>{},
     onOpenChange:()=>{},
+    onDel:()=>{},
 };
 
 class EditGrid extends Component {
@@ -28,14 +32,16 @@ class EditGrid extends Component {
         super(props);
         this.state={
             columns:props.columns,
-            data:props.data,
+            data:props.data||[],
             selectData:[],//选中的数据
             copying:false,//是否正在拷贝
-            open:props.open||true
+            open:props.defaultOpen||false,
+            isMax:false
         }
     }
 
     componentWillMount(){
+        if(this.props.disabled)return;
         let columns = this.state.columns.slice();
         columns.forEach(item => {
             if(item.type){
@@ -59,7 +65,7 @@ class EditGrid extends Component {
 
         //给data加index
         let data  = this.state.data.slice();
-        if(data[0].index==1)return;
+        if(data[0]&&data[0].index==1)return;
         data.forEach((item,index)=>{
             item.index=index+1
         })
@@ -96,14 +102,14 @@ class EditGrid extends Component {
     componentWillReceiveProps(nextProps){
         if(!isequal(nextProps.data,this.state.data)){
             this.setState({
-                data
+                data:nextProps.data
             })
         }
-        if('open' in nextProps){
-            this.setState({
-                open
-            })
-        }
+        // if('open' in nextProps){
+        //     this.setState({
+        //         open
+        //     })
+        // }
     }
 
     //打开关闭
@@ -118,7 +124,7 @@ class EditGrid extends Component {
     addRow=()=>{
         let data = this.state.data.slice();
         let length = data.length;
-        let obj = cloneDeep(data[0]);
+        let obj = cloneDeep(data[0]||{});
         for(let attr in obj){
             if(attr=='index'){
                 obj.index=length+1;
@@ -137,11 +143,12 @@ class EditGrid extends Component {
     //删行
     delRow=()=>{
         let {selectData,data} = this.state;
-        data.splice(selectData.index-1,1);
+        data.splice(selectData.index-1,selectData.length);
         this.setState({
             data
         })
         this.props.onChange(data)
+        this.props.onDel(selectData)
     }
     //复制行
     copyRow=()=>{
@@ -173,7 +180,9 @@ class EditGrid extends Component {
 
     //最大化
     max=()=>{
-
+        this.setState({
+            isMax:!this.state.isMax
+        })
     }
     //行hover
     onRowHover = (index,record) => {
@@ -214,26 +223,12 @@ class EditGrid extends Component {
         this.props.onChange(data)
     }
 
-    // resetIndex=(data)=>{
-    //     console.log(this)
-    //     console.log('-----',data)
-    //     let d = data.slice();
-    //     d.forEach((item,i)=>{
-    //         if(item.index+1!==i){
-    //             item.index=i+1;
-    //             item.key=(i+1).toString()
-    //         }
-    //     })
-    //     console.log(d)
-    //     return d;
-    // }
-
-    render() {
+    renderDom=()=>{
         const { exportData, clsfix,title, data:propsData,columns:cl, ...otherProps } = this.props; 
-        let { data,open,columns,copying } = this.state;
+        let { data,open,columns,copying,isMax } = this.state;
         let _exportData = exportData || data;
         return (
-            <div className={clsfix}>
+            <div className={`${clsfix} ${isMax?'max':''}`}>
                 <div className={`${clsfix}-panel ${open?'':'close'}`}>
                     <span onClick={this.open}>
                         <span className={`${clsfix}-panel-icon`}>
@@ -245,37 +240,54 @@ class EditGrid extends Component {
                             {title}
                         </span>
                     </span>
+                    {
+                        open?<span className={`${clsfix}-panel-btns`}>
+                            {
+                                copying?<ButtonGroup>
+                                            <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
+                                            <Button bordered onClick={this.cancelCopy}>取消</Button>
+                                        </ButtonGroup>:<ButtonGroup>
+                                                        <Button bordered onClick={this.addRow}>增行</Button>
+                                                        <Button bordered onClick={this.delRow}>删行</Button>
+                                                        <Button bordered onClick={this.copyRow}>复制行</Button>
+
+                                                        {
+                                                            isMax?<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>
+                                                            :<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-maxmize'/></Button>
+                                                        }
+                                                        
+                                                    </ButtonGroup>
+                            }
+                        </span>:''
+                    }
                     
-                    <span className={`${clsfix}-panel-btns`}>
-                        {
-                            copying?<ButtonGroup>
-                                        <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
-                                        <Button bordered onClick={this.cancelCopy}>取消</Button>
-                                    </ButtonGroup>:<ButtonGroup>
-                                                    <Button bordered onClick={this.addRow}>增行</Button>
-                                                    <Button bordered onClick={this.delRow}>删行</Button>
-                                                    <Button bordered onClick={this.copyRow}>复制行</Button>
-                                                    <Button bordered onClick={this.max}><Icon type='uf-maxmize'/></Button>
-                                                   </ButtonGroup>
-                        }
-                    </span>
                 </div>
-                <Collapse in={open}>
-                    <NcGird
-                        {...otherProps}
-                        columns = {columns}
-                        data={data}
-                        exportData={_exportData}
-                        paginationObj='none'
-                        getSelectedDataFunc={this.getSelectedDataFunc}
-                        hoverContent={this.hoverContent}
-                        onRowHover={this.onRowHover}
-                    />
-                </Collapse>
-                
+                <div className={`${clsfix}-inner ${open?'show':'hide'} ${isMax?'max':''}`}>
+                            <NcGird
+                                {...otherProps}
+                                columns = {columns}
+                                data={data}
+                                exportData={_exportData}
+                                paginationObj='none'
+                                getSelectedDataFunc={this.getSelectedDataFunc}
+                                hoverContent={this.hoverContent}
+                                onRowHover={this.onRowHover}
+                            />
+                        </div>
             </div>
-            
-        );
+        )
+        
+    }
+
+    render() {
+        return (
+            <span>
+                {
+                    this.state.isMax?ReactDOM.createPortal(this.renderDom(),document.querySelector('body')):this.renderDom()
+                }
+            </span>
+        )
+        
     }
 }
 

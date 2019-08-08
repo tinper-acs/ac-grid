@@ -146,8 +146,8 @@ class Demo1 extends Component {
 
   render() {
     let paginationObj = {
-      items:10,//一页显示多少条
-      total:100,//总共多少条、
+      maxButtons:999,
+      items:15,//一页显示多少条
       activePage:2,
       onSelect:(value)=>{console.log('切换到第几页：'+value)},
       onDataNumSelect:(value)=>{console.log("每页多少条："+value)},//改变页码回调

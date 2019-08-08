@@ -104,8 +104,7 @@ var NcGrid = function (_Component) {
                     next: true,
                     size: "sm",
                     gap: true,
-                    items: 5,
-                    maxButtons: 5
+                    items: 0
                 }, paginationObj))
             ) : ''
         );
