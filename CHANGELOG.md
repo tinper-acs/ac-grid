@@ -1,3 +1,13 @@
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.3...v0.0.4) (2019-08-08)
+
+
+### Features
+
+* **ac-nc-grid:** onDel 最大化最小化 ([cd8fda5](https://github.com/tinper-bee/ac-nc-grid/commit/cd8fda5))
+
+
+
 <a name="0.0.3"></a>
 ## [0.0.3](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.2...v0.0.3) (2019-08-08)
 
