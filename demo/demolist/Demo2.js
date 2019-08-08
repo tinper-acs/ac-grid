@@ -96,7 +96,7 @@ const column = [
 ];
 const dataList = [
   {
-    index: 1,
+    // index: 1,
     orderCode: "2343",
     supplierName: "xxx",
     type_name: "类型1",
@@ -111,7 +111,7 @@ const dataList = [
     key: "1"
   },
   {
-    index: 2,
+    // index: 2,
     orderCode: "222",
     supplierName: "22xxx",
     type_name: "类型2",
@@ -126,7 +126,7 @@ const dataList = [
     key: "2"
   },
   {
-    index: 3,
+    // index: 3,
     orderCode: "222",
     supplierName: "22xxx",
     type_name: "类型3",
@@ -141,7 +141,7 @@ const dataList = [
     key: "3"
   },
   {
-    index: 4,
+    // index: 4,
     orderCode: "222",
     supplierName: "22xxx",
     type_name: "类型3",
@@ -178,6 +178,8 @@ class Demo1 extends Component {
     return (
       <div>
           <EditGrid
+          disabled={false}
+          defaultOpen={true}
           columns={column}
           data={dataList}
           paginationObj={paginationObj}

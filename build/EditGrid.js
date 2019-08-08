@@ -56,7 +56,8 @@ var propTypes = {
     onOpenChange: _propTypes2["default"].func, //展开收起回调
     title: _propTypes2["default"].string,
     disabled: _propTypes2["default"].bool, //是否可编辑
-    onDel: _propTypes2["default"].func
+    onDel: _propTypes2["default"].func,
+    defaultOpen: _propTypes2["default"].bool //默认是否打开
 };
 
 var defaultProps = {
@@ -88,10 +89,7 @@ var EditGrid = function (_Component) {
         };
 
         _this.getSelectedDataFunc = function (selectData) {
-            var data = _this.state.data.slice();
-            data.forEach(function (item) {
-                item._checked = false;
-            });
+            var data = _this.resetChecked(_this.state.data);
             selectData.forEach(function (item) {
                 data[item.index - 1]._checked = !data[item.index - 1]._checked;
             });
@@ -99,6 +97,14 @@ var EditGrid = function (_Component) {
                 selectData: selectData,
                 data: data
             });
+        };
+
+        _this.resetChecked = function (dataValue) {
+            var data = dataValue.slice();
+            data.forEach(function (item) {
+                item._checked = false;
+            });
+            return data;
         };
 
         _this.open = function () {
@@ -133,6 +139,7 @@ var EditGrid = function (_Component) {
                 data = _this$state.data;
 
             data.splice(selectData.index - 1, selectData.length);
+            data = _this.resetChecked(data);
             _this.setState({
                 data: data
             });
@@ -367,6 +374,9 @@ var EditGrid = function (_Component) {
 
     EditGrid.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         if (!(0, _lodash2["default"])(nextProps.data, this.state.data)) {
+            nextProps.data.forEach(function (item, index) {
+                item.index = index + 1;
+            });
             this.setState({
                 data: nextProps.data
             });

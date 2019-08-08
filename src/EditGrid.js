@@ -14,7 +14,8 @@ const propTypes = {
     onOpenChange:PropTypes.func,//展开收起回调
     title:PropTypes.string,
     disabled:PropTypes.bool,//是否可编辑
-    onDel:PropTypes.func
+    onDel:PropTypes.func,
+    defaultOpen:PropTypes.bool,//默认是否打开
 }
 
 const defaultProps = {
@@ -86,10 +87,7 @@ class EditGrid extends Component {
 
     //选中数据的回调
     getSelectedDataFunc=(selectData)=>{
-        let data = this.state.data.slice();
-        data.forEach(item=>{
-            item._checked=false
-        })
+        let data = this.resetChecked(this.state.data)
         selectData.forEach((item)=>{
             data[item.index-1]._checked=!data[item.index-1]._checked
         })
@@ -99,8 +97,20 @@ class EditGrid extends Component {
         })
     }
 
+    resetChecked=(dataValue)=>{
+        let data = dataValue.slice();
+        data.forEach(item=>{
+            item._checked=false
+        })
+        return data
+    }
+
+
     componentWillReceiveProps(nextProps){
         if(!isequal(nextProps.data,this.state.data)){
+            nextProps.data.forEach((item,index)=>{
+                item.index=index+1
+            })
             this.setState({
                 data:nextProps.data
             })
@@ -144,6 +154,7 @@ class EditGrid extends Component {
     delRow=()=>{
         let {selectData,data} = this.state;
         data.splice(selectData.index-1,selectData.length);
+        data = this.resetChecked(data)
         this.setState({
             data
         })
