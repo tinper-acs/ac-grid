@@ -1,0 +1,279 @@
+import React, {Component} from "react";
+import PropTypes from 'prop-types';
+import NcGird, {GridToolBar} from "./NcGrid";
+import RenderColumn from './RenderColumn';
+import isequal from 'lodash.isequal';
+import cloneDeep from 'lodash.clonedeep';
+import { Collapse,Button,Icon,ButtonGroup } from 'tinper-bee';
+
+
+const propTypes = {
+    onChange:PropTypes.func,//数据改变回调
+    clsfix:PropTypes.string,
+    onOpenChange:PropTypes.func,//展开收起回调
+}
+
+const defaultProps = {
+    title:'标题',
+    clsfix:'ac-edit-grid',
+    data: [],
+    columns:[],
+    onChange:()=>{},
+    onOpenChange:()=>{},
+};
+
+class EditGrid extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            columns:props.columns,
+            data:props.data,
+            selectData:[],//选中的数据
+            copying:false,//是否正在拷贝
+            open:props.open||true
+        }
+    }
+
+    componentWillMount(){
+        let columns = this.state.columns.slice();
+        columns.forEach(item => {
+            if(item.type){
+                item.render=(text,record,index)=>{
+                    return <RenderColumn
+                                type={item.type}
+                                index={index}
+                                dataIndex={item.dataIndex}
+                                value={text}
+                                options={item.options}
+                                onChange={this.onChange}
+                            />
+                }
+            }
+        });
+        this.setState({
+            columns
+        })
+
+        //给data加index
+        let data  = this.state.data.slice();
+        if(data[0].index==1)return;
+        data.forEach((item,index)=>{
+            item.index=index+1
+        })
+        this.setState({
+            data
+        })
+        
+    }
+    onChange=(index,key,value)=>{
+        //改变data
+        let data  = this.state.data.slice();
+        data[index][key]=value;
+        this.setState({
+            data:data
+        })
+        this.props.onChange(data);
+    }
+
+    //选中数据的回调
+    getSelectedDataFunc=(selectData)=>{
+        let data = this.state.data.slice();
+        data.forEach(item=>{
+            item._checked=false
+        })
+        selectData.forEach((item)=>{
+            data[item.index-1]._checked=!data[item.index-1]._checked
+        })
+        this.setState({
+            selectData,
+            data
+        })
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(!isequal(nextProps.data,this.state.data)){
+            this.setState({
+                data
+            })
+        }
+        if('open' in nextProps){
+            this.setState({
+                open
+            })
+        }
+    }
+
+    //打开关闭
+    open=()=>{
+        this.props.onOpenChange(!this.state.open)
+        this.setState({
+            open:!this.state.open
+        })
+    }
+
+    //增行
+    addRow=()=>{
+        let data = this.state.data.slice();
+        let length = data.length;
+        let obj = cloneDeep(data[0]);
+        for(let attr in obj){
+            if(attr=='index'){
+                obj.index=length+1;
+            }else if(attr=='key'){
+                obj.key=`${length+1}`;
+            }else{
+                obj[attr] = ''
+            }
+        }
+        data.push(obj)
+        this.setState({
+            data
+        })
+    }
+
+    //删行
+    delRow=()=>{
+        let {selectData,data} = this.state;
+        data.splice(selectData.index-1,1);
+        this.setState({
+            data
+        })
+        this.props.onChange(data)
+    }
+    //复制行
+    copyRow=()=>{
+        this.setState({
+            copying:true
+        })
+    }
+    //粘贴至末行
+    copyToEnd=()=>{
+        let {selectData,data} = this.state;
+        selectData.forEach((item,index)=>{
+            item.index = data.length+index+1;
+            item.key = data.length+index+1+'';
+            item._checked = false;
+        })
+        data = data.concat(selectData);
+        this.setState({
+            data
+        })
+        this.props.onChange(data)
+    }
+    //取消复制
+    cancelCopy=()=>{
+        this.setState({
+            copying:false
+        })
+    }
+
+    //最大化
+    max=()=>{
+
+    }
+    //行hover
+    onRowHover = (index,record) => {
+        this.currentIndex = index;
+        console.log(this.currentIndex)
+    }
+
+    //粘贴至此处按钮
+    hoverContent=()=>{
+        if(this.state.copying){
+            return <span onClick={this.copyToHere} className='copy-to-here'>粘贴至此处</span>
+        }else{
+            return ''
+        }
+    }
+    //粘贴至此处
+    copyToHere=()=>{
+        let index = this.currentIndex;
+        let data = this.state.data.slice();
+        let selectData = this.state.selectData;
+        selectData.forEach(item=>{
+            item._checked=false
+        })
+        data.splice(index,0,...selectData);
+        data.forEach((item,i)=>{
+            console.log('index   '+i+'item.index   '+item.index)
+            if(item.index!==(i+1)){console.log('改了')
+                item.index=i+1;
+                item.key=i+1+''
+            }
+        })
+        // data = this.resetIndex(data);
+        this.setState({
+            data
+        })
+
+        this.props.onChange(data)
+    }
+
+    // resetIndex=(data)=>{
+    //     console.log(this)
+    //     console.log('-----',data)
+    //     let d = data.slice();
+    //     d.forEach((item,i)=>{
+    //         if(item.index+1!==i){
+    //             item.index=i+1;
+    //             item.key=(i+1).toString()
+    //         }
+    //     })
+    //     console.log(d)
+    //     return d;
+    // }
+
+    render() {
+        const { exportData, clsfix,title, data:propsData,columns:cl, ...otherProps } = this.props; 
+        let { data,open,columns,copying } = this.state;
+        let _exportData = exportData || data;
+        return (
+            <div className={clsfix}>
+                <div className={`${clsfix}-panel ${open?'':'close'}`}>
+                    <span onClick={this.open}>
+                        <span className={`${clsfix}-panel-icon`}>
+                            {
+                                open?<Icon type='uf-triangle-down'/>:<Icon type='uf-triangle-right'/>
+                            }
+                        </span>
+                        <span className={`${clsfix}-panel-title`}>
+                            {title}
+                        </span>
+                    </span>
+                    
+                    <span className={`${clsfix}-panel-btns`}>
+                        {
+                            copying?<ButtonGroup>
+                                        <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
+                                        <Button bordered onClick={this.cancelCopy}>取消</Button>
+                                    </ButtonGroup>:<ButtonGroup>
+                                                    <Button bordered onClick={this.addRow}>增行</Button>
+                                                    <Button bordered onClick={this.delRow}>删行</Button>
+                                                    <Button bordered onClick={this.copyRow}>复制行</Button>
+                                                    <Button bordered onClick={this.max}><Icon type='uf-maxmize'/></Button>
+                                                   </ButtonGroup>
+                        }
+                    </span>
+                </div>
+                <Collapse in={open}>
+                    <NcGird
+                        {...otherProps}
+                        columns = {columns}
+                        data={data}
+                        exportData={_exportData}
+                        paginationObj='none'
+                        getSelectedDataFunc={this.getSelectedDataFunc}
+                        hoverContent={this.hoverContent}
+                        onRowHover={this.onRowHover}
+                    />
+                </Collapse>
+                
+            </div>
+            
+        );
+    }
+}
+
+EditGrid.defaultProps = defaultProps;
+EditGrid.propTypes = propTypes;
+export default EditGrid;
