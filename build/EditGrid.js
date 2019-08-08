@@ -49,7 +49,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var propTypes = {
     onChange: _propTypes2["default"].func, //数据改变回调
     clsfix: _propTypes2["default"].string,
-    onOpenChange: _propTypes2["default"].func //展开收起回调
+    onOpenChange: _propTypes2["default"].func, //展开收起回调
+    title: _propTypes2["default"].string
 };
 
 var defaultProps = {
@@ -149,7 +150,8 @@ var EditGrid = function (_Component) {
             });
             data = data.concat(selectData);
             _this.setState({
-                data: data
+                data: data,
+                copying: false
             });
             _this.props.onChange(data);
         };
@@ -164,7 +166,6 @@ var EditGrid = function (_Component) {
 
         _this.onRowHover = function (index, record) {
             _this.currentIndex = index;
-            console.log(_this.currentIndex);
         };
 
         _this.hoverContent = function () {
@@ -183,21 +184,21 @@ var EditGrid = function (_Component) {
             var index = _this.currentIndex;
             var data = _this.state.data.slice();
             var selectData = _this.state.selectData;
-            selectData.forEach(function (item) {
+            selectData.forEach(function (item, i) {
                 item._checked = false;
+                item.index = i + index + 1;
+                item.key = i + index + 1 + '';
             });
             data.splice.apply(data, [index, 0].concat(_toConsumableArray(selectData)));
             data.forEach(function (item, i) {
-                console.log('index   ' + i + 'item.index   ' + item.index);
-                if (item.index !== i + 1) {
-                    console.log('改了');
+                if (item.index != i + 1) {
                     item.index = i + 1;
                     item.key = i + 1 + '';
                 }
             });
-            // data = this.resetIndex(data);
             _this.setState({
-                data: data
+                data: data,
+                copying: false
             });
 
             _this.props.onChange(data);

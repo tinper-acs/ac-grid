@@ -174,6 +174,7 @@ class Demo1 extends Component {
         paginationObj={paginationObj}
         multiSelect={true}
         onChange={this.onChange}
+        showPagination={false}
       />
     );
   }

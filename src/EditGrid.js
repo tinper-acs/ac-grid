@@ -11,6 +11,7 @@ const propTypes = {
     onChange:PropTypes.func,//数据改变回调
     clsfix:PropTypes.string,
     onOpenChange:PropTypes.func,//展开收起回调
+    title:PropTypes.string
 }
 
 const defaultProps = {
@@ -156,7 +157,8 @@ class EditGrid extends Component {
         })
         data = data.concat(selectData);
         this.setState({
-            data
+            data,
+            copying:false
         })
         this.props.onChange(data)
     }
@@ -174,7 +176,6 @@ class EditGrid extends Component {
     //行hover
     onRowHover = (index,record) => {
         this.currentIndex = index;
-        console.log(this.currentIndex)
     }
 
     //粘贴至此处按钮
@@ -190,20 +191,22 @@ class EditGrid extends Component {
         let index = this.currentIndex;
         let data = this.state.data.slice();
         let selectData = this.state.selectData;
-        selectData.forEach(item=>{
+        selectData.forEach((item,i)=>{
             item._checked=false
+            item.index = i+index+1;
+            item.key = i+index+1+'';
         })
         data.splice(index,0,...selectData);
         data.forEach((item,i)=>{
-            console.log('index   '+i+'item.index   '+item.index)
-            if(item.index!==(i+1)){console.log('改了')
+            if(item.index!=i+1){
                 item.index=i+1;
                 item.key=i+1+''
             }
+            
         })
-        // data = this.resetIndex(data);
         this.setState({
-            data
+            data,
+            copying:false
         })
 
         this.props.onChange(data)

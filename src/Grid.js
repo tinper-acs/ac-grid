@@ -1,15 +1,6 @@
 import React, {Component} from "react";
 import BeeGrid,{GridToolBar}  from "bee-complex-grid";
 
-const defualtPaginationParam = {
-    dataNumSelect: ["5", "10", "15", "20", "25", "50", "All"],
-    horizontalPosition: 'center',
-    verticalPosition: "bottom",
-    dataNum: 4,
-    btnType: {shape: 'border'},
-    noBorder: true,
-    confirmBtn: () => null
-};
 const defaultProps = {
     headerScroll: false,
     bordered: false,

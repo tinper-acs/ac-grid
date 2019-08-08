@@ -148,10 +148,9 @@ class Demo1 extends Component {
     let paginationObj = {
       items:10,//一页显示多少条
       total:100,//总共多少条、
-      freshData:this.freshData,//点击下一页刷新的数据
-      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件
-      showJump:false,
-      noBorder:true
+      activePage:2,
+      onSelect:(value)=>{console.log('切换到第几页：'+value)},
+      onDataNumSelect:(value)=>{console.log("每页多少条："+value)},//改变页码回调
     }
     return (
       <div>
