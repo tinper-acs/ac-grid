@@ -5,6 +5,7 @@
  */
 import React, { Component } from "react";
 import NcGrid from '../../src';
+import { Select } from 'tinper-bee'
 
 const EditGrid = NcGrid.EditGrid;
 
@@ -21,7 +22,9 @@ const column = [
     dataIndex: "orderCode",
     key: "orderCode",
     width: 150,
-    type:'input'
+    type:'input',
+    required:true,
+    validate:true
   },
   {
     title: "金额",
@@ -29,7 +32,9 @@ const column = [
     key: "money",
     width: 160,
     textAlign:'right',
-    type:'inputNumber'
+    type:'inputNumber',
+    required:true,
+    validate:true
   },
   {
     title: "类型",
@@ -37,6 +42,8 @@ const column = [
     key: "type_name",
     width: 100,
     type:'select',
+    required:true,
+    validate:true,
     options:[
       {
         key:'1',value:'类型1'
@@ -91,7 +98,7 @@ const dataList = [
     index: 1,
     orderCode: "2343",
     supplierName: "xxx",
-    type_name: "123",
+    type_name: "1",
     purchasing: "内行",
     purchasingGroup: "323",
     voucherDate: "kkkk",
@@ -106,7 +113,7 @@ const dataList = [
     index: 2,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "1223",
+    type_name: "2",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -121,7 +128,7 @@ const dataList = [
     index: 3,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "1223",
+    type_name: "3",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -136,7 +143,7 @@ const dataList = [
     index: 4,
     orderCode: "222",
     supplierName: "22xxx",
-    type_name: "1223",
+    type_name: "3",
     purchasing: "内行2",
     purchasingGroup: "3223",
     voucherDate: "222kk",
@@ -168,14 +175,17 @@ class Demo1 extends Component {
       noBorder:true
     }
     return (
-      <EditGrid
-        columns={column}
-        data={dataList}
-        paginationObj={paginationObj}
-        multiSelect={true}
-        onChange={this.onChange}
-        showPagination={false}
-      />
+      <div>
+          <EditGrid
+          columns={column}
+          data={dataList}
+          paginationObj={paginationObj}
+          multiSelect={true}
+          onChange={this.onChange}
+          showPagination={false}
+        />
+      </div>
+      
     );
   }
 }

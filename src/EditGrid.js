@@ -47,6 +47,8 @@ class EditGrid extends Component {
                                 value={text}
                                 options={item.options}
                                 onChange={this.onChange}
+                                validate={item.validate} 
+                                required={item.required}
                             />
                 }
             }

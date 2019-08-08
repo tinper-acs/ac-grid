@@ -31,13 +31,18 @@ class RenderColumn extends Component {
      * @returns JSX
      */
     renderComp = () => {
-        let { type, value,index,dataIndex, record, disabled, options } = this.props;
+        let { type, value,index,dataIndex, validate, disabled, options,required } = this.props;
         switch (type) {
-            case 'inputNumber'://开始时间
+            case 'inputNumber':
                 return (<div>
                         {
                             disabled?text:<RenderCell text = {value}>
-                            <NumberField value={value} onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                            <NumberField 
+                                field={dataIndex} 
+                                validate={validate} 
+                                required={required} 
+                                value={value} 
+                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                             </RenderCell>
                         }
                     </div>);
@@ -45,7 +50,12 @@ class RenderColumn extends Component {
                 return (<div>
                     {
                         disabled?text:<RenderCell text = {value}>
-                        <TextField value={value} onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                        <TextField 
+                            field={dataIndex}  
+                            validate={validate} 
+                            required={required} 
+                            value={value} 
+                            onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                         </RenderCell>
                     }
                 </div>);
@@ -53,7 +63,13 @@ class RenderColumn extends Component {
                 return (<div>
                         {
                             disabled?text:<RenderCell text = {value}>
-                                <SelectField value={value} onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}} data={options}/>
+                                <SelectField 
+                                    data={options}
+                                    field={dataIndex}  
+                                    validate={validate} 
+                                    required={required} 
+                                    value={value} 
+                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}} data={options}/>
                             </RenderCell>
                         }
                     </div>

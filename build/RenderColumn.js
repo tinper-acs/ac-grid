@@ -32,6 +32,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -60,20 +62,25 @@ var RenderColumn = function (_Component) {
                 value = _this$props.value,
                 index = _this$props.index,
                 dataIndex = _this$props.dataIndex,
-                record = _this$props.record,
+                validate = _this$props.validate,
                 disabled = _this$props.disabled,
-                options = _this$props.options;
+                options = _this$props.options,
+                required = _this$props.required;
 
             switch (type) {
                 case 'inputNumber':
-                    //开始时间
                     return _react2["default"].createElement(
                         'div',
                         null,
                         disabled ? text : _react2["default"].createElement(
                             _RenderCell2["default"],
                             { text: value },
-                            _react2["default"].createElement(_NumberField2["default"], { value: value, onChange: function onChange(field, v) {
+                            _react2["default"].createElement(_NumberField2["default"], {
+                                field: dataIndex,
+                                validate: validate,
+                                required: required,
+                                value: value,
+                                onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })
                         )
@@ -85,7 +92,12 @@ var RenderColumn = function (_Component) {
                         disabled ? text : _react2["default"].createElement(
                             _RenderCell2["default"],
                             { text: value },
-                            _react2["default"].createElement(_TextField2["default"], { value: value, onChange: function onChange(field, v) {
+                            _react2["default"].createElement(_TextField2["default"], {
+                                field: dataIndex,
+                                validate: validate,
+                                required: required,
+                                value: value,
+                                onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })
                         )
@@ -97,9 +109,15 @@ var RenderColumn = function (_Component) {
                         disabled ? text : _react2["default"].createElement(
                             _RenderCell2["default"],
                             { text: value },
-                            _react2["default"].createElement(_SelectField2["default"], { value: value, onChange: function onChange(field, v) {
+                            _react2["default"].createElement(_SelectField2["default"], _defineProperty({
+                                data: options,
+                                field: dataIndex,
+                                validate: validate,
+                                required: required,
+                                value: value,
+                                onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
-                                }, data: options })
+                                } }, 'data', options))
                         )
                     );
             }

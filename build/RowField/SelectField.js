@@ -109,7 +109,7 @@ var SelectField = function (_Component) {
             var value = _this.state.value;
             //设置校验规则
 
-            var descriptor = _defineProperty({}, field, { type: "number", required: required });
+            var descriptor = _defineProperty({}, field, { type: "string", required: required });
             var validator = new _asyncValidator2["default"](descriptor);
             validator.validate(_defineProperty({}, field, value), function (errors, fields) {
                 if (errors) {

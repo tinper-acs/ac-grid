@@ -227,7 +227,9 @@ var EditGrid = function (_Component) {
                         dataIndex: item.dataIndex,
                         value: text,
                         options: item.options,
-                        onChange: _this2.onChange
+                        onChange: _this2.onChange,
+                        validate: item.validate,
+                        required: item.required
                     });
                 };
             }
