@@ -101,8 +101,9 @@ var EditGrid = function (_Component) {
 
         _this.resetChecked = function (dataValue) {
             var data = dataValue.slice();
-            data.forEach(function (item) {
+            data.forEach(function (item, index) {
                 item._checked = false;
+                item.index = index + 1;
             });
             return data;
         };

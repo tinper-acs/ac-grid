@@ -99,8 +99,9 @@ class EditGrid extends Component {
 
     resetChecked=(dataValue)=>{
         let data = dataValue.slice();
-        data.forEach(item=>{
+        data.forEach((item,index)=>{
             item._checked=false
+            item.index=index+1
         })
         return data
     }
