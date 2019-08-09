@@ -51,12 +51,14 @@ var RenderCell = function (_Component) {
             });
         };
 
-        _this.renderSpan = function (text) {
+        _this.renderSpan = function () {
             if (_this.state.visible) {
                 return _react2["default"].createElement(
                     'span',
-                    { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''), onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter, onClick: _this.click },
-                    text
+                    { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''),
+                        onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter,
+                        onClick: _this.click },
+                    _this.props.text
                 );
             } else {
                 return _react2["default"].cloneElement(_this.props.children, {
@@ -78,7 +80,7 @@ var RenderCell = function (_Component) {
     }
 
     RenderCell.prototype.render = function render() {
-        return this.renderSpan(this.props.text);
+        return this.renderSpan();
     };
 
     return RenderCell;

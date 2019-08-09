@@ -94,7 +94,12 @@ var EditGrid = function (_Component) {
                             validate: item.validate,
                             required: item.required,
                             pattern: item.pattern,
-                            patternMessage: item.patternMessage
+                            patternMessage: item.patternMessage,
+                            iconStyle: item.iconStyle,
+                            max: item.max,
+                            min: item.min,
+                            step: item.step,
+                            precision: item.precision
                         });
                     };
                 }

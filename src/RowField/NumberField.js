@@ -171,6 +171,7 @@ class NumberField extends Component {
                     iconStyle={iconStyle}
                     step={step}
                     max={max}
+                    min={min}
                     precision={precision}
                     onBlur={onBlur}
                 />

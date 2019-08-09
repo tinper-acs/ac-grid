@@ -32,8 +32,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -56,18 +54,46 @@ var RenderColumn = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-        _this.renderComp = function () {
+        _this.getValue = function (text) {
             var _this$props = _this.props,
                 type = _this$props.type,
-                value = _this$props.value,
-                index = _this$props.index,
-                dataIndex = _this$props.dataIndex,
-                validate = _this$props.validate,
-                disabled = _this$props.disabled,
-                options = _this$props.options,
-                required = _this$props.required,
-                pattern = _this$props.pattern,
-                patternMessage = _this$props.patternMessage;
+                options = _this$props.options;
+
+            var value = '';
+            if (type && type == 'select') {
+                options.forEach(function (item) {
+                    if (item.value == text) {
+                        value = item.key;
+                    }
+                });
+            } else {
+                value = text;
+            }
+            return value;
+        };
+
+        _this.onChange = function (index, dataIndex, value) {
+            _this.getValue(value);
+            _this.props.onChange(index, dataIndex, value);
+        };
+
+        _this.renderComp = function () {
+            var _this$props2 = _this.props,
+                type = _this$props2.type,
+                value = _this$props2.value,
+                index = _this$props2.index,
+                dataIndex = _this$props2.dataIndex,
+                validate = _this$props2.validate,
+                disabled = _this$props2.disabled,
+                options = _this$props2.options,
+                required = _this$props2.required,
+                pattern = _this$props2.pattern,
+                patternMessage = _this$props2.patternMessage,
+                iconStyle = _this$props2.iconStyle,
+                max = _this$props2.max,
+                min = _this$props2.min,
+                step = _this$props2.step,
+                precision = _this$props2.precision;
 
             switch (type) {
                 case 'inputNumber':
@@ -84,6 +110,11 @@ var RenderColumn = function (_Component) {
                                 value: value,
                                 pattern: pattern,
                                 patternMessage: patternMessage,
+                                iconStyle: iconStyle,
+                                max: max,
+                                min: min,
+                                step: step,
+                                precision: precision,
                                 onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })
@@ -116,16 +147,16 @@ var RenderColumn = function (_Component) {
                         null,
                         disabled ? text : _react2["default"].createElement(
                             _RenderCell2["default"],
-                            { text: value },
-                            _react2["default"].createElement(_SelectField2["default"], _defineProperty({
+                            { text: _this.getValue(value) },
+                            _react2["default"].createElement(_SelectField2["default"], {
                                 data: options,
                                 field: dataIndex,
                                 validate: validate,
                                 required: required,
                                 value: value,
                                 onChange: function onChange(field, v) {
-                                    _this.props.onChange(index, dataIndex, v);
-                                } }, 'data', options))
+                                    _this.onChange(index, dataIndex, v);
+                                } })
                         )
                     );
             }

@@ -62,6 +62,11 @@ class EditGrid extends Component {
                                 required={item.required}
                                 pattern={item.pattern}
                                 patternMessage={item.patternMessage}
+                                iconStyle={item.iconStyle}
+                                max={item.max}
+                                min={item.min}
+                                step={item.step} 
+                                precision={item.precision}
                             />
                 }
             }

@@ -251,6 +251,7 @@ var NumberField = function (_Component) {
                 iconStyle: iconStyle,
                 step: step,
                 max: max,
+                min: min,
                 precision: precision,
                 onBlur: onBlur
             })

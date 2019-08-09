@@ -34,11 +34,12 @@ class RenderCell extends Component {
             enter:false
         })
     }
-
-    renderSpan=(text)=>{
+    renderSpan=()=>{
         if(this.state.visible){
             return (
-                <span className={`nc-grid-cell ${this.state.enter?'enter':''}`} onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} onClick={this.click}>{text}</span>
+                <span className={`nc-grid-cell ${this.state.enter?'enter':''}`} 
+                onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} 
+                onClick={this.click}>{this.props.text}</span>
             )
         }else{
             return React.cloneElement(this.props.children,{
@@ -53,7 +54,7 @@ class RenderCell extends Component {
     }
 
     render() {
-        return this.renderSpan(this.props.text);
+        return this.renderSpan();
     }
 }
 export default RenderCell;
