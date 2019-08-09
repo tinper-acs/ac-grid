@@ -110,7 +110,7 @@ class SelectField extends Component {
     render() {
         let { value, error, flag } = this.state;
 
-        let { className, message, required, data } = this.props;
+        let { className, message, required, data, onBlur } = this.props;
 
         return (
             <FieldWrap
@@ -124,6 +124,7 @@ class SelectField extends Component {
                     value={value}
                     onChange={this.handlerChange}
                     data={data}
+                    onBlur={onBlur}
                 >
                 </Select>
             </FieldWrap>

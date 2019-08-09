@@ -42,8 +42,12 @@ class EditGrid extends Component {
     }
 
     componentWillMount(){
-        if(this.props.disabled)return;
-        let columns = this.state.columns.slice();
+        this.setDataColumn(this.props.disabled,this.state.columns,this.state.data)
+    }
+
+    setDataColumn=(disabled,col,da)=>{
+        if(disabled)return;
+        let columns = col.slice();
         columns.forEach(item => {
             if(item.type){
                 item.render=(text,record,index)=>{
@@ -56,6 +60,8 @@ class EditGrid extends Component {
                                 onChange={this.onChange}
                                 validate={item.validate} 
                                 required={item.required}
+                                pattern={item.pattern}
+                                patternMessage={item.patternMessage}
                             />
                 }
             }
@@ -65,7 +71,7 @@ class EditGrid extends Component {
         })
 
         //给data加index
-        let data  = this.state.data.slice();
+        let data  = da.slice();
         if(data[0]&&data[0].index==1)return;
         data.forEach((item,index)=>{
             item.index=index+1
@@ -73,8 +79,8 @@ class EditGrid extends Component {
         this.setState({
             data
         })
-        
     }
+
     onChange=(index,key,value)=>{
         //改变data
         let data  = this.state.data.slice();
@@ -116,11 +122,9 @@ class EditGrid extends Component {
                 data:nextProps.data
             })
         }
-        // if('open' in nextProps){
-        //     this.setState({
-        //         open
-        //     })
-        // }
+        if('disabled' in nextProps){
+            this.setDataColumn(nextProps.disabled,this.state.columns,nextProps.data)
+        }
     }
 
     //打开关闭

@@ -31,7 +31,7 @@ class RenderColumn extends Component {
      * @returns JSX
      */
     renderComp = () => {
-        let { type, value,index,dataIndex, validate, disabled, options,required } = this.props;
+        let { type, value,index,dataIndex, validate, disabled, options,required,pattern,patternMessage } = this.props;
         switch (type) {
             case 'inputNumber':
                 return (<div>
@@ -42,6 +42,8 @@ class RenderColumn extends Component {
                                 validate={validate} 
                                 required={required} 
                                 value={value} 
+                                pattern={pattern}
+                                patternMessage={patternMessage}
                                 onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                             </RenderCell>
                         }
@@ -56,6 +58,8 @@ class RenderColumn extends Component {
                             validate={validate} 
                             required={required} 
                             value={value} 
+                            pattern={pattern}
+                            patternMessage={patternMessage}
                             onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                         </RenderCell>
                     }

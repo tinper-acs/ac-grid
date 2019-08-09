@@ -168,7 +168,8 @@ var SelectField = function (_Component) {
             className = _props.className,
             message = _props.message,
             required = _props.required,
-            data = _props.data;
+            data = _props.data,
+            onBlur = _props.onBlur;
 
 
         return _react2["default"].createElement(
@@ -183,7 +184,8 @@ var SelectField = function (_Component) {
                 className: className,
                 value: value,
                 onChange: this.handlerChange,
-                data: data
+                data: data,
+                onBlur: onBlur
             })
         );
     };

@@ -105,11 +105,18 @@ var TextField = function (_Component) {
                 required = _this$props2.required,
                 field = _this$props2.field,
                 index = _this$props2.index,
-                onValidate = _this$props2.onValidate;
+                onValidate = _this$props2.onValidate,
+                pattern = _this$props2.pattern,
+                patternMessage = _this$props2.patternMessage;
             var value = _this.state.value;
             //设置校验规则
 
-            var descriptor = _defineProperty({}, field, { type: "string", required: required });
+            var descriptor = _defineProperty({}, field, [{ type: "string", required: required }]);
+            if (pattern) {
+                descriptor[field].push({
+                    pattern: pattern, message: patternMessage
+                });
+            }
             var validator = new _asyncValidator2["default"](descriptor);
             validator.validate(_defineProperty({}, field, value), function (errors, fields) {
                 if (errors) {
@@ -167,7 +174,10 @@ var TextField = function (_Component) {
         var _props = this.props,
             className = _props.className,
             message = _props.message,
-            required = _props.required;
+            required = _props.required,
+            onBlur = _props.onBlur,
+            pattern = _props.pattern,
+            patternMessage = _props.patternMessage;
 
 
         return _react2["default"].createElement(
@@ -175,13 +185,14 @@ var TextField = function (_Component) {
             {
                 required: required,
                 error: error,
-                message: message,
+                message: pattern ? patternMessage : message,
                 flag: flag
             },
             _react2["default"].createElement(_tinperBee.FormControl, {
                 className: className + ' triangle-element',
                 value: value,
-                onChange: this.handlerChange
+                onChange: this.handlerChange,
+                onBlur: onBlur
             })
         );
     };

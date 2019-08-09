@@ -78,6 +78,42 @@ var EditGrid = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.setDataColumn = function (disabled, col, da) {
+            if (disabled) return;
+            var columns = col.slice();
+            columns.forEach(function (item) {
+                if (item.type) {
+                    item.render = function (text, record, index) {
+                        return _react2["default"].createElement(_RenderColumn2["default"], {
+                            type: item.type,
+                            index: index,
+                            dataIndex: item.dataIndex,
+                            value: text,
+                            options: item.options,
+                            onChange: _this.onChange,
+                            validate: item.validate,
+                            required: item.required,
+                            pattern: item.pattern,
+                            patternMessage: item.patternMessage
+                        });
+                    };
+                }
+            });
+            _this.setState({
+                columns: columns
+            });
+
+            //给data加index
+            var data = da.slice();
+            if (data[0] && data[0].index == 1) return;
+            data.forEach(function (item, index) {
+                item.index = index + 1;
+            });
+            _this.setState({
+                data: data
+            });
+        };
+
         _this.onChange = function (index, key, value) {
             //改变data
             var data = _this.state.data.slice();
@@ -335,39 +371,7 @@ var EditGrid = function (_Component) {
     }
 
     EditGrid.prototype.componentWillMount = function componentWillMount() {
-        var _this2 = this;
-
-        if (this.props.disabled) return;
-        var columns = this.state.columns.slice();
-        columns.forEach(function (item) {
-            if (item.type) {
-                item.render = function (text, record, index) {
-                    return _react2["default"].createElement(_RenderColumn2["default"], {
-                        type: item.type,
-                        index: index,
-                        dataIndex: item.dataIndex,
-                        value: text,
-                        options: item.options,
-                        onChange: _this2.onChange,
-                        validate: item.validate,
-                        required: item.required
-                    });
-                };
-            }
-        });
-        this.setState({
-            columns: columns
-        });
-
-        //给data加index
-        var data = this.state.data.slice();
-        if (data[0] && data[0].index == 1) return;
-        data.forEach(function (item, index) {
-            item.index = index + 1;
-        });
-        this.setState({
-            data: data
-        });
+        this.setDataColumn(this.props.disabled, this.state.columns, this.state.data);
     };
 
     //选中数据的回调
@@ -382,11 +386,9 @@ var EditGrid = function (_Component) {
                 data: nextProps.data
             });
         }
-        // if('open' in nextProps){
-        //     this.setState({
-        //         open
-        //     })
-        // }
+        if ('disabled' in nextProps) {
+            this.setDataColumn(nextProps.disabled, this.state.columns, nextProps.data);
+        }
     };
 
     //打开关闭

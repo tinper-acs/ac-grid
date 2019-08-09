@@ -7534,6 +7534,14 @@ ul {
   width: 100%;
   height: 39px;
   line-height: 39px; }
+  .ac-edit-grid .ac-nc-grid-wrapper .u-table .nc-grid-cell.enter::after {
+    cursor: pointer;
+    color: #0073E1;
+    font-family: uf !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    content: "\e69b"; }
 
 .ac-edit-grid-panel {
   display: flex;

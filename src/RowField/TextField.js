@@ -87,11 +87,20 @@ class TextField extends Component {
      *
      */
     validate = () => {
-        let { required, field, index, onValidate } = this.props;
+        let { required, field, index, onValidate,pattern,patternMessage } = this.props;
         let { value } = this.state;
         //设置校验规则
         let descriptor = {
-            [field]: { type: "string", required }
+            [field]: 
+            [
+                { type: "string", required }
+            ]
+            
+        }
+        if(pattern){
+            descriptor[field].push({
+                pattern:pattern,message:patternMessage
+            })
         }
         let validator = new schema(descriptor);
         validator.validate({ [field]: value }, (errors, fields) => {
@@ -110,19 +119,20 @@ class TextField extends Component {
     render() {
         let { value, error, flag } = this.state;
 
-        let { className, message, required } = this.props;
+        let { className, message, required, onBlur, pattern,patternMessage } = this.props;
 
         return (
             <FieldWrap
                 required={required}
                 error={error}
-                message={message}
+                message={pattern?patternMessage:message}
                 flag={flag}
             >
                 <FormControl
                     className={`${className} triangle-element`}
                     value={value}
                     onChange={this.handlerChange}
+                    onBlur={onBlur}
                 />
             </FieldWrap>
         );

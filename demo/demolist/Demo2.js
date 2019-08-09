@@ -25,7 +25,9 @@ const column = [
     type:'input',
     required:true,
     validate:true,
-    disabled:true
+    disabled:true,
+    pattern:/^2$/,
+    patternMessage:'格式错误'
   },
   {
     title: "金额",

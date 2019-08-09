@@ -232,7 +232,8 @@ var NumberField = function (_Component) {
             max = _props.max,
             min = _props.min,
             step = _props.step,
-            precision = _props.precision;
+            precision = _props.precision,
+            onBlur = _props.onBlur;
 
 
         return _react2["default"].createElement(
@@ -250,7 +251,8 @@ var NumberField = function (_Component) {
                 iconStyle: iconStyle,
                 step: step,
                 max: max,
-                precision: precision
+                precision: precision,
+                onBlur: onBlur
             })
         );
     };

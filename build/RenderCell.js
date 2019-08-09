@@ -27,8 +27,27 @@ var RenderCell = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.click = function () {
+            if (_this.state.visible) {
+                setTimeout(function () {
+                    var input = document.querySelector('.triangle-flag .u-form-control');
+                    if (input) input.focus();
+                }, 0);
+            }
             _this.setState({
                 visible: !_this.state.visible
+            });
+        };
+
+        _this.onMouseEnter = function () {
+            _this.setState({
+                enter: true
+            });
+        };
+
+        _this.onMouseLeave = function () {
+            _this.setState({
+                visible: true,
+                enter: false
             });
         };
 
@@ -36,16 +55,24 @@ var RenderCell = function (_Component) {
             if (_this.state.visible) {
                 return _react2["default"].createElement(
                     'span',
-                    { className: 'nc-grid-cell', onClick: _this.click },
+                    { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''), onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter, onClick: _this.click },
                     text
                 );
             } else {
-                return _this.props.children;
+                return _react2["default"].cloneElement(_this.props.children, {
+                    onBlur: function onBlur() {
+                        _this.setState({
+                            visible: true,
+                            enter: false
+                        });
+                    }
+                });
             }
         };
 
         _this.state = {
-            visible: true
+            visible: true,
+            enter: false
         };
         return _this;
     }

@@ -65,7 +65,9 @@ var RenderColumn = function (_Component) {
                 validate = _this$props.validate,
                 disabled = _this$props.disabled,
                 options = _this$props.options,
-                required = _this$props.required;
+                required = _this$props.required,
+                pattern = _this$props.pattern,
+                patternMessage = _this$props.patternMessage;
 
             switch (type) {
                 case 'inputNumber':
@@ -80,6 +82,8 @@ var RenderColumn = function (_Component) {
                                 validate: validate,
                                 required: required,
                                 value: value,
+                                pattern: pattern,
+                                patternMessage: patternMessage,
                                 onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })
@@ -98,6 +102,8 @@ var RenderColumn = function (_Component) {
                                 validate: validate,
                                 required: required,
                                 value: value,
+                                pattern: pattern,
+                                patternMessage: patternMessage,
                                 onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })
