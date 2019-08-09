@@ -1,3 +1,13 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.5...v0.0.6) (2019-08-09)
+
+
+### Features
+
+* **ac-nc-grid:** select ([dd36030](https://github.com/tinper-bee/ac-nc-grid/commit/dd36030))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.4...v0.0.5) (2019-08-09)
 
