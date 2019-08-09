@@ -1,3 +1,13 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.4...v0.0.5) (2019-08-09)
+
+
+### Features
+
+* **ac-nc-grid:** 支持正则 ([0b3fec4](https://github.com/tinper-bee/ac-nc-grid/commit/0b3fec4))
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.3...v0.0.4) (2019-08-08)
 
