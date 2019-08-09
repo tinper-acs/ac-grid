@@ -1,3 +1,13 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.6...v0.0.7) (2019-08-09)
+
+
+### Features
+
+* **ac-nc-grid:** 升级bee-input-number ([4b085bb](https://github.com/tinper-bee/ac-nc-grid/commit/4b085bb))
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.5...v0.0.6) (2019-08-09)
 
