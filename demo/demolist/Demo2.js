@@ -37,7 +37,8 @@ const column = [
     textAlign:'right',
     type:'inputNumber',
     required:true,
-    validate:true
+    validate:true,
+    precision:0
   },
   {
     title: "类型",
