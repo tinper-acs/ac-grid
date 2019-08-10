@@ -176,11 +176,10 @@ var EditGrid = function (_Component) {
         };
 
         _this.delRow = function () {
-            var _this$state = _this.state,
-                selectData = _this$state.selectData,
-                data = _this$state.data;
+            var selectData = _this.state.selectData;
 
-            data.splice(selectData.index - 1, selectData.length);
+            var data = _this.state.data.slice();
+            data.splice(selectData[0].index - 1, selectData.length);
             data = _this.resetChecked(data);
             _this.setState({
                 data: data
@@ -196,9 +195,9 @@ var EditGrid = function (_Component) {
         };
 
         _this.copyToEnd = function () {
-            var _this$state2 = _this.state,
-                selectData = _this$state2.selectData,
-                data = _this$state2.data;
+            var _this$state = _this.state,
+                selectData = _this$state.selectData,
+                data = _this$state.data;
 
             selectData.forEach(function (item, index) {
                 item.index = data.length + index + 1;
@@ -274,12 +273,12 @@ var EditGrid = function (_Component) {
                 cl = _this$props.columns,
                 otherProps = _objectWithoutProperties(_this$props, ["exportData", "clsfix", "title", "data", "columns"]);
 
-            var _this$state3 = _this.state,
-                data = _this$state3.data,
-                open = _this$state3.open,
-                columns = _this$state3.columns,
-                copying = _this$state3.copying,
-                isMax = _this$state3.isMax;
+            var _this$state2 = _this.state,
+                data = _this$state2.data,
+                open = _this$state2.open,
+                columns = _this$state2.columns,
+                copying = _this$state2.copying,
+                isMax = _this$state2.isMax;
 
             var _exportData = exportData || data;
             return _react2["default"].createElement(
@@ -328,12 +327,12 @@ var EditGrid = function (_Component) {
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, onClick: _this.delRow },
+                                { bordered: true, disabled: !_this.state.selectData.length, onClick: _this.delRow },
                                 "\u5220\u884C"
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, onClick: _this.copyRow },
+                                { bordered: true, disabled: !_this.state.selectData.length, onClick: _this.copyRow },
                                 "\u590D\u5236\u884C"
                             ),
                             isMax ? _react2["default"].createElement(

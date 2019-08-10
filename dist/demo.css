@@ -6175,6 +6175,10 @@ ul {
   line-height: 40px;
   padding-left: 12px;
   padding-right: 20px; }
+  .ac-edit-grid-panel-btns .u-button.u-button[disabled] {
+    background: #fff;
+    color: #dfe1e6;
+    border-color: #a5adba; }
   .ac-edit-grid-panel.close {
     margin-left: 8px;
     margin-right: 8px; }

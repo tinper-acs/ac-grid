@@ -100,7 +100,7 @@ const column = [
 const dataList = [
   {
     // index: 1,
-    orderCode: "2343",
+    orderCode: "11",
     supplierName: "xxx",
     type_name: "1",
     purchasing: "内行",
@@ -115,7 +115,7 @@ const dataList = [
   },
   {
     // index: 2,
-    orderCode: "222",
+    orderCode: "22",
     supplierName: "22xxx",
     type_name: "2",
     purchasing: "内行2",
@@ -130,7 +130,7 @@ const dataList = [
   },
   {
     // index: 3,
-    orderCode: "222",
+    orderCode: "33",
     supplierName: "22xxx",
     type_name: "3",
     purchasing: "内行2",
@@ -145,7 +145,7 @@ const dataList = [
   },
   {
     // index: 4,
-    orderCode: "222",
+    orderCode: "44",
     supplierName: "22xxx",
     type_name: "3",
     purchasing: "内行2",
@@ -169,6 +169,11 @@ class Demo1 extends Component {
     console.log('table的数据如下')
     console.log(data)
   }
+  onDel=(data)=>{
+    console.log('删除的数据如下')
+    console.log(data)
+  }
+
   render() {
     let paginationObj = {
       items:10,
@@ -189,6 +194,7 @@ class Demo1 extends Component {
           multiSelect={true}
           onChange={this.onChange}
           showPagination={false}
+          onDel={this.onDel}
         />
       </div>
       

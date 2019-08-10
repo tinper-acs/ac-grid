@@ -162,8 +162,9 @@ class EditGrid extends Component {
 
     //删行
     delRow=()=>{
-        let {selectData,data} = this.state;
-        data.splice(selectData.index-1,selectData.length);
+        let {selectData} = this.state;
+        let data = this.state.data.slice()
+        data.splice(selectData[0].index-1,selectData.length);
         data = this.resetChecked(data)
         this.setState({
             data
@@ -269,8 +270,8 @@ class EditGrid extends Component {
                                             <Button bordered onClick={this.cancelCopy}>取消</Button>
                                         </ButtonGroup>:<ButtonGroup>
                                                         <Button bordered onClick={this.addRow}>增行</Button>
-                                                        <Button bordered onClick={this.delRow}>删行</Button>
-                                                        <Button bordered onClick={this.copyRow}>复制行</Button>
+                                                        <Button bordered disabled={!this.state.selectData.length} onClick={this.delRow}>删行</Button>
+                                                        <Button bordered disabled={!this.state.selectData.length} onClick={this.copyRow}>复制行</Button>
 
                                                         {
                                                             isMax?<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>
