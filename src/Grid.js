@@ -11,7 +11,9 @@ class Grid extends Component {
     constructor(props) {
         super(props);
     }
-
+    exportExcel=()=>{
+        this.grid.exportExcel();
+    }
     render() {
         const { paginationObj, data,  ...otherProps } = this.props;
         return (
@@ -21,6 +23,7 @@ class Grid extends Component {
                 data={data}
                 paginationObj='none'  
                 columnFilterAble={false}
+                ref={ref=>this.grid=ref}
             />
         );
     }

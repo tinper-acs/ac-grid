@@ -56,13 +56,20 @@ var NcGrid = function (_Component) {
             _this.props.paginationObj.onDataNumSelect && _this.props.paginationObj.onDataNumSelect(value);
         };
 
+        _this.exportExcel = function () {
+            _this.grid.exportExcel();
+        };
+
         _this.state = {
             activePage: 1
         };
+        _this.gird = _react2["default"].createRef();
         return _this;
     }
 
     NcGrid.prototype.render = function render() {
+        var _this2 = this;
+
         var _props = this.props,
             paginationObj = _props.paginationObj,
             showPagination = _props.showPagination,
@@ -71,7 +78,9 @@ var NcGrid = function (_Component) {
         return _react2["default"].createElement(
             "div",
             { className: "ac-nc-grid-wrapper" },
-            _react2["default"].createElement(_Grid2["default"], other),
+            _react2["default"].createElement(_Grid2["default"], _extends({}, other, { ref: function ref(_ref) {
+                    return _this2.grid = _ref;
+                } })),
             showPagination ? _react2["default"].createElement(
                 "div",
                 { className: "ac-nc-grid-wrapper-pages" },

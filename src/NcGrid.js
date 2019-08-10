@@ -22,16 +22,20 @@ class NcGrid extends Component {
         this.state={
             activePage:1
         }
+        this.gird = React.createRef();
     }
 
     onSelectChange=(value)=>{
         this.props.paginationObj.onDataNumSelect&&this.props.paginationObj.onDataNumSelect(value)
     }
+    exportExcel=()=>{
+        this.grid.exportExcel();
+    }
     render() {
         let { paginationObj,showPagination,...other } = this.props;
         return (
             <div className='ac-nc-grid-wrapper'>
-              <Grid {...other}/>
+              <Grid {...other} ref={ref=>this.grid=ref} />
               {
                   showPagination?<div className='ac-nc-grid-wrapper-pages'>
                     <Select onChange={this.onSelectChange} defaultValue='10'>

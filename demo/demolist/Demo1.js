@@ -154,7 +154,7 @@ class Demo1 extends Component {
     }
     return (
       <div>
-        <Button onClick={this.exportExcel}>导出</Button>
+        <Button onClick={()=>{this.refs.grid.exportExcel()}}>导出</Button>
         <NcGrid
           columns={column}
           data={dataList}

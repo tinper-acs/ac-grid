@@ -38,10 +38,18 @@ var Grid = function (_Component) {
     function Grid(props) {
         _classCallCheck(this, Grid);
 
-        return _possibleConstructorReturn(this, _Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+        _this.exportExcel = function () {
+            _this.grid.exportExcel();
+        };
+
+        return _this;
     }
 
     Grid.prototype.render = function render() {
+        var _this2 = this;
+
         var _props = this.props,
             paginationObj = _props.paginationObj,
             data = _props.data,
@@ -51,7 +59,10 @@ var Grid = function (_Component) {
             className: "ac-nc-grid",
             data: data,
             paginationObj: "none",
-            columnFilterAble: false
+            columnFilterAble: false,
+            ref: function ref(_ref) {
+                return _this2.grid = _ref;
+            }
         }));
     };
 
