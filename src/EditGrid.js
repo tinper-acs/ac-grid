@@ -156,6 +156,7 @@ class EditGrid extends Component {
             }
         }
         data.push(obj)
+        this.props.onChange(data);
         this.setState({
             data
         })
@@ -168,7 +169,8 @@ class EditGrid extends Component {
         data.splice(selectData[0].index-1,selectData.length);
         data = this.resetChecked(data)
         this.setState({
-            data
+            data,
+            selectData:[]
         })
         this.props.onChange(data)
         this.props.onDel(selectData)

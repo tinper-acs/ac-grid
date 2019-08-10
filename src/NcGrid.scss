@@ -122,7 +122,7 @@
         padding-left: 12px;
         padding-right: 20px;
         &-btns{
-            .u-button.u-button[disabled]{
+            .u-button.u-button[disabled],.u-button.u-button[disabled]:hover{
                 background: #fff;
                 color: #dfe1e6;
                 border-color: #a5adba

@@ -170,6 +170,7 @@ var EditGrid = function (_Component) {
                 }
             }
             data.push(obj);
+            _this.props.onChange(data);
             _this.setState({
                 data: data
             });
@@ -182,7 +183,8 @@ var EditGrid = function (_Component) {
             data.splice(selectData[0].index - 1, selectData.length);
             data = _this.resetChecked(data);
             _this.setState({
-                data: data
+                data: data,
+                selectData: []
             });
             _this.props.onChange(data);
             _this.props.onDel(selectData);
