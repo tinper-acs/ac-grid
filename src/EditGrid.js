@@ -112,7 +112,8 @@ class EditGrid extends Component {
         let data = dataValue.slice();
         data.forEach((item,index)=>{
             item._checked=false
-            item.index=index+1
+            item.index=index+1,
+            item.key=index+1+''
         })
         return data
     }
@@ -187,6 +188,7 @@ class EditGrid extends Component {
             item._checked = false;
         })
         data = data.concat(selectData);
+        data = this.resetChecked(data)
         this.setState({
             data,
             copying:false
@@ -230,13 +232,7 @@ class EditGrid extends Component {
             item.key = i+index+1+'';
         })
         data.splice(index,0,...selectData);
-        data.forEach((item,i)=>{
-            if(item.index!=i+1){
-                item.index=i+1;
-                item.key=i+1+''
-            }
-            
-        })
+        data = this.resetChecked(data)
         this.setState({
             data,
             copying:false
@@ -270,8 +266,8 @@ class EditGrid extends Component {
                                             <Button bordered onClick={this.cancelCopy}>取消</Button>
                                         </ButtonGroup>:<ButtonGroup>
                                                         <Button bordered onClick={this.addRow}>增行</Button>
-                                                        <Button bordered disabled={!this.state.selectData.length} onClick={this.delRow}>删行</Button>
-                                                        <Button bordered disabled={!this.state.selectData.length} onClick={this.copyRow}>复制行</Button>
+                                                        <Button bordered disabled={this.state.selectData==0} onClick={this.delRow}>删行</Button>
+                                                        <Button bordered disabled={this.state.selectData==0} onClick={this.copyRow}>复制行</Button>
 
                                                         {
                                                             isMax?<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>

@@ -144,7 +144,7 @@ var EditGrid = function (_Component) {
             var data = dataValue.slice();
             data.forEach(function (item, index) {
                 item._checked = false;
-                item.index = index + 1;
+                item.index = index + 1, item.key = index + 1 + '';
             });
             return data;
         };
@@ -205,6 +205,7 @@ var EditGrid = function (_Component) {
                 item._checked = false;
             });
             data = data.concat(selectData);
+            data = _this.resetChecked(data);
             _this.setState({
                 data: data,
                 copying: false
@@ -241,6 +242,8 @@ var EditGrid = function (_Component) {
         };
 
         _this.copyToHere = function () {
+            var _data;
+
             var index = _this.currentIndex;
             var data = _this.state.data.slice();
             var selectData = _this.state.selectData;
@@ -249,13 +252,8 @@ var EditGrid = function (_Component) {
                 item.index = i + index + 1;
                 item.key = i + index + 1 + '';
             });
-            data.splice.apply(data, [index, 0].concat(_toConsumableArray(selectData)));
-            data.forEach(function (item, i) {
-                if (item.index != i + 1) {
-                    item.index = i + 1;
-                    item.key = i + 1 + '';
-                }
-            });
+            (_data = data).splice.apply(_data, [index, 0].concat(_toConsumableArray(selectData)));
+            data = _this.resetChecked(data);
             _this.setState({
                 data: data,
                 copying: false
@@ -327,12 +325,12 @@ var EditGrid = function (_Component) {
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, disabled: !_this.state.selectData.length, onClick: _this.delRow },
+                                { bordered: true, disabled: _this.state.selectData == 0, onClick: _this.delRow },
                                 "\u5220\u884C"
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, disabled: !_this.state.selectData.length, onClick: _this.copyRow },
+                                { bordered: true, disabled: _this.state.selectData == 0, onClick: _this.copyRow },
                                 "\u590D\u5236\u884C"
                             ),
                             isMax ? _react2["default"].createElement(
