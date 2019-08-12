@@ -28,6 +28,10 @@ var _RenderCell = require('./RenderCell');
 
 var _RenderCell2 = _interopRequireDefault(_RenderCell);
 
+var _beeTooltip = require('bee-tooltip');
+
+var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -83,6 +87,7 @@ var RenderColumn = function (_Component) {
                 value = _this$props2.value,
                 index = _this$props2.index,
                 dataIndex = _this$props2.dataIndex,
+                textAlign = _this$props2.textAlign,
                 validate = _this$props2.validate,
                 disabled = _this$props2.disabled,
                 options = _this$props2.options,
@@ -100,9 +105,17 @@ var RenderColumn = function (_Component) {
                     return _react2["default"].createElement(
                         'div',
                         null,
-                        disabled ? text : _react2["default"].createElement(
+                        disabled ? _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { inverse: true, overlay: text, placement: 'top' },
+                            _react2["default"].createElement(
+                                'span',
+                                null,
+                                text
+                            )
+                        ) : _react2["default"].createElement(
                             _RenderCell2["default"],
-                            { text: value },
+                            { text: value, textAlign: textAlign },
                             _react2["default"].createElement(_NumberField2["default"], {
                                 field: dataIndex,
                                 validate: validate,
@@ -125,10 +138,15 @@ var RenderColumn = function (_Component) {
                     return _react2["default"].createElement(
                         'div',
                         null,
-                        disabled ? text : _react2["default"].createElement(
+                        disabled ? _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { overlay: text },
+                            text
+                        ) : _react2["default"].createElement(
                             _RenderCell2["default"],
-                            { text: value },
+                            { text: value, textAlign: textAlign },
                             _react2["default"].createElement(_TextField2["default"], {
+                                textAlign: textAlign,
                                 field: dataIndex,
                                 validate: validate,
                                 required: required,
@@ -145,10 +163,15 @@ var RenderColumn = function (_Component) {
                     return _react2["default"].createElement(
                         'div',
                         null,
-                        disabled ? text : _react2["default"].createElement(
+                        disabled ? _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { inverse: true, overlay: text },
+                            text
+                        ) : _react2["default"].createElement(
                             _RenderCell2["default"],
-                            { text: _this.getValue(value) },
+                            { text: _this.getValue(value), textAlign: textAlign },
                             _react2["default"].createElement(_SelectField2["default"], {
+                                textAlign: textAlign,
                                 data: options,
                                 field: dataIndex,
                                 validate: validate,

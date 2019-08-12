@@ -1,7 +1,6 @@
 //React导入
 import React, { Component } from 'react';
-import {FormControl, Select} from 'tinper-bee'
-import InputNumber from 'bee-input-number';
+import InputNumber from 'rc-input-number';
 //类型校验
 import PropTypes from 'prop-types';
 //验证组件 https://www.npmjs.com/package/async-validator
@@ -165,6 +164,7 @@ class NumberField extends Component {
                 flag={flag}
             >
                 <InputNumber
+                    prefixCls='ac-input-number'
                     className={className}
                     value={value}
                     onChange={this.handlerChange}

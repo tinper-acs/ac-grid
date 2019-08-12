@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _beeTooltip = require('bee-tooltip');
+
+var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -53,12 +57,19 @@ var RenderCell = function (_Component) {
 
         _this.renderSpan = function () {
             if (_this.state.visible) {
+                var textAlign = _this.props.textAlign;
+                var placement = 'left';
+                if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
                 return _react2["default"].createElement(
-                    'span',
-                    { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''),
-                        onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter,
-                        onClick: _this.click },
-                    _this.props.text
+                    _beeTooltip2["default"],
+                    { inverse: true, overlay: _this.props.text, placement: placement },
+                    _react2["default"].createElement(
+                        'span',
+                        { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''),
+                            onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter,
+                            onClick: _this.click },
+                        _this.props.text
+                    )
                 );
             } else {
                 return _react2["default"].cloneElement(_this.props.children, {

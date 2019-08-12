@@ -8,11 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _tinperBee = require('tinper-bee');
+var _rcInputNumber = require('rc-input-number');
 
-var _beeInputNumber = require('bee-input-number');
-
-var _beeInputNumber2 = _interopRequireDefault(_beeInputNumber);
+var _rcInputNumber2 = _interopRequireDefault(_rcInputNumber);
 
 var _propTypes = require('prop-types');
 
@@ -244,7 +242,8 @@ var NumberField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(_beeInputNumber2["default"], {
+            _react2["default"].createElement(_rcInputNumber2["default"], {
+                prefixCls: 'ac-input-number',
                 className: className,
                 value: value,
                 onChange: this.handlerChange,

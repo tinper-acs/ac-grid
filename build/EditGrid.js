@@ -85,6 +85,7 @@ var EditGrid = function (_Component) {
                 if (item.type) {
                     item.render = function (text, record, index) {
                         return _react2["default"].createElement(_RenderColumn2["default"], {
+                            textAlign: item.textAlign,
                             type: item.type,
                             index: index,
                             dataIndex: item.dataIndex,
@@ -102,6 +103,13 @@ var EditGrid = function (_Component) {
                             precision: item.precision
                         });
                     };
+                    if (item.required) {
+                        item.title = _react2["default"].createElement(
+                            "span",
+                            { className: _this.props.clsfix + "-column-title-required" },
+                            item.title
+                        );
+                    }
                 }
             });
             _this.setState({
@@ -210,14 +218,16 @@ var EditGrid = function (_Component) {
             data = _this.resetChecked(data);
             _this.setState({
                 data: data,
-                copying: false
+                copying: false,
+                selectData: []
             });
             _this.props.onChange(data);
         };
 
         _this.cancelCopy = function () {
             _this.setState({
-                copying: false
+                copying: false,
+                selectData: []
             });
         };
 
@@ -236,7 +246,7 @@ var EditGrid = function (_Component) {
                 return _react2["default"].createElement(
                     "span",
                     { onClick: _this.copyToHere, className: "copy-to-here" },
-                    "\u7C98\u8D34\u81F3\u6B64\u5904"
+                    "\u7C98\u8D34\u81F3\u6B64"
                 );
             } else {
                 return '';
@@ -258,7 +268,8 @@ var EditGrid = function (_Component) {
             data = _this.resetChecked(data);
             _this.setState({
                 data: data,
-                copying: false
+                copying: false,
+                selectData: []
             });
 
             _this.props.onChange(data);
@@ -271,7 +282,8 @@ var EditGrid = function (_Component) {
                 title = _this$props.title,
                 propsData = _this$props.data,
                 cl = _this$props.columns,
-                otherProps = _objectWithoutProperties(_this$props, ["exportData", "clsfix", "title", "data", "columns"]);
+                disabled = _this$props.disabled,
+                otherProps = _objectWithoutProperties(_this$props, ["exportData", "clsfix", "title", "data", "columns", "disabled"]);
 
             var _this$state2 = _this.state,
                 data = _this$state2.data,
@@ -322,17 +334,17 @@ var EditGrid = function (_Component) {
                             null,
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, onClick: _this.addRow },
+                                { bordered: true, onClick: _this.addRow, disabled: disabled },
                                 "\u589E\u884C"
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, disabled: _this.state.selectData == 0, onClick: _this.delRow },
+                                { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.delRow },
                                 "\u5220\u884C"
                             ),
                             _react2["default"].createElement(
                                 _tinperBee.Button,
-                                { bordered: true, disabled: _this.state.selectData == 0, onClick: _this.copyRow },
+                                { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.copyRow },
                                 "\u590D\u5236\u884C"
                             ),
                             isMax ? _react2["default"].createElement(
@@ -368,8 +380,8 @@ var EditGrid = function (_Component) {
             data: props.data || [],
             selectData: [], //选中的数据
             copying: false, //是否正在拷贝
-            open: props.defaultOpen || false,
-            isMax: false
+            open: props.defaultOpen || true, //默认展开收起
+            isMax: false //是否最大化了
         };
         return _this;
     }

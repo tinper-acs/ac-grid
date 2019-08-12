@@ -149,19 +149,14 @@ class Demo1 extends Component {
       onDataNumSelect:(value)=>{console.log("每页多少条："+value)},//改变页码回调
     }
     return (
-      <div tabIndex='1' onBlur={()=>{
-        console.log('blur')
-      }}>123123
-        {/* <NcGrid
+        <NcGrid
           columns={column}
           data={dataList}
           getSelectedDataFunc={this.getSelectedDataFunc}
           paginationObj={paginationObj}
           multiSelect={false}
           ref='grid'
-        /> */}
-      </div>
-      
+        /> 
     );
   }
 }
