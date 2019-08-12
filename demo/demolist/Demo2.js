@@ -163,6 +163,9 @@ const dataList = [
 class Demo1 extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      disabled:false
+    }
   }
 
   onChange=(data)=>{
@@ -172,6 +175,11 @@ class Demo1 extends Component {
   onDel=(data)=>{
     console.log('删除的数据如下')
     console.log(data)
+  }
+  setdisabled=()=>{
+    this.setState({
+      disabled:true
+    })
   }
 
   render() {
@@ -185,8 +193,9 @@ class Demo1 extends Component {
     }
     return (
       <div>
+        <button onClick={this.setdisabled}> 设置为disabled</button>
           <EditGrid
-          disabled={false}
+          disabled={this.state.disabled}
           defaultOpen={true}
           columns={column}
           data={dataList}

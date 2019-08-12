@@ -47,7 +47,7 @@ class EditGrid extends Component {
 
     setDataColumn=(disabled,col,da)=>{
         if(disabled)return;
-        let columns = col.slice();
+        let columns = cloneDeep(col);
         columns.forEach(item => {
             if(item.type){
                 item.render=(text,record,index)=>{
@@ -80,7 +80,7 @@ class EditGrid extends Component {
         })
 
         //给data加index
-        let data  = da.slice();
+        let data  = cloneDeep(da);
         if(data[0]&&data[0].index==1)return;
         data.forEach((item,index)=>{
             item.index=index+1
@@ -92,7 +92,7 @@ class EditGrid extends Component {
 
     onChange=(index,key,value)=>{
         //改变data
-        let data  = this.state.data.slice();
+        let data  = cloneDeep(this.state.data);
         data[index][key]=value;
         this.setState({
             data:data
@@ -113,7 +113,7 @@ class EditGrid extends Component {
     }
 
     resetChecked=(dataValue)=>{
-        let data = dataValue.slice();
+        let data = cloneDeep(dataValue);
         data.forEach((item,index)=>{
             item._checked=false
             item.index=index+1,
@@ -133,7 +133,7 @@ class EditGrid extends Component {
             })
         }
         if('disabled' in nextProps){
-            this.setDataColumn(nextProps.disabled,this.state.columns,nextProps.data)
+            this.setDataColumn(nextProps.disabled,nextProps.columns,nextProps.data)
         }
     }
 
@@ -147,7 +147,7 @@ class EditGrid extends Component {
 
     //增行
     addRow=()=>{
-        let data = this.state.data.slice();
+        let data = cloneDeep(this.state.data);
         let length = data.length;
         let obj = cloneDeep(data[0]||{});
         for(let attr in obj){
@@ -169,7 +169,7 @@ class EditGrid extends Component {
     //删行
     delRow=()=>{
         let {selectData} = this.state;
-        let data = this.state.data.slice()
+        let data = cloneDeep(this.state.data)
         data.splice(selectData[0].index-1,selectData.length);
         data = this.resetChecked(data)
         this.setState({
@@ -232,7 +232,7 @@ class EditGrid extends Component {
     //粘贴至此处
     copyToHere=()=>{
         let index = this.currentIndex;
-        let data = this.state.data.slice();
+        let data = cloneDeep(this.state.data);
         let selectData = this.state.selectData;
         selectData.forEach((item,i)=>{
             item._checked=false

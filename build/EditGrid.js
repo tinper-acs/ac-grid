@@ -80,7 +80,7 @@ var EditGrid = function (_Component) {
 
         _this.setDataColumn = function (disabled, col, da) {
             if (disabled) return;
-            var columns = col.slice();
+            var columns = (0, _lodash4["default"])(col);
             columns.forEach(function (item) {
                 if (item.type) {
                     item.render = function (text, record, index) {
@@ -117,7 +117,7 @@ var EditGrid = function (_Component) {
             });
 
             //给data加index
-            var data = da.slice();
+            var data = (0, _lodash4["default"])(da);
             if (data[0] && data[0].index == 1) return;
             data.forEach(function (item, index) {
                 item.index = index + 1;
@@ -129,7 +129,7 @@ var EditGrid = function (_Component) {
 
         _this.onChange = function (index, key, value) {
             //改变data
-            var data = _this.state.data.slice();
+            var data = (0, _lodash4["default"])(_this.state.data);
             data[index][key] = value;
             _this.setState({
                 data: data
@@ -149,7 +149,7 @@ var EditGrid = function (_Component) {
         };
 
         _this.resetChecked = function (dataValue) {
-            var data = dataValue.slice();
+            var data = (0, _lodash4["default"])(dataValue);
             data.forEach(function (item, index) {
                 item._checked = false;
                 item.index = index + 1, item.key = index + 1 + '';
@@ -165,7 +165,7 @@ var EditGrid = function (_Component) {
         };
 
         _this.addRow = function () {
-            var data = _this.state.data.slice();
+            var data = (0, _lodash4["default"])(_this.state.data);
             var length = data.length;
             var obj = (0, _lodash4["default"])(data[0] || {});
             for (var attr in obj) {
@@ -187,7 +187,7 @@ var EditGrid = function (_Component) {
         _this.delRow = function () {
             var selectData = _this.state.selectData;
 
-            var data = _this.state.data.slice();
+            var data = (0, _lodash4["default"])(_this.state.data);
             data.splice(selectData[0].index - 1, selectData.length);
             data = _this.resetChecked(data);
             _this.setState({
@@ -257,7 +257,7 @@ var EditGrid = function (_Component) {
             var _data;
 
             var index = _this.currentIndex;
-            var data = _this.state.data.slice();
+            var data = (0, _lodash4["default"])(_this.state.data);
             var selectData = _this.state.selectData;
             selectData.forEach(function (item, i) {
                 item._checked = false;
@@ -403,7 +403,7 @@ var EditGrid = function (_Component) {
             });
         }
         if ('disabled' in nextProps) {
-            this.setDataColumn(nextProps.disabled, this.state.columns, nextProps.data);
+            this.setDataColumn(nextProps.disabled, nextProps.columns, nextProps.data);
         }
     };
 
