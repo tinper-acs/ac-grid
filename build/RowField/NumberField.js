@@ -252,7 +252,8 @@ var NumberField = function (_Component) {
                 max: max,
                 min: min,
                 precision: precision,
-                onBlur: onBlur
+                onBlur: onBlur,
+                autoFocus: true
             })
         );
     };

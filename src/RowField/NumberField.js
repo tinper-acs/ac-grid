@@ -174,6 +174,7 @@ class NumberField extends Component {
                     min={min}
                     precision={precision}
                     onBlur={onBlur}
+                    autoFocus={true}
                 />
             </FieldWrap>
         )
