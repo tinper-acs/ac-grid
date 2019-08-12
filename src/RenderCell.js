@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import ToolTip from 'bee-tooltip'
 
 class RenderCell extends Component {
     constructor(props){
@@ -36,10 +37,15 @@ class RenderCell extends Component {
     }
     renderSpan=()=>{
         if(this.state.visible){
+            let textAlign = this.props.textAlign;
+            let placement = 'left';
+            if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
             return (
-                <span className={`nc-grid-cell ${this.state.enter?'enter':''}`} 
-                onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} 
-                onClick={this.click}>{this.props.text}</span>
+                <ToolTip inverse overlay={this.props.text} placement={placement}>
+                    <span className={`nc-grid-cell ${this.state.enter?'enter':''}`} 
+                    onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} 
+                    onClick={this.click}>{this.props.text}</span>
+                </ToolTip> 
             )
         }else{
             return React.cloneElement(this.props.children,{

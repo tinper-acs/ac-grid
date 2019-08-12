@@ -5,6 +5,7 @@ import TextField from './RowField/TextField';
 import NumberField from './RowField/NumberField';
 import SelectField from './RowField/SelectField';
 import RenderCell from './RenderCell';
+import ToolTip from 'bee-tooltip'
 
 const propTypes = {
     onChange:PropTypes.func
@@ -50,12 +51,16 @@ class RenderColumn extends Component {
      * @returns JSX
      */
     renderComp = () => {
-        let { type, value,index,dataIndex, validate, disabled, options,required,pattern,patternMessage,iconStyle, max, min, step, precision } = this.props;
+        let { type, value,index,dataIndex,textAlign, validate, disabled, options,required,pattern,patternMessage,iconStyle, max, min, step, precision } = this.props;
         switch (type) {
             case 'inputNumber':
                 return (<div>
                         {
-                            disabled?text:<RenderCell text = {value}>
+                            disabled?
+                            <ToolTip inverse overlay={text} placement='top'>
+                                <span>{text}</span>
+                            </ToolTip>
+                            :<RenderCell text = {value} textAlign={textAlign}>
                             <NumberField 
                                 field={dataIndex} 
                                 validate={validate} 
@@ -76,8 +81,12 @@ class RenderColumn extends Component {
             case 'input':
                 return (<div>
                     {
-                        disabled?text:<RenderCell text = {value}>
+                        disabled?
+                        <ToolTip overlay={text}>
+                            {text}
+                        </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
                         <TextField 
+                            textAlign={textAlign}
                             field={dataIndex}  
                             validate={validate} 
                             required={required} 
@@ -92,8 +101,13 @@ class RenderColumn extends Component {
             case 'select':
                 return (<div>
                         {
-                            disabled?text:<RenderCell text ={this.getValue(value)}>
+                            disabled?
+                            <ToolTip inverse overlay={text}>
+                                {text}
+                            </ToolTip>
+                            :<RenderCell text ={this.getValue(value)} textAlign={textAlign}>
                                 <SelectField 
+                                    textAlign={textAlign}
                                     data={options}
                                     field={dataIndex}  
                                     validate={validate} 

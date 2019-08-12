@@ -6139,12 +6139,18 @@ ul {
   .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-total {
     display: none; }
 
+.ac-edit-grid-column-title-required:before {
+  content: '*';
+  color: #f53c32;
+  padding-right: 2px; }
+
 .ac-edit-grid.max {
   position: absolute;
   top: 0;
   height: 100%;
   background: #fff;
-  width: 100%; }
+  width: 100%;
+  z-index: 2; }
 
 .ac-edit-grid .ac-nc-grid-wrapper .u-table td {
   padding: 0 8px;
@@ -6178,7 +6184,12 @@ ul {
   .ac-edit-grid-panel-btns .u-button.u-button[disabled], .ac-edit-grid-panel-btns .u-button.u-button[disabled]:hover {
     background: #fff;
     color: #dfe1e6;
-    border-color: #a5adba; }
+    border-color: #a5adba;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+  .ac-edit-grid-panel-btns .u-button:hover {
+    background-color: #ffffff;
+    border-color: #e14c46;
+    color: #e14c46; }
   .ac-edit-grid-panel.close {
     margin-left: 8px;
     margin-right: 8px; }

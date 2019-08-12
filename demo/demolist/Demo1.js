@@ -140,10 +140,6 @@ class Demo1 extends Component {
     super(props);
   }
 
-    exportExcel = () => {
-        this.refs.grid.exportExcel();
-    };
-
   render() {
     let paginationObj = {
       maxButtons:999,
@@ -153,16 +149,17 @@ class Demo1 extends Component {
       onDataNumSelect:(value)=>{console.log("每页多少条："+value)},//改变页码回调
     }
     return (
-      <div>
-        <Button onClick={()=>{this.refs.grid.exportExcel()}}>导出</Button>
-        <NcGrid
+      <div tabIndex='1' onBlur={()=>{
+        console.log('blur')
+      }}>123123
+        {/* <NcGrid
           columns={column}
           data={dataList}
           getSelectedDataFunc={this.getSelectedDataFunc}
           paginationObj={paginationObj}
           multiSelect={false}
           ref='grid'
-        />
+        /> */}
       </div>
       
     );

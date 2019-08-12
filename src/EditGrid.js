@@ -36,8 +36,8 @@ class EditGrid extends Component {
             data:props.data||[],
             selectData:[],//选中的数据
             copying:false,//是否正在拷贝
-            open:props.defaultOpen||false,
-            isMax:false
+            open:props.defaultOpen||true,//默认展开收起
+            isMax:false,//是否最大化了
         }
     }
 
@@ -52,6 +52,7 @@ class EditGrid extends Component {
             if(item.type){
                 item.render=(text,record,index)=>{
                     return <RenderColumn
+                                textAlign={item.textAlign}
                                 type={item.type}
                                 index={index}
                                 dataIndex={item.dataIndex}
@@ -68,6 +69,9 @@ class EditGrid extends Component {
                                 step={item.step} 
                                 precision={item.precision}
                             />
+                }
+                if(item.required){
+                    item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
                 }
             }
         });
@@ -193,14 +197,16 @@ class EditGrid extends Component {
         data = this.resetChecked(data)
         this.setState({
             data,
-            copying:false
+            copying:false,
+            selectData:[]
         })
         this.props.onChange(data)
     }
     //取消复制
     cancelCopy=()=>{
         this.setState({
-            copying:false
+            copying:false,
+            selectData:[]
         })
     }
 
@@ -218,7 +224,7 @@ class EditGrid extends Component {
     //粘贴至此处按钮
     hoverContent=()=>{
         if(this.state.copying){
-            return <span onClick={this.copyToHere} className='copy-to-here'>粘贴至此处</span>
+            return <span onClick={this.copyToHere} className='copy-to-here'>粘贴至此</span>
         }else{
             return ''
         }
@@ -237,14 +243,15 @@ class EditGrid extends Component {
         data = this.resetChecked(data)
         this.setState({
             data,
-            copying:false
+            copying:false,
+            selectData:[]
         })
 
         this.props.onChange(data)
     }
 
     renderDom=()=>{
-        const { exportData, clsfix,title, data:propsData,columns:cl, ...otherProps } = this.props; 
+        const { exportData, clsfix,title, data:propsData,columns:cl,disabled, ...otherProps } = this.props; 
         let { data,open,columns,copying,isMax } = this.state;
         let _exportData = exportData || data;
         return (
@@ -267,9 +274,9 @@ class EditGrid extends Component {
                                             <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
                                             <Button bordered onClick={this.cancelCopy}>取消</Button>
                                         </ButtonGroup>:<ButtonGroup>
-                                                        <Button bordered onClick={this.addRow}>增行</Button>
-                                                        <Button bordered disabled={this.state.selectData==0} onClick={this.delRow}>删行</Button>
-                                                        <Button bordered disabled={this.state.selectData==0} onClick={this.copyRow}>复制行</Button>
+                                                        <Button bordered onClick={this.addRow} disabled={disabled}>增行</Button>
+                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.delRow}>删行</Button>
+                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.copyRow}>复制行</Button>
 
                                                         {
                                                             isMax?<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>

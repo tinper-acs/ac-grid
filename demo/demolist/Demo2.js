@@ -5,7 +5,6 @@
  */
 import React, { Component } from "react";
 import NcGrid from '../../src';
-import { Select } from 'tinper-bee'
 
 const EditGrid = NcGrid.EditGrid;
 
@@ -27,7 +26,8 @@ const column = [
     validate:true,
     disabled:true,
     pattern:/^2$/,
-    patternMessage:'格式错误'
+    patternMessage:'格式错误',
+    textAlign:'left',
   },
   {
     title: "金额",

@@ -43,6 +43,7 @@
   "bee-datepicker": "^2.2.5",
   "bee-icon": "^1.0.11",
   "bee-input-number": "^2.1.4",
+  "bee-tooltip": "^2.1.2",
   "classnames": "^2.2.5",
   "lodash.clonedeep": "^4.5.0",
   "lodash.isequal": "^4.5.0",
