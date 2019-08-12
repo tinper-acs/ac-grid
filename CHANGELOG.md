@@ -1,3 +1,13 @@
+<a name="0.0.13"></a>
+## [0.0.13](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.12...v0.0.13) (2019-08-12)
+
+
+### Features
+
+* **ac-nc-grid:** Number自动获得焦点 ([50d1716](https://github.com/tinper-bee/ac-nc-grid/commit/50d1716))
+
+
+
 <a name="0.0.12"></a>
 ## [0.0.12](https://github.com/tinper-bee/ac-nc-grid/compare/v0.0.11...v0.0.12) (2019-08-12)
 
