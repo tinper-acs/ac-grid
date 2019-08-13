@@ -17,6 +17,7 @@ const propTypes = {
     onDel:PropTypes.func,//删除的回调
     defaultOpen:PropTypes.bool,//默认是否打开
     showIndex:PropTypes.bool,//是否显示序号列
+    excludeKeys:PropTypes.array,//粘贴时不需要粘贴的key值合计
 }
 
 const defaultProps = {
@@ -27,7 +28,8 @@ const defaultProps = {
     onChange:()=>{},
     onOpenChange:()=>{},
     onDel:()=>{},
-    showIndex:true
+    showIndex:true,
+    excludeKeys:[]
 };
 
 class EditGrid extends Component {
@@ -202,6 +204,9 @@ class EditGrid extends Component {
             item.index = data.length+index+1;
             item.key = data.length+index+1+'';
             item._checked = false;
+            this.props.excludeKeys.forEach(it=>{
+                delete item[it];
+            })
         })
         data = data.concat(selectData);
         data = this.resetChecked(data)

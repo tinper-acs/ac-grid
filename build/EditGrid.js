@@ -58,7 +58,8 @@ var propTypes = {
     disabled: _propTypes2["default"].bool, //是否可编辑
     onDel: _propTypes2["default"].func, //删除的回调
     defaultOpen: _propTypes2["default"].bool, //默认是否打开
-    showIndex: _propTypes2["default"].bool //是否显示序号列
+    showIndex: _propTypes2["default"].bool, //是否显示序号列
+    excludeKeys: _propTypes2["default"].array //粘贴时不需要粘贴的key值合计
 };
 
 var defaultProps = {
@@ -69,7 +70,8 @@ var defaultProps = {
     onChange: function onChange() {},
     onOpenChange: function onOpenChange() {},
     onDel: function onDel() {},
-    showIndex: true
+    showIndex: true,
+    excludeKeys: []
 };
 
 var EditGrid = function (_Component) {
@@ -223,6 +225,9 @@ var EditGrid = function (_Component) {
                 item.index = data.length + index + 1;
                 item.key = data.length + index + 1 + '';
                 item._checked = false;
+                _this.props.excludeKeys.forEach(function (it) {
+                    delete item[it];
+                });
             });
             data = data.concat(selectData);
             data = _this.resetChecked(data);
