@@ -147,7 +147,7 @@ class Demo1 extends Component {
     return (
         <AcGrids
           columns={column}
-          data={dataList}
+          data={[]}
           getSelectedDataFunc={this.getSelectedDataFunc}
           paginationObj={paginationObj}
           multiSelect={false}

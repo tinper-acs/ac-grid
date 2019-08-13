@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import NcGird from "./AcGrids";
+import AcGird from "./AcGrids";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
@@ -50,35 +50,7 @@ class EditGrid extends Component {
     }
 
     setDataColumn=(disabled,col,da)=>{
-        if(disabled)return;
         let columns = cloneDeep(col);
-        columns.forEach(item => {
-            if(item.type){
-                item.render=(text,record,index)=>{
-                    return <RenderColumn
-                                textAlign={item.textAlign}
-                                type={item.type}
-                                index={index}
-                                dataIndex={item.dataIndex}
-                                value={text}
-                                options={item.options}
-                                onChange={this.onChange}
-                                validate={item.validate} 
-                                required={item.required}
-                                pattern={item.pattern}
-                                patternMessage={item.patternMessage}
-                                iconStyle={item.iconStyle}
-                                max={item.max}
-                                min={item.min}
-                                step={item.step} 
-                                precision={item.precision}
-                            />
-                }
-                if(item.required){
-                    item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
-                }
-            }
-        });
         if(this.props.showIndex){
             columns.unshift({
                 title: "序号",
@@ -87,21 +59,53 @@ class EditGrid extends Component {
                 width: 100,
               })
         }
+        columns.forEach(item => {
+            if(item.type){
+                if(!disabled){
+                    item.render=(text,record,index)=>{
+                        return <RenderColumn
+                                    textAlign={item.textAlign}
+                                    type={item.type}
+                                    index={index}
+                                    dataIndex={item.dataIndex}
+                                    value={text}
+                                    options={item.options}
+                                    onChange={this.onChange}
+                                    validate={item.validate} 
+                                    required={item.required}
+                                    pattern={item.pattern}
+                                    patternMessage={item.patternMessage}
+                                    iconStyle={item.iconStyle}
+                                    max={item.max}
+                                    min={item.min}
+                                    step={item.step} 
+                                    precision={item.precision}
+                                />
+                    }
+                    if(item.required){
+                        item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
+                    }
+                }
+                
+            }
+        });
         this.setState({
             columns
         })
-
         //给data加index
         let data  = cloneDeep(da);
-        if(data[0]&&data[0].index==1)return;
-        data.forEach((item,index)=>{
-            item.index=index+1
-        })
-        this.setState({
-            data
-        })
+        if(data[0]&&data[0].index==1){
+        }else{
+            data.forEach((item,index)=>{
+                item.index=index+1
+            })
+            this.setState({
+                data
+            })
+        }
     }
 
+    
     onChange=(index,key,value)=>{
         //改变data
         let data  = cloneDeep(this.state.data);
@@ -305,8 +309,9 @@ class EditGrid extends Component {
                     
                 </div>
                 <div className={`${clsfix}-inner ${open?'show':'hide'} ${isMax?'max':''}`}>
-                            <NcGird
+                            <AcGird
                                 {...otherProps}
+                                noReplaceColumns={true}
                                 columns = {columns}
                                 data={data}
                                 exportData={_exportData}

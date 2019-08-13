@@ -83,39 +83,7 @@ var EditGrid = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.setDataColumn = function (disabled, col, da) {
-            if (disabled) return;
             var columns = (0, _lodash4["default"])(col);
-            columns.forEach(function (item) {
-                if (item.type) {
-                    item.render = function (text, record, index) {
-                        return _react2["default"].createElement(_RenderColumn2["default"], {
-                            textAlign: item.textAlign,
-                            type: item.type,
-                            index: index,
-                            dataIndex: item.dataIndex,
-                            value: text,
-                            options: item.options,
-                            onChange: _this.onChange,
-                            validate: item.validate,
-                            required: item.required,
-                            pattern: item.pattern,
-                            patternMessage: item.patternMessage,
-                            iconStyle: item.iconStyle,
-                            max: item.max,
-                            min: item.min,
-                            step: item.step,
-                            precision: item.precision
-                        });
-                    };
-                    if (item.required) {
-                        item.title = _react2["default"].createElement(
-                            "span",
-                            { className: _this.props.clsfix + "-column-title-required" },
-                            item.title
-                        );
-                    }
-                }
-            });
             if (_this.props.showIndex) {
                 columns.unshift({
                     title: "序号",
@@ -124,19 +92,52 @@ var EditGrid = function (_Component) {
                     width: 100
                 });
             }
+            columns.forEach(function (item) {
+                if (item.type) {
+                    if (!disabled) {
+                        item.render = function (text, record, index) {
+                            return _react2["default"].createElement(_RenderColumn2["default"], {
+                                textAlign: item.textAlign,
+                                type: item.type,
+                                index: index,
+                                dataIndex: item.dataIndex,
+                                value: text,
+                                options: item.options,
+                                onChange: _this.onChange,
+                                validate: item.validate,
+                                required: item.required,
+                                pattern: item.pattern,
+                                patternMessage: item.patternMessage,
+                                iconStyle: item.iconStyle,
+                                max: item.max,
+                                min: item.min,
+                                step: item.step,
+                                precision: item.precision
+                            });
+                        };
+                        if (item.required) {
+                            item.title = _react2["default"].createElement(
+                                "span",
+                                { className: _this.props.clsfix + "-column-title-required" },
+                                item.title
+                            );
+                        }
+                    }
+                }
+            });
             _this.setState({
                 columns: columns
             });
-
             //给data加index
             var data = (0, _lodash4["default"])(da);
-            if (data[0] && data[0].index == 1) return;
-            data.forEach(function (item, index) {
-                item.index = index + 1;
-            });
-            _this.setState({
-                data: data
-            });
+            if (data[0] && data[0].index == 1) {} else {
+                data.forEach(function (item, index) {
+                    item.index = index + 1;
+                });
+                _this.setState({
+                    data: data
+                });
+            }
         };
 
         _this.onChange = function (index, key, value) {
@@ -378,6 +379,7 @@ var EditGrid = function (_Component) {
                     "div",
                     { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
                     _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
+                        noReplaceColumns: true,
                         columns: columns,
                         data: data,
                         exportData: _exportData,

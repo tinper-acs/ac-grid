@@ -5,6 +5,7 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
+import { Button } from 'tinper-bee'
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -151,6 +152,9 @@ const dataList = [
 class Demo1 extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      disabled:false
+    }
   }
 
   onChange=(data)=>{
@@ -161,7 +165,11 @@ class Demo1 extends Component {
     console.log('删除的数据如下')
     console.log(data)
   }
-
+  click=()=>{
+    this.setState({
+      disabled:true
+    })
+  }
   render() {
     let paginationObj = {
       items:10,
@@ -173,8 +181,12 @@ class Demo1 extends Component {
     }
     return (
       <div>
+          <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>
+            设置不可编辑
+          </Button>
           <EditGrid
-          disabled={true}
+          showIndex={false}
+          disabled={this.state.disabled}
           defaultOpen={true}
           columns={column}
           data={dataList}
