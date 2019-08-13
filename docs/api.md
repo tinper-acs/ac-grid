@@ -47,7 +47,7 @@ import 'ac-grids/build/AcGrids.css';
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|type|表单类型|`input/inputNumber/select`，不写则不render成表单|-|
+|type|表单类型|目前支持 `input/inputNumber/select`，正在继续完善，不写则不render成表单|-|
 |validate|是否校验|bool|-|
 |required|是否必填|bool|-|
 |options|type为 select 时的下拉内容|bool|-|
