@@ -1,3 +1,13 @@
+<a name="0.0.15"></a>
+## [0.0.15](https://github.com/tinper-bee/ac-grid/compare/v0.0.14...v0.0.15) (2019-08-13)
+
+
+### Features
+
+* **ac-grid:** 改名 ([b248934](https://github.com/tinper-bee/ac-grid/commit/b248934))
+
+
+
 <a name="0.0.14"></a>
 ## [0.0.14](https://github.com/tinper-bee/ac-grid/compare/v0.0.13...v0.0.14) (2019-08-13)
 
@@ -9,7 +19,7 @@
 
 ### Features
 
-* **ac-grid:** Number自动获得焦点 ([50d1716](https://github.com/tinper-bee/ac-grid/commit/50d1716))
+* **ac-nc-grid:** Number自动获得焦点 ([50d1716](https://github.com/tinper-bee/ac-grid/commit/50d1716))
 
 
 
@@ -39,7 +49,7 @@
 
 ### Features
 
-* **ac-grid:** 导出 ([d8d3058](https://github.com/tinper-bee/ac-grid/commit/d8d3058))
+* **ac-nc-grid:** 导出 ([d8d3058](https://github.com/tinper-bee/ac-grid/commit/d8d3058))
 
 
 
@@ -49,7 +59,7 @@
 
 ### Features
 
-* **ac-grid:** 升级bee-input-number ([4b085bb](https://github.com/tinper-bee/ac-grid/commit/4b085bb))
+* **ac-nc-grid:** 升级bee-input-number ([4b085bb](https://github.com/tinper-bee/ac-grid/commit/4b085bb))
 
 
 
@@ -59,7 +69,7 @@
 
 ### Features
 
-* **ac-grid:** select ([dd36030](https://github.com/tinper-bee/ac-grid/commit/dd36030))
+* **ac-nc-grid:** select ([dd36030](https://github.com/tinper-bee/ac-grid/commit/dd36030))
 
 
 
@@ -69,7 +79,7 @@
 
 ### Features
 
-* **ac-grid:** 支持正则 ([0b3fec4](https://github.com/tinper-bee/ac-grid/commit/0b3fec4))
+* **ac-nc-grid:** 支持正则 ([0b3fec4](https://github.com/tinper-bee/ac-grid/commit/0b3fec4))
 
 
 
@@ -79,7 +89,7 @@
 
 ### Features
 
-* **ac-grid:** onDel 最大化最小化 ([cd8fda5](https://github.com/tinper-bee/ac-grid/commit/cd8fda5))
+* **ac-nc-grid:** onDel 最大化最小化 ([cd8fda5](https://github.com/tinper-bee/ac-grid/commit/cd8fda5))
 
 
 
@@ -89,7 +99,7 @@
 
 ### Features
 
-* **ac-grid:** 分页 ([e384010](https://github.com/tinper-bee/ac-grid/commit/e384010))
+* **ac-nc-grid:** 分页 ([e384010](https://github.com/tinper-bee/ac-grid/commit/e384010))
 
 
 
