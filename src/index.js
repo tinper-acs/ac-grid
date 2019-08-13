@@ -1,6 +1,6 @@
-import AcGrid from './AcGrid';
+import AcGrids from './AcGrids';
 import EditGrid from './EditGrid'
 
-AcGrid.EditGrid = EditGrid;
+AcGrids.EditGrid = EditGrid;
 
-export default AcGrid;
+export default AcGrids;

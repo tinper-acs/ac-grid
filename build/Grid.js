@@ -56,7 +56,7 @@ var Grid = function (_Component) {
             otherProps = _objectWithoutProperties(_props, ["paginationObj", "data"]);
 
         return _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
-            className: "ac-grid",
+            className: "ac-grids",
             data: data,
             paginationObj: "none",
             columnFilterAble: false,

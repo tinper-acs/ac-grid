@@ -1,4 +1,4 @@
-# 复杂表格 AcGrid
+# 复杂表格 AcGrids
 
 
 ## 何时使用
@@ -8,8 +8,8 @@
 
 ```js
 
-import AcGrid from 'ac-grid';
-import 'ac-grid/build/AcGrid.css';
+import AcGrids from 'ac-grids';
+import 'ac-grids/build/AcGrids.css';
 ```
 
 ## 代码演示

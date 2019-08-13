@@ -14,9 +14,9 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _AcGrid = require("./AcGrid");
+var _AcGrids = require("./AcGrids");
 
-var _AcGrid2 = _interopRequireDefault(_AcGrid);
+var _AcGrids2 = _interopRequireDefault(_AcGrids);
 
 var _RenderColumn = require("./RenderColumn");
 
@@ -372,7 +372,7 @@ var EditGrid = function (_Component) {
                 _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-                    _react2["default"].createElement(_AcGrid2["default"], _extends({}, otherProps, {
+                    _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
                         columns: columns,
                         data: data,
                         exportData: _exportData,

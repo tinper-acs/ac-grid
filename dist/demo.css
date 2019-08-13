@@ -6081,34 +6081,34 @@ ul {
 #filter_column_popover .u-table-filter-column-pop-cont-item .drop-menu .uf {
   display: none; }
 
-.ac-grid-wrapper .u-grid.ac-grid {
+.ac-grids-wrapper .u-grid.ac-grids {
   background: #fff;
   overflow: hidden; }
-  .ac-grid-wrapper .u-grid.ac-grid table {
+  .ac-grids-wrapper .u-grid.ac-grids table {
     table-layout: fixed; }
-  .ac-grid-wrapper .u-grid.ac-grid .table-menu {
+  .ac-grids-wrapper .u-grid.ac-grids .table-menu {
     height: 16px;
     line-height: 1; }
 
-.ac-grid-wrapper .u-input-group {
+.ac-grids-wrapper .u-input-group {
   border-spacing: 0; }
 
-.ac-grid-wrapper .u-table tr {
+.ac-grids-wrapper .u-table tr {
   transition: none; }
-  .ac-grid-wrapper .u-table tr:nth-child(2n) {
+  .ac-grids-wrapper .u-table tr:nth-child(2n) {
     background: #FAFAFA; }
-  .ac-grid-wrapper .u-table tr:nth-child(2n + 1) {
+  .ac-grids-wrapper .u-table tr:nth-child(2n + 1) {
     background: #ffffff; }
-  .ac-grid-wrapper .u-table tr:hover, .ac-grid-wrapper .u-table tr.u-table-row-hover {
+  .ac-grids-wrapper .u-table tr:hover, .ac-grids-wrapper .u-table tr.u-table-row-hover {
     background: #EBECF0; }
-  .ac-grid-wrapper .u-table tr.u-table-row.selected, .ac-grid-wrapper .u-table tr.u-table-row.ref-multiple-table-row-selected {
+  .ac-grids-wrapper .u-table tr.u-table-row.selected, .ac-grids-wrapper .u-table tr.u-table-row.ref-multiple-table-row-selected {
     background: #FFF7E7; }
 
-.ac-grid-wrapper .u-table th, .ac-grid-wrapper .u-table td {
+.ac-grids-wrapper .u-table th, .ac-grids-wrapper .u-table td {
   padding: 10px 8px;
   height: 40px; }
 
-.ac-grid-wrapper .u-table th {
+.ac-grids-wrapper .u-table th {
   overflow: visible;
   background-clip: padding-box;
   word-break: keep-all;
@@ -6117,10 +6117,10 @@ ul {
   text-align: left;
   background: #eceff5; }
 
-.ac-grid-wrapper .u-table tr.filterable th {
+.ac-grids-wrapper .u-table tr.filterable th {
   padding: 0 2px; }
 
-.ac-grid-wrapper .ac-grid-wrapper-pages {
+.ac-grids-wrapper .ac-grids-wrapper-pages {
   height: 50px;
   display: -ms-flexbox;
   display: flex;
@@ -6128,15 +6128,15 @@ ul {
   justify-content: space-between;
   padding-top: 9px;
   padding-left: 10px; }
-  .ac-grid-wrapper .ac-grid-wrapper-pages .u-select {
+  .ac-grids-wrapper .ac-grids-wrapper-pages .u-select {
     width: 85px; }
-  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span:hover {
+  .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > a, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > a:focus, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > a:hover, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > span, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > span:focus, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .active > span:hover {
     color: #E14C46;
     background: #fff;
     border-color: #E14C46; }
-  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > li > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > li > span {
+  .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > a, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > a:focus, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > a:hover, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > span, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > span:focus, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > .disabled > span:hover, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > li > a, .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-list > li > span {
     background: #fff; }
-  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-total {
+  .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-total {
     display: none; }
 
 .ac-edit-grid-column-title-required:before {
@@ -6152,16 +6152,16 @@ ul {
   width: 100%;
   z-index: 2; }
 
-.ac-edit-grid .ac-grid-wrapper .u-table td {
+.ac-edit-grid .ac-grids-wrapper .u-table td {
   padding: 0 8px;
   height: 40px; }
 
-.ac-edit-grid .ac-grid-wrapper .u-table .nc-grid-cell {
+.ac-edit-grid .ac-grids-wrapper .u-table .nc-grid-cell {
   display: block;
   width: 100%;
   height: 39px;
   line-height: 39px; }
-  .ac-edit-grid .ac-grid-wrapper .u-table .nc-grid-cell.enter::after {
+  .ac-edit-grid .ac-grids-wrapper .u-table .nc-grid-cell.enter::after {
     cursor: pointer;
     color: #0073E1;
     font-family: uf !important;

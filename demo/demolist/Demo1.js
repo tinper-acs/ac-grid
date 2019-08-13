@@ -5,7 +5,7 @@
  */
 import React, { Component } from "react";
 import { Button } from 'tinper-bee';
-import AcGrid from '../../src'
+import AcGrids from '../../src'
 
 const column = [
   {
@@ -145,7 +145,7 @@ class Demo1 extends Component {
       onDataNumSelect:(value)=>{console.log("每页多少条："+value)},//改变页码回调
     }
     return (
-        <AcGrid
+        <AcGrids
           columns={column}
           data={dataList}
           getSelectedDataFunc={this.getSelectedDataFunc}

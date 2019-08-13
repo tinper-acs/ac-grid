@@ -1,16 +1,16 @@
-# ac-grid
+# ac-grids
 
-[![npm version](https://img.shields.io/npm/v/ac-grid.svg)](https://www.npmjs.com/package/ac-grid)
-[![Build Status](https://img.shields.io/travis/tinper-bee/ac-grid/master.svg)](https://travis-ci.org/tinper-bee/ac-grid)
-[![Coverage Status](https://coveralls.io/repos/github/tinper-bee/ac-grid/badge.svg?branch=master)](https://coveralls.io/github/tinper-bee/ac-grid?branch=master)
-[![devDependency Status](https://img.shields.io/david/dev/tinper-bee/ac-grid.svg)](https://david-dm.org/tinper-bee/ac-grid#info=devDependencies)
-[![NPM downloads](http://img.shields.io/npm/dm/ac-grid.svg?style=flat)](https://npmjs.org/package/ac-grid)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/tinper-bee/ac-grid.svg)](http://isitmaintained.com/project/tinper-bee/ac-grid "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/tinper-bee/ac-grid.svg)](http://isitmaintained.com/project/tinper-bee/ac-grid "Percentage of issues still open")
+[![npm version](https://img.shields.io/npm/v/ac-grids.svg)](https://www.npmjs.com/package/ac-grids)
+[![Build Status](https://img.shields.io/travis/tinper-bee/ac-grids/master.svg)](https://travis-ci.org/tinper-bee/ac-grids)
+[![Coverage Status](https://coveralls.io/repos/github/tinper-bee/ac-grids/badge.svg?branch=master)](https://coveralls.io/github/tinper-bee/ac-grids?branch=master)
+[![devDependency Status](https://img.shields.io/david/dev/tinper-bee/ac-grids.svg)](https://david-dm.org/tinper-bee/ac-grids#info=devDependencies)
+[![NPM downloads](http://img.shields.io/npm/dm/ac-grids.svg?style=flat)](https://npmjs.org/package/ac-grids)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/tinper-bee/ac-grids.svg)](http://isitmaintained.com/project/tinper-bee/ac-grids "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/tinper-bee/ac-grids.svg)](http://isitmaintained.com/project/tinper-bee/ac-grids "Percentage of issues still open")
 
 
 
-react ac-grid component for tinper-bee
+react ac-grids component for tinper-bee
 
 ## Rely
 
@@ -36,8 +36,8 @@ react ac-grid component for tinper-bee
 
 ```sh
 $ npm install -g bee-tools
-$ git clone https://github.com/tinper-bee/ac-grid
-$ cd ac-grid
+$ git clone https://github.com/tinper-bee/ac-grids
+$ cd ac-grids
 $ npm install
 $ npm run dev
 ```
