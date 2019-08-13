@@ -19,7 +19,7 @@ class Grid extends Component {
         return (
             <BeeGrid
                 {...otherProps}
-                className="ac-nc-grid"
+                className="ac-grid"
                 data={data}
                 paginationObj='none'  
                 columnFilterAble={false}

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import NcGird from "./NcGrid";
+import NcGird from "./AcGrid";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
@@ -14,7 +14,7 @@ const propTypes = {
     onOpenChange:PropTypes.func,//展开收起回调
     title:PropTypes.string,
     disabled:PropTypes.bool,//是否可编辑
-    onDel:PropTypes.func,
+    onDel:PropTypes.func,//删除的回调
     defaultOpen:PropTypes.bool,//默认是否打开
     showIndex:PropTypes.bool,//是否显示序号列
 }

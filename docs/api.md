@@ -1,15 +1,20 @@
-# 复杂表格 NcGrid
+# 复杂表格 AcGrid
 
 
- ## 何时使用
+## 何时使用
 
+ 
+## 如何使用
 
- ## 如何使用
+```js
 
+import AcGrid from 'ac-grid';
+import 'ac-grid/build/AcGrid.css';
+```
 
- ## 代码演示
+## 代码演示
 
- ## API
+## API
 
 ### Grid
 
@@ -30,9 +35,15 @@
 |title|标题|string|-|
 |onOpenChange|展开收起回调|function|-|
 |onChange|数据改变的回调|function|-|
+|disabled|是否可编辑|bool|-|
+|onDel|删除的回调|function|-|
+|defaultOpen|默认是否打开|bool|-|
+|showIndex|是否显示序号列|bool|true|
 
 
 ### columns
+
+参考 [table的columns API](http://bee.tinper.org/tinper-bee/bee-table#Column)
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|

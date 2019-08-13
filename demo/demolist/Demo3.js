@@ -4,9 +4,9 @@
  *
  */
 import React, { Component } from "react";
-import NcGrid from '../../src';
+import AcGrid from '../../src';
 
-const EditGrid = NcGrid.EditGrid;
+const EditGrid = AcGrid.EditGrid;
 
 const column = [
   {

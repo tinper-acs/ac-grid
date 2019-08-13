@@ -14,9 +14,9 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _NcGrid = require("./NcGrid");
+var _AcGrid = require("./AcGrid");
 
-var _NcGrid2 = _interopRequireDefault(_NcGrid);
+var _AcGrid2 = _interopRequireDefault(_AcGrid);
 
 var _RenderColumn = require("./RenderColumn");
 
@@ -56,7 +56,7 @@ var propTypes = {
     onOpenChange: _propTypes2["default"].func, //展开收起回调
     title: _propTypes2["default"].string,
     disabled: _propTypes2["default"].bool, //是否可编辑
-    onDel: _propTypes2["default"].func,
+    onDel: _propTypes2["default"].func, //删除的回调
     defaultOpen: _propTypes2["default"].bool, //默认是否打开
     showIndex: _propTypes2["default"].bool //是否显示序号列
 };
@@ -372,7 +372,7 @@ var EditGrid = function (_Component) {
                 _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-                    _react2["default"].createElement(_NcGrid2["default"], _extends({}, otherProps, {
+                    _react2["default"].createElement(_AcGrid2["default"], _extends({}, otherProps, {
                         columns: columns,
                         data: data,
                         exportData: _exportData,

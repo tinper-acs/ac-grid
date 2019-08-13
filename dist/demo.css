@@ -6081,34 +6081,34 @@ ul {
 #filter_column_popover .u-table-filter-column-pop-cont-item .drop-menu .uf {
   display: none; }
 
-.ac-nc-grid-wrapper .u-grid.ac-nc-grid {
+.ac-grid-wrapper .u-grid.ac-grid {
   background: #fff;
   overflow: hidden; }
-  .ac-nc-grid-wrapper .u-grid.ac-nc-grid table {
+  .ac-grid-wrapper .u-grid.ac-grid table {
     table-layout: fixed; }
-  .ac-nc-grid-wrapper .u-grid.ac-nc-grid .table-menu {
+  .ac-grid-wrapper .u-grid.ac-grid .table-menu {
     height: 16px;
     line-height: 1; }
 
-.ac-nc-grid-wrapper .u-input-group {
+.ac-grid-wrapper .u-input-group {
   border-spacing: 0; }
 
-.ac-nc-grid-wrapper .u-table tr {
+.ac-grid-wrapper .u-table tr {
   transition: none; }
-  .ac-nc-grid-wrapper .u-table tr:nth-child(2n) {
+  .ac-grid-wrapper .u-table tr:nth-child(2n) {
     background: #FAFAFA; }
-  .ac-nc-grid-wrapper .u-table tr:nth-child(2n + 1) {
+  .ac-grid-wrapper .u-table tr:nth-child(2n + 1) {
     background: #ffffff; }
-  .ac-nc-grid-wrapper .u-table tr:hover, .ac-nc-grid-wrapper .u-table tr.u-table-row-hover {
+  .ac-grid-wrapper .u-table tr:hover, .ac-grid-wrapper .u-table tr.u-table-row-hover {
     background: #EBECF0; }
-  .ac-nc-grid-wrapper .u-table tr.u-table-row.selected, .ac-nc-grid-wrapper .u-table tr.u-table-row.ref-multiple-table-row-selected {
+  .ac-grid-wrapper .u-table tr.u-table-row.selected, .ac-grid-wrapper .u-table tr.u-table-row.ref-multiple-table-row-selected {
     background: #FFF7E7; }
 
-.ac-nc-grid-wrapper .u-table th, .ac-nc-grid-wrapper .u-table td {
+.ac-grid-wrapper .u-table th, .ac-grid-wrapper .u-table td {
   padding: 10px 8px;
   height: 40px; }
 
-.ac-nc-grid-wrapper .u-table th {
+.ac-grid-wrapper .u-table th {
   overflow: visible;
   background-clip: padding-box;
   word-break: keep-all;
@@ -6117,10 +6117,10 @@ ul {
   text-align: left;
   background: #eceff5; }
 
-.ac-nc-grid-wrapper .u-table tr.filterable th {
+.ac-grid-wrapper .u-table tr.filterable th {
   padding: 0 2px; }
 
-.ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages {
+.ac-grid-wrapper .ac-grid-wrapper-pages {
   height: 50px;
   display: -ms-flexbox;
   display: flex;
@@ -6128,15 +6128,15 @@ ul {
   justify-content: space-between;
   padding-top: 9px;
   padding-left: 10px; }
-  .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-select {
+  .ac-grid-wrapper .ac-grid-wrapper-pages .u-select {
     width: 85px; }
-  .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > a:hover, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .active > span:hover {
+  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > a:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .active > span:hover {
     color: #E14C46;
     background: #fff;
     border-color: #E14C46; }
-  .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > a, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > a:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > a:hover, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > span, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > span:focus, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > .disabled > span:hover, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > li > a, .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-list > li > span {
+  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > a:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span:focus, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > .disabled > span:hover, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > li > a, .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-list > li > span {
     background: #fff; }
-  .ac-nc-grid-wrapper .ac-nc-grid-wrapper-pages .u-pagination-total {
+  .ac-grid-wrapper .ac-grid-wrapper-pages .u-pagination-total {
     display: none; }
 
 .ac-edit-grid-column-title-required:before {
@@ -6152,16 +6152,16 @@ ul {
   width: 100%;
   z-index: 2; }
 
-.ac-edit-grid .ac-nc-grid-wrapper .u-table td {
+.ac-edit-grid .ac-grid-wrapper .u-table td {
   padding: 0 8px;
   height: 40px; }
 
-.ac-edit-grid .ac-nc-grid-wrapper .u-table .nc-grid-cell {
+.ac-edit-grid .ac-grid-wrapper .u-table .nc-grid-cell {
   display: block;
   width: 100%;
   height: 39px;
   line-height: 39px; }
-  .ac-edit-grid .ac-nc-grid-wrapper .u-table .nc-grid-cell.enter::after {
+  .ac-edit-grid .ac-grid-wrapper .u-table .nc-grid-cell.enter::after {
     cursor: pointer;
     color: #0073E1;
     font-family: uf !important;

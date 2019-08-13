@@ -1,6 +1,6 @@
-import NcGrid from './NcGrid';
+import AcGrid from './AcGrid';
 import EditGrid from './EditGrid'
 
-NcGrid.EditGrid = EditGrid;
+AcGrid.EditGrid = EditGrid;
 
-export default NcGrid;
+export default AcGrid;
