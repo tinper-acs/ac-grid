@@ -10,13 +10,6 @@ const EditGrid = NcGrid.EditGrid;
 
 const column = [
   {
-    title: "序号",
-    dataIndex: "index",
-    key: "index",
-    width: 100,
-    
-  },
-  {
     title: "订单编号",
     dataIndex: "orderCode",
     key: "orderCode",
@@ -99,7 +92,6 @@ const column = [
 ];
 const dataList = [
   {
-    // index: 1,
     orderCode: "11",
     supplierName: "xxx",
     type_name: "1",
@@ -114,7 +106,6 @@ const dataList = [
     key: "1"
   },
   {
-    // index: 2,
     orderCode: "22",
     supplierName: "22xxx",
     type_name: "2",
@@ -129,7 +120,6 @@ const dataList = [
     key: "2"
   },
   {
-    // index: 3,
     orderCode: "33",
     supplierName: "22xxx",
     type_name: "3",
@@ -144,7 +134,6 @@ const dataList = [
     key: "3"
   },
   {
-    // index: 4,
     orderCode: "44",
     supplierName: "22xxx",
     type_name: "3",
@@ -193,9 +182,7 @@ class Demo1 extends Component {
     }
     return (
       <div>
-        <button onClick={this.setdisabled}> 设置为disabled</button>
           <EditGrid
-          disabled={this.state.disabled}
           defaultOpen={true}
           columns={column}
           data={dataList}

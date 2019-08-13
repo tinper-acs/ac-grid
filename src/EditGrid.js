@@ -16,6 +16,7 @@ const propTypes = {
     disabled:PropTypes.bool,//是否可编辑
     onDel:PropTypes.func,
     defaultOpen:PropTypes.bool,//默认是否打开
+    showIndex:PropTypes.bool,//是否显示序号列
 }
 
 const defaultProps = {
@@ -26,6 +27,7 @@ const defaultProps = {
     onChange:()=>{},
     onOpenChange:()=>{},
     onDel:()=>{},
+    showIndex:true
 };
 
 class EditGrid extends Component {
@@ -75,6 +77,14 @@ class EditGrid extends Component {
                 }
             }
         });
+        if(this.props.showIndex){
+            columns.unshift({
+                title: "序号",
+                dataIndex: "index",
+                key: "index",
+                width: 100,
+              })
+        }
         this.setState({
             columns
         })

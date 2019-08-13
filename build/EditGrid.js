@@ -57,7 +57,8 @@ var propTypes = {
     title: _propTypes2["default"].string,
     disabled: _propTypes2["default"].bool, //是否可编辑
     onDel: _propTypes2["default"].func,
-    defaultOpen: _propTypes2["default"].bool //默认是否打开
+    defaultOpen: _propTypes2["default"].bool, //默认是否打开
+    showIndex: _propTypes2["default"].bool //是否显示序号列
 };
 
 var defaultProps = {
@@ -67,7 +68,8 @@ var defaultProps = {
     columns: [],
     onChange: function onChange() {},
     onOpenChange: function onOpenChange() {},
-    onDel: function onDel() {}
+    onDel: function onDel() {},
+    showIndex: true
 };
 
 var EditGrid = function (_Component) {
@@ -112,6 +114,14 @@ var EditGrid = function (_Component) {
                     }
                 }
             });
+            if (_this.props.showIndex) {
+                columns.unshift({
+                    title: "序号",
+                    dataIndex: "index",
+                    key: "index",
+                    width: 100
+                });
+            }
             _this.setState({
                 columns: columns
             });
