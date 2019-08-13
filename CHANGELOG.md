@@ -4,7 +4,7 @@
 
 ### Features
 
-* **ac-grids:** 改名 ([b248934](https://github.com/tinper-bee/ac-grids/commit/b248934))
+* **ac-grid:** 改名 ([b248934](https://github.com/tinper-bee/ac-grids/commit/b248934))
 
 
 
