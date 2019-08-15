@@ -1,3 +1,13 @@
+<a name="0.0.19"></a>
+## [0.0.19](https://github.com/tinper-bee/ac-grids/compare/v0.0.18...v0.0.19) (2019-08-15)
+
+
+### Features
+
+* **ac-grids:** 支持传入showTootip,showIndex ([45764c2](https://github.com/tinper-bee/ac-grids/commit/45764c2))
+
+
+
 <a name="0.0.18"></a>
 ## [0.0.18](https://github.com/tinper-bee/ac-grids/compare/v0.0.17...v0.0.18) (2019-08-15)
 
