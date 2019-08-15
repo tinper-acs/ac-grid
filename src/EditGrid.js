@@ -197,8 +197,14 @@ class EditGrid extends Component {
     }
     //复制行
     copyRow=()=>{
+        let copyData = [];
+        let data = cloneDeep(this.state.data);
+        data.forEach(item=>{
+            if(item._checked)copyData.push(item)
+        })
         this.setState({
-            copying:true
+            copying:true,
+            selectData:copyData
         })
     }
     //粘贴至末行

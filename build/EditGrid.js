@@ -212,8 +212,14 @@ var EditGrid = function (_Component) {
         };
 
         _this.copyRow = function () {
+            var copyData = [];
+            var data = (0, _lodash4["default"])(_this.state.data);
+            data.forEach(function (item) {
+                if (item._checked) copyData.push(item);
+            });
             _this.setState({
-                copying: true
+                copying: true,
+                selectData: copyData
             });
         };
 
