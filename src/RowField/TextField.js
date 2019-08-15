@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 //验证组件 https://www.npmjs.com/package/async-validator
 import schema from 'async-validator';
 //Tinper-bee
-import { FormControl } from 'tinper-bee';
+import FormControl from 'bee-form-control';
 import FieldWrap from './FieldWrap'
 
 

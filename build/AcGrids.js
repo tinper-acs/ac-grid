@@ -18,7 +18,21 @@ var _Grid = require("./Grid");
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _tinperBee = require("tinper-bee");
+var _beePagination = require("bee-pagination");
+
+var _beePagination2 = _interopRequireDefault(_beePagination);
+
+var _beeSelect = require("bee-select");
+
+var _beeSelect2 = _interopRequireDefault(_beeSelect);
+
+var _beeTooltip = require("bee-tooltip");
+
+var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
+
+var _lodash = require("lodash.clonedeep");
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -32,16 +46,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
-var Option = _tinperBee.Select.Option;
+var Option = _beeSelect2["default"].Option;
 
 var propsTypes = {
-    paginationObj: _propTypes2["default"].object,
-    showPagination: _propTypes2["default"].bool
+    paginationObj: _propTypes2["default"].object, //分页参数
+    showPagination: _propTypes2["default"].bool, //是否显示分页
+    showTooltip: _propTypes2["default"].bool, //是否显示tooltip
+    showIndex: _propTypes2["default"].bool //是否显示index列
 };
 
 var defaultProps = {
     paginationObj: {},
-    showPagination: true
+    showPagination: true,
+    showTooltip: false,
+    showIndex: false
 };
 
 var AcGrids = function (_Component) {
@@ -60,12 +78,73 @@ var AcGrids = function (_Component) {
             _this.grid.exportExcel();
         };
 
-        _this.state = {
-            activePage: 1
+        _this.setColumns = function (col, da) {
+            var columns = (0, _lodash2["default"])(col);
+            var _this$props = _this.props,
+                showIndex = _this$props.showIndex,
+                showTooltip = _this$props.showTooltip;
+
+            if (showIndex) {
+                //给data加index
+                var data = (0, _lodash2["default"])(da);
+                if (data[0] && data[0].index == 1) {//如果index存在
+                } else {
+                    data.forEach(function (item, index) {
+                        item.index = index + 1;
+                    });
+                    _this.setState({
+                        data: data
+                    });
+                }
+                columns.unshift({
+                    title: "序号",
+                    dataIndex: "index",
+                    key: "index",
+                    width: 100
+                });
+            }
+            columns.forEach(function (item) {
+                item.oldRender = item.render;
+                item.render = function (text, record, index) {
+                    if (showTooltip) {
+                        var placement = 'left';
+                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                        return _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { overlay: value, inverse: true, placement: placement },
+                            _react2["default"].createElement(
+                                "span",
+                                null,
+                                value
+                            )
+                        );
+                    } else {
+                        var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                        return _react2["default"].createElement(
+                            "span",
+                            { className: "ac-grid-cell", title: _value },
+                            _value
+                        );
+                    }
+                };
+            });
+            _this.setState({
+                columns: columns
+            });
         };
-        _this.gird = _react2["default"].createRef();
+
+        _this.state = {
+            activePage: 1,
+            columns: props.columns,
+            data: props.data
+        };
         return _this;
     }
+
+    AcGrids.prototype.componentWillMount = function componentWillMount() {
+        this.setColumns(this.props.columns, this.props.data);
+    };
 
     AcGrids.prototype.render = function render() {
         var _this2 = this;
@@ -73,19 +152,21 @@ var AcGrids = function (_Component) {
         var _props = this.props,
             paginationObj = _props.paginationObj,
             showPagination = _props.showPagination,
-            other = _objectWithoutProperties(_props, ["paginationObj", "showPagination"]);
+            columns = _props.columns,
+            data = _props.data,
+            other = _objectWithoutProperties(_props, ["paginationObj", "showPagination", "columns", "data"]);
 
         return _react2["default"].createElement(
             "div",
             { className: "ac-grids-wrapper" },
-            _react2["default"].createElement(_Grid2["default"], _extends({}, other, { ref: function ref(_ref) {
+            _react2["default"].createElement(_Grid2["default"], _extends({}, other, { columns: this.state.columns, data: this.state.data, ref: function ref(_ref) {
                     return _this2.grid = _ref;
                 } })),
             showPagination ? _react2["default"].createElement(
                 "div",
                 { className: "ac-grids-wrapper-pages" },
                 _react2["default"].createElement(
-                    _tinperBee.Select,
+                    _beeSelect2["default"],
                     { onChange: this.onSelectChange, defaultValue: "10" },
                     _react2["default"].createElement(
                         Option,
@@ -108,7 +189,7 @@ var AcGrids = function (_Component) {
                         "100\u6761/\u9875"
                     )
                 ),
-                _react2["default"].createElement(_tinperBee.Pagination, _extends({
+                _react2["default"].createElement(_beePagination2["default"], _extends({
                     prev: true,
                     next: true,
                     size: "sm",

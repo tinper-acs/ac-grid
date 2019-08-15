@@ -5,6 +5,7 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
+import Button from 'bee-button'
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -20,7 +21,7 @@ const column = [
     disabled:true,
     pattern:/^2$/,
     patternMessage:'格式错误',
-    textAlign:'left',
+    textAlign:'left'
   },
   {
     title: "金额",
@@ -96,7 +97,7 @@ const dataList = [
     supplierName: "xxx",
     type_name: "1",
     purchasing: "内行",
-    purchasingGroup: "323",
+    purchasingGroup: "采购组",
     voucherDate: "kkkk",
     approvalState_name: "vvvv",
     confirmState_name: "aaaa",

@@ -42,7 +42,7 @@ class RenderCell extends Component {
             if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
             return (
                 <ToolTip inverse overlay={this.props.text} placement={placement}>
-                    <span className={`nc-grid-cell ${this.state.enter?'enter':''}`} 
+                    <span className={`ac-grid-cell ${this.state.enter?'enter':''}`} 
                     onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} 
                     onClick={this.click}>{this.props.text}</span>
                 </ToolTip> 

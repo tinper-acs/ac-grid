@@ -65,7 +65,7 @@ var RenderCell = function (_Component) {
                     { inverse: true, overlay: _this.props.text, placement: placement },
                     _react2["default"].createElement(
                         'span',
-                        { className: 'nc-grid-cell ' + (_this.state.enter ? 'enter' : ''),
+                        { className: 'ac-grid-cell ' + (_this.state.enter ? 'enter' : ''),
                             onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter,
                             onClick: _this.click },
                         _this.props.text

@@ -24,6 +24,8 @@ import 'ac-grids/build/AcGrids.css';
 |columns|列|array|[]|
 |paginationObj|分页属性|同分页组件|-|
 |showPagination|是否显示分页|bool|true|
+|showTooltip|是否显示tooltip|bool|false|
+|showIndex|是否显示序号列|bool|false|
 
 
 ### EditGrid

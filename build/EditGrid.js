@@ -14,9 +14,9 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _AcGrids = require("./AcGrids");
+var _Grid = require("./Grid");
 
-var _AcGrids2 = _interopRequireDefault(_AcGrids);
+var _Grid2 = _interopRequireDefault(_Grid);
 
 var _RenderColumn = require("./RenderColumn");
 
@@ -34,7 +34,21 @@ var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _tinperBee = require("tinper-bee");
+var _beeButton = require("bee-button");
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
+
+var _beeIcon = require("bee-icon");
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
+var _beeButtonGroup = require("bee-button-group");
+
+var _beeButtonGroup2 = _interopRequireDefault(_beeButtonGroup);
+
+var _beeTooltip = require("bee-tooltip");
+
+var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -112,7 +126,8 @@ var EditGrid = function (_Component) {
                                 max: item.max,
                                 min: item.min,
                                 step: item.step,
-                                precision: item.precision
+                                precision: item.precision,
+                                disabled: item.disabled
                             });
                         };
                         if (item.required) {
@@ -123,6 +138,20 @@ var EditGrid = function (_Component) {
                             );
                         }
                     }
+                } else {
+                    item.render = function (text, record, index) {
+                        var placement = 'left';
+                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+                        return _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { overlay: text, inverse: true, placement: placement },
+                            _react2["default"].createElement(
+                                "span",
+                                { className: "ac-grid-cell" },
+                                text
+                            )
+                        );
+                    };
                 }
             });
             _this.setState({
@@ -327,7 +356,7 @@ var EditGrid = function (_Component) {
                         _react2["default"].createElement(
                             "span",
                             { className: clsfix + "-panel-icon" },
-                            open ? _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-down" }) : _react2["default"].createElement(_tinperBee.Icon, { type: "uf-triangle-right" })
+                            open ? _react2["default"].createElement(_beeIcon2["default"], { type: "uf-triangle-down" }) : _react2["default"].createElement(_beeIcon2["default"], { type: "uf-triangle-right" })
                         ),
                         _react2["default"].createElement(
                             "span",
@@ -339,44 +368,44 @@ var EditGrid = function (_Component) {
                         "span",
                         { className: clsfix + "-panel-btns" },
                         copying ? _react2["default"].createElement(
-                            _tinperBee.ButtonGroup,
+                            _beeButtonGroup2["default"],
                             null,
                             _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { bordered: true, onClick: _this.copyToEnd },
                                 "\u7C98\u8D34\u81F3\u672B\u884C"
                             ),
                             _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { bordered: true, onClick: _this.cancelCopy },
                                 "\u53D6\u6D88"
                             )
                         ) : _react2["default"].createElement(
-                            _tinperBee.ButtonGroup,
+                            _beeButtonGroup2["default"],
                             null,
                             _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { bordered: true, onClick: _this.addRow, disabled: disabled },
                                 "\u589E\u884C"
                             ),
                             _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.delRow },
                                 "\u5220\u884C"
                             ),
                             _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.copyRow },
                                 "\u590D\u5236\u884C"
                             ),
                             isMax ? _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { className: "maxmin-btn", bordered: true, onClick: _this.max },
-                                _react2["default"].createElement(_tinperBee.Icon, { type: "uf-minimize" })
+                                _react2["default"].createElement(_beeIcon2["default"], { type: "uf-minimize" })
                             ) : _react2["default"].createElement(
-                                _tinperBee.Button,
+                                _beeButton2["default"],
                                 { className: "maxmin-btn", bordered: true, onClick: _this.max },
-                                _react2["default"].createElement(_tinperBee.Icon, { type: "uf-maxmize" })
+                                _react2["default"].createElement(_beeIcon2["default"], { type: "uf-maxmize" })
                             )
                         )
                     ) : ''
@@ -384,7 +413,7 @@ var EditGrid = function (_Component) {
                 _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-                    _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
+                    _react2["default"].createElement(_Grid2["default"], _extends({}, otherProps, {
                         noReplaceColumns: true,
                         columns: columns,
                         data: data,

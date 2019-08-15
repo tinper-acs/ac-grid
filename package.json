@@ -1,6 +1,6 @@
 {
  "name": "ac-grids",
- "version": "0.0.18",
+ "version": "0.0.19",
  "description": "AcGrids ui component for react",
  "keywords": [
   "react",
@@ -39,19 +39,21 @@
  "dependencies": {
   "async-validator": "^3.0.1",
   "babel-runtime": "^6.23.0",
+  "bee-button-group": "^2.0.1",
   "bee-complex-grid": "^2.0.23",
   "bee-datepicker": "^2.2.5",
+  "bee-form-control": "^2.0.6",
   "bee-icon": "^1.0.11",
   "bee-input-number": "^2.1.4",
+  "bee-pagination": "^2.0.8",
+  "bee-select": "^2.0.15",
   "bee-tooltip": "^2.1.2",
   "classnames": "^2.2.5",
   "lodash.clonedeep": "^4.5.0",
   "lodash.isequal": "^4.5.0",
   "moment": "^2.24.0",
   "rc-calendar": "^9.15.5",
-  "rc-input-number": "^4.4.5",
-  "tinper-bee": "^2.1.5",
-  "tinper-bee-core": "latest"
+  "rc-input-number": "^4.4.5"
  },
  "devDependencies": {
   "chai": "^3.5.0",

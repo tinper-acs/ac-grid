@@ -16,7 +16,9 @@ var _asyncValidator = require('async-validator');
 
 var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 
-var _tinperBee = require('tinper-bee');
+var _beeFormControl = require('bee-form-control');
+
+var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
 var _FieldWrap = require('./FieldWrap');
 
@@ -188,7 +190,7 @@ var TextField = function (_Component) {
                 message: pattern ? patternMessage : message,
                 flag: flag
             },
-            _react2["default"].createElement(_tinperBee.FormControl, {
+            _react2["default"].createElement(_beeFormControl2["default"], {
                 className: className + ' triangle-element',
                 value: value,
                 onChange: this.handlerChange,

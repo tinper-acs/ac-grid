@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
-//Tinper-bee
-import { Icon, Tooltip } from 'tinper-bee';
+import Icon from 'bee-icon';
+import Tooltip from 'bee-tooltip';
 
 
 

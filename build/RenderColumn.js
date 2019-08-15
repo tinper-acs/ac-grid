@@ -100,6 +100,8 @@ var RenderColumn = function (_Component) {
                 step = _this$props2.step,
                 precision = _this$props2.precision;
 
+            var placement = 'left';
+            if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
             switch (type) {
                 case 'inputNumber':
                     return _react2["default"].createElement(
@@ -107,11 +109,11 @@ var RenderColumn = function (_Component) {
                         null,
                         disabled ? _react2["default"].createElement(
                             _beeTooltip2["default"],
-                            { inverse: true, overlay: text, placement: 'top' },
+                            { overlay: value, inverse: true, placement: placement },
                             _react2["default"].createElement(
                                 'span',
-                                null,
-                                text
+                                { className: 'ac-grid-cell' },
+                                value
                             )
                         ) : _react2["default"].createElement(
                             _RenderCell2["default"],
@@ -133,15 +135,19 @@ var RenderColumn = function (_Component) {
                                 } })
                         )
                     );
-
+                    break;
                 case 'input':
                     return _react2["default"].createElement(
                         'div',
                         null,
                         disabled ? _react2["default"].createElement(
                             _beeTooltip2["default"],
-                            { overlay: text },
-                            text
+                            { overlay: value, inverse: true, placement: placement },
+                            _react2["default"].createElement(
+                                'span',
+                                { className: 'ac-grid-cell' },
+                                value
+                            )
                         ) : _react2["default"].createElement(
                             _RenderCell2["default"],
                             { text: value, textAlign: textAlign },
@@ -158,15 +164,19 @@ var RenderColumn = function (_Component) {
                                 } })
                         )
                     );
-
+                    break;
                 case 'select':
                     return _react2["default"].createElement(
                         'div',
                         null,
                         disabled ? _react2["default"].createElement(
                             _beeTooltip2["default"],
-                            { inverse: true, overlay: text },
-                            text
+                            { inverse: true, placement: placement, overlay: _this.getValue(value) },
+                            _react2["default"].createElement(
+                                'span',
+                                { className: 'ac-grid-cell' },
+                                _this.getValue(value)
+                            )
                         ) : _react2["default"].createElement(
                             _RenderCell2["default"],
                             { text: _this.getValue(value), textAlign: textAlign },
@@ -182,6 +192,7 @@ var RenderColumn = function (_Component) {
                                 } })
                         )
                     );
+                    break;
             }
         };
 

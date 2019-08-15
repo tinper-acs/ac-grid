@@ -5,7 +5,7 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
-import { Button } from 'tinper-bee'
+import Button from 'bee-button'
 
 const EditGrid = AcGrids.EditGrid;
 

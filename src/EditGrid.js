@@ -1,11 +1,14 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import AcGird from "./AcGrids";
+import AcGird from "./Grid";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
 import ReactDOM from 'react-dom'
-import { Button,Icon,ButtonGroup } from 'tinper-bee';
+import Button from 'bee-button';
+import Icon from 'bee-icon';
+import ButtonGroup from 'bee-button-group';
+import Tooltip from 'bee-tooltip';
 
 
 const propTypes = {
@@ -80,13 +83,21 @@ class EditGrid extends Component {
                                     min={item.min}
                                     step={item.step} 
                                     precision={item.precision}
+                                    disabled={item.disabled}
                                 />
                     }
                     if(item.required){
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
                     }
                 }
-                
+            }else{
+                item.render=(text,record,index)=>{
+                    let placement = 'left';
+                    if(item.textAlign)placement=item.textAlign=='center'?'bottom':item.textAlign;
+                    return <Tooltip overlay={text} inverse placement={placement}>
+                                <span className='ac-grid-cell'>{text}</span>
+                            </Tooltip>
+                }
             }
         });
         this.setState({

@@ -4,21 +4,18 @@
  *
  */
 import React, { Component } from "react";
-import { Button } from 'tinper-bee';
+import Button from 'bee-button';
 import AcGrids from '../../src'
 
 const column = [
   {
-    title: "序号",
-    dataIndex: "index",
-    key: "index",
-    width: 100
-  },
-  {
     title: "订单编号",
     dataIndex: "orderCode",
     key: "orderCode",
-    width: 150
+    width: 150,
+    render:(text)=>{
+      return '123'
+    }
   },
   {
     title: "金额",
@@ -147,7 +144,7 @@ class Demo1 extends Component {
     return (
         <AcGrids
           columns={column}
-          data={[]}
+          data={dataList}
           getSelectedDataFunc={this.getSelectedDataFunc}
           paginationObj={paginationObj}
           multiSelect={false}

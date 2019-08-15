@@ -20,7 +20,9 @@ var _FieldWrap = require('./FieldWrap');
 
 var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 
-var _tinperBee = require('tinper-bee');
+var _beeSelect = require('bee-select');
+
+var _beeSelect2 = _interopRequireDefault(_beeSelect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -180,7 +182,7 @@ var SelectField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(_tinperBee.Select, {
+            _react2["default"].createElement(_beeSelect2["default"], {
                 className: className,
                 value: value,
                 onChange: this.handlerChange,

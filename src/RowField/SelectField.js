@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import schema from 'async-validator';
 import FieldWrap from './FieldWrap'
 //下拉组件
-import { Select } from 'tinper-bee'
+import Select from 'bee-select'
 
 
 

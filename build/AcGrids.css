@@ -7486,7 +7486,7 @@ ul {
     background: #FFF7E7; }
 
 .ac-grids-wrapper .u-table th, .ac-grids-wrapper .u-table td {
-  padding: 10px 8px;
+  padding: 0;
   height: 40px; }
 
 .ac-grids-wrapper .u-table th {
@@ -7500,6 +7500,15 @@ ul {
 
 .ac-grids-wrapper .u-table tr.filterable th {
   padding: 0 2px; }
+
+.ac-grids-wrapper .u-table .ac-grid-cell {
+  display: block;
+  width: 100%;
+  height: 39px;
+  line-height: 39px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
 
 .ac-grids-wrapper .ac-grids-wrapper-pages {
   height: 50px;
@@ -7531,16 +7540,19 @@ ul {
   width: 100%;
   z-index: 2; }
 
-.ac-edit-grid .ac-grids-wrapper .u-table td {
+.ac-edit-grid .u-table td {
   padding: 0 8px;
   height: 40px; }
 
-.ac-edit-grid .ac-grids-wrapper .u-table .nc-grid-cell {
+.ac-edit-grid .u-table .ac-grid-cell {
   display: block;
   width: 100%;
   height: 39px;
-  line-height: 39px; }
-  .ac-edit-grid .ac-grids-wrapper .u-table .nc-grid-cell.enter::after {
+  line-height: 39px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+  .ac-edit-grid .u-table .ac-grid-cell.enter::after {
     cursor: pointer;
     color: #0073E1;
     font-family: uf !important;

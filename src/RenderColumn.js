@@ -52,13 +52,15 @@ class RenderColumn extends Component {
      */
     renderComp = () => {
         let { type, value,index,dataIndex,textAlign, validate, disabled, options,required,pattern,patternMessage,iconStyle, max, min, step, precision } = this.props;
+        let placement = 'left';
+        if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
         switch (type) {
             case 'inputNumber':
                 return (<div>
                         {
                             disabled?
-                            <ToolTip inverse overlay={text} placement='top'>
-                                <span>{text}</span>
+                            <ToolTip overlay={value} inverse placement={placement}>
+                                <span className='ac-grid-cell'>{value}</span>
                             </ToolTip>
                             :<RenderCell text = {value} textAlign={textAlign}>
                             <NumberField 
@@ -77,13 +79,13 @@ class RenderColumn extends Component {
                             </RenderCell>
                         }
                     </div>);
- 
+            break;
             case 'input':
                 return (<div>
                     {
                         disabled?
-                        <ToolTip overlay={text}>
-                            {text}
+                        <ToolTip overlay={value} inverse placement={placement}>
+                            <span className='ac-grid-cell'>{value}</span>
                         </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
                         <TextField 
                             textAlign={textAlign}
@@ -97,13 +99,13 @@ class RenderColumn extends Component {
                         </RenderCell>
                     }
                 </div>);
-
+            break;
             case 'select':
                 return (<div>
                         {
                             disabled?
-                            <ToolTip inverse overlay={text}>
-                                {text}
+                            <ToolTip inverse placement={placement} overlay={this.getValue(value)}>
+                                <span className='ac-grid-cell'>{this.getValue(value)}</span>
                             </ToolTip>
                             :<RenderCell text ={this.getValue(value)} textAlign={textAlign}>
                                 <SelectField 
@@ -113,13 +115,14 @@ class RenderColumn extends Component {
                                     validate={validate} 
                                     required={required} 
                                     value={value} 
-                                    onChange={(field, v)=>{
-                                        this.onChange(index,dataIndex,v)}} />
+                                    onChange={(field, v)=>{this.onChange(index,dataIndex,v)}} />
                             </RenderCell>
                         }
                     </div>
                 )
+            break;
         }
+        
     }
     render() {
         return (<div>
