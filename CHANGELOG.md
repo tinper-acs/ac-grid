@@ -1,3 +1,13 @@
+<a name="0.0.18"></a>
+## [0.0.18](https://github.com/tinper-bee/ac-grids/compare/v0.0.17...v0.0.18) (2019-08-15)
+
+
+### Features
+
+* **ac-grids:** 复制行实施监控选中行数据变化 ([41e7295](https://github.com/tinper-bee/ac-grids/commit/41e7295))
+
+
+
 <a name="0.0.17"></a>
 ## [0.0.17](https://github.com/tinper-bee/ac-grids/compare/v0.0.16...v0.0.17) (2019-08-13)
 
