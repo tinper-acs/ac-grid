@@ -1,3 +1,13 @@
+<a name="0.0.21"></a>
+## [0.0.21](https://github.com/tinper-bee/ac-grids/compare/v0.0.20...v0.0.21) (2019-08-16)
+
+
+### Features
+
+* **ac-grids:** editGrid 自定义render ([4214759](https://github.com/tinper-bee/ac-grids/commit/4214759))
+
+
+
 <a name="0.0.20"></a>
 ## [0.0.20](https://github.com/tinper-bee/ac-grids/compare/v0.0.19...v0.0.20) (2019-08-16)
 
