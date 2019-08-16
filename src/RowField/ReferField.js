@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 //验证组件 https://www.npmjs.com/package/async-validator
 import schema from 'async-validator';
 //Tinper-bee
-import MdfRefer from '@yonyou/mdf-refer'
+import MdfRefer,{cb} from '@yonyou/mdf-refer'
 import FieldWrap from './FieldWrap'
 
 
@@ -27,6 +27,9 @@ const propTypes = {
     onValidate: PropTypes.func,
     isFlag: PropTypes.bool,
     validate: PropTypes.bool,
+    cRefType:PropTypes.string.isRequired,//参照唯一标示
+    displayname:PropTypes.string,//参照展示字段
+    valueField:PropTypes.string,//参照保存字段
 };
 
 //默认参数值
@@ -38,7 +41,9 @@ const defaultProps = {
     required: false,
     isFlag: false,
     validate: false,
-    className: ''
+    className: '',
+    displayname:'name',
+    valueField:'id'
 }
 
 class ReferField extends Component {
@@ -53,7 +58,12 @@ class ReferField extends Component {
             value: props.value,
             flag: false,
             error: false
-        }
+        };
+
+        this.model=new cb.models.ReferModel({
+            cRefType:props.cRefType,
+            displayname:props.displayname
+        })
     }
     /**
      *  参数发生变化回调
@@ -74,13 +84,13 @@ class ReferField extends Component {
      * @param {string} value
      */
     handlerChange = (value) => {
-        let { onChange, field, index, status } = this.props;
+        let { onChange, field, index, status,valueField } = this.props;
         //处理是否有修改状态改变、状态同步之后校验输入是否正确
         this.setState({ value, flag: status == 'edit' }, () => {
             this.validate();
         });
         //回调外部函数
-        onChange && onChange(field, value, index);
+        onChange && onChange(field, value[valueField], index);
     }
     /**
      * 校验方法
@@ -118,8 +128,7 @@ class ReferField extends Component {
     }
     render() {
         let { value, error, flag } = this.state;
-
-        let { className,model,config, message, required, onBlur, pattern,patternMessage } = this.props;
+        let { className,cRefType,displayname,valueField,config={}, message, required, onBlur, pattern,patternMessage } = this.props;
         return (
             <FieldWrap
                 required={required}
@@ -131,7 +140,7 @@ class ReferField extends Component {
                     value={value}
                     onChange={this.handlerChange}
                     onBlur={onBlur}
-                    model={model}
+                    model={this.model}
                     modelName={'refer'}
                     config={config}
                 />

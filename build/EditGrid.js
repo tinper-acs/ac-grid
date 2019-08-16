@@ -113,6 +113,9 @@ var EditGrid = function (_Component) {
                         item.render = function (text, record, index) {
                             return _react2["default"].createElement(_RenderColumn2["default"], {
                                 model: item.model,
+                                cRefType: item.cRefType,
+                                displayname: item.displayname,
+                                valueField: item.valueField,
                                 config: item.config,
                                 textAlign: item.textAlign,
                                 type: item.type,

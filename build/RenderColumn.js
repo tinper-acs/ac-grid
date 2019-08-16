@@ -103,7 +103,9 @@ var RenderColumn = function (_Component) {
                 min = _this$props2.min,
                 step = _this$props2.step,
                 precision = _this$props2.precision,
-                model = _this$props2.model,
+                cRefType = _this$props2.cRefType,
+                displayname = _this$props2.displayname,
+                valueField = _this$props2.valueField,
                 config = _this$props2.config;
 
             var placement = 'left';
@@ -214,15 +216,18 @@ var RenderColumn = function (_Component) {
                             )
                         ) : _react2["default"].createElement(
                             _RenderCell2["default"],
-                            { text: value, textAlign: textAlign },
+                            { type: 'refer', text: value, textAlign: textAlign },
                             _react2["default"].createElement(_ReferField2["default"], {
-                                model: model,
+                                cRefType: cRefType,
+                                displayname: displayname,
+                                valueField: valueField,
                                 config: config,
                                 textAlign: textAlign,
                                 field: dataIndex,
                                 validate: validate,
                                 required: required,
                                 value: value,
+
                                 onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })

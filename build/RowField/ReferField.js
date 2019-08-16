@@ -59,7 +59,10 @@ var propTypes = {
     required: _propTypes2["default"].bool,
     onValidate: _propTypes2["default"].func,
     isFlag: _propTypes2["default"].bool,
-    validate: _propTypes2["default"].bool
+    validate: _propTypes2["default"].bool,
+    cRefType: _propTypes2["default"].string.isRequired, //参照唯一标示
+    displayname: _propTypes2["default"].string, //参照展示字段
+    valueField: _propTypes2["default"].string //参照保存字段
 };
 
 //默认参数值
@@ -71,7 +74,9 @@ var defaultProps = {
     required: false,
     isFlag: false,
     validate: false,
-    className: ''
+    className: '',
+    displayname: 'name',
+    valueField: 'id'
 };
 
 var ReferField = function (_Component) {
@@ -92,14 +97,15 @@ var ReferField = function (_Component) {
                 onChange = _this$props.onChange,
                 field = _this$props.field,
                 index = _this$props.index,
-                status = _this$props.status;
+                status = _this$props.status,
+                valueField = _this$props.valueField;
             //处理是否有修改状态改变、状态同步之后校验输入是否正确
 
             _this.setState({ value: value, flag: status == 'edit' }, function () {
                 _this.validate();
             });
             //回调外部函数
-            onChange && onChange(field, value, index);
+            onChange && onChange(field, value[valueField], index);
         };
 
         _this.validate = function () {
@@ -139,6 +145,11 @@ var ReferField = function (_Component) {
             flag: false,
             error: false
         };
+
+        _this.model = new _mdfRefer.cb.models.ReferModel({
+            cRefType: props.cRefType,
+            displayname: props.displayname
+        });
         return _this;
     }
     /**
@@ -175,8 +186,11 @@ var ReferField = function (_Component) {
             flag = _state.flag;
         var _props = this.props,
             className = _props.className,
-            model = _props.model,
-            config = _props.config,
+            cRefType = _props.cRefType,
+            displayname = _props.displayname,
+            valueField = _props.valueField,
+            _props$config = _props.config,
+            config = _props$config === undefined ? {} : _props$config,
             message = _props.message,
             required = _props.required,
             onBlur = _props.onBlur,
@@ -195,7 +209,7 @@ var ReferField = function (_Component) {
                 value: value,
                 onChange: this.handlerChange,
                 onBlur: onBlur,
-                model: model,
+                model: this.model,
                 modelName: 'refer',
                 config: config
             })

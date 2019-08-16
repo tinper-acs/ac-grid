@@ -56,7 +56,7 @@ class RenderColumn extends Component {
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
             iconStyle, max, min, step, precision,
-            model,config 
+            cRefType,displayname,valueField,config 
         } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
@@ -134,15 +134,18 @@ class RenderColumn extends Component {
                             disabled?
                             <ToolTip overlay={value} inverse placement={placement}>
                                 <span className='ac-grid-cell'>{value}</span>
-                            </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
+                            </ToolTip>:<RenderCell type='refer' text = {value} textAlign={textAlign}>
                             <ReferField 
-                                model={model}
+                                cRefType={cRefType}
+                                displayname={displayname}
+                                valueField={valueField}
                                 config={config}
                                 textAlign={textAlign}
                                 field={dataIndex}  
                                 validate={validate} 
                                 required={required} 
                                 value={value} 
+                                
                                 onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                             </RenderCell>
                         }

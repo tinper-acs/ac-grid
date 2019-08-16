@@ -5,7 +5,8 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
-import Button from 'bee-button'
+import Button from 'bee-button';
+import {cb} from '@yonyou/mdf-refer'
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -59,6 +60,17 @@ const column = [
     dataIndex: "purchasing",
     key: "purchasing",
     width: 150,
+    type:'refer',
+    model:new cb.models.ReferModel({
+      cRefType:'ucf-org-center.bd_adminorgtreeviewref',
+      displayname:'name',
+      valueField:'id',
+    }),
+    config:{
+      modelconfig:{
+          afterOkClick:()=>{alert()}
+      }
+  }
   },
   {
     title: "采购组",

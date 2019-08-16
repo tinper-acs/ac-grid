@@ -69,6 +69,9 @@ class EditGrid extends Component {
                     item.render=(text,record,index)=>{
                         return <RenderColumn
                                     model={item.model}
+                                    cRefType={item.cRefType}
+                                    displayname={item.displayname}
+                                    valueField={item.valueField}
                                     config={item.config}
                                     textAlign={item.textAlign}
                                     type={item.type}
