@@ -1,3 +1,13 @@
+<a name="0.0.20"></a>
+## [0.0.20](https://github.com/tinper-bee/ac-grids/compare/v0.0.19...v0.0.20) (2019-08-16)
+
+
+### Features
+
+* **ac-grids:** componentWillReceiveProps 改变data ([55a3ddc](https://github.com/tinper-bee/ac-grids/commit/55a3ddc))
+
+
+
 <a name="0.0.19"></a>
 ## [0.0.19](https://github.com/tinper-bee/ac-grids/compare/v0.0.18...v0.0.19) (2019-08-15)
 
