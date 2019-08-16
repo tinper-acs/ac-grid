@@ -5,6 +5,7 @@ import Pagination from 'bee-pagination';
 import Select from 'bee-select';
 import Tooltip from 'bee-tooltip';
 import cloneDeep from 'lodash.clonedeep';
+import isequal from 'lodash.isequal';
 
 const Option = Select.Option;
 
@@ -90,9 +91,15 @@ class AcGrids extends Component {
         this.setState({
             columns
         })
-        
     }
 
+    componentWillReceiveProps(nextProps){
+        if(!isequal(nextProps.data,this.state.data)){
+            this.setState({
+                data:nextProps.data
+            })  
+        }
+    }
     render() {
         let { paginationObj,showPagination,columns,data,...other } = this.props;
         return (

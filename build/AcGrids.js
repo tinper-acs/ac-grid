@@ -34,6 +34,10 @@ var _lodash = require("lodash.clonedeep");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _lodash3 = require("lodash.isequal");
+
+var _lodash4 = _interopRequireDefault(_lodash3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -144,6 +148,14 @@ var AcGrids = function (_Component) {
 
     AcGrids.prototype.componentWillMount = function componentWillMount() {
         this.setColumns(this.props.columns, this.props.data);
+    };
+
+    AcGrids.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if (!(0, _lodash4["default"])(nextProps.data, this.state.data)) {
+            this.setState({
+                data: nextProps.data
+            });
+        }
     };
 
     AcGrids.prototype.render = function render() {
