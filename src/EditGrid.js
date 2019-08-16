@@ -68,6 +68,8 @@ class EditGrid extends Component {
                 if(!disabled){
                     item.render=(text,record,index)=>{
                         return <RenderColumn
+                                    model={item.model}
+                                    config={item.config}
                                     textAlign={item.textAlign}
                                     type={item.type}
                                     index={index}

@@ -24,6 +24,10 @@ var _SelectField = require('./RowField/SelectField');
 
 var _SelectField2 = _interopRequireDefault(_SelectField);
 
+var _ReferField = require('./RowField/ReferField');
+
+var _ReferField2 = _interopRequireDefault(_ReferField);
+
 var _RenderCell = require('./RenderCell');
 
 var _RenderCell2 = _interopRequireDefault(_RenderCell);
@@ -98,7 +102,9 @@ var RenderColumn = function (_Component) {
                 max = _this$props2.max,
                 min = _this$props2.min,
                 step = _this$props2.step,
-                precision = _this$props2.precision;
+                precision = _this$props2.precision,
+                model = _this$props2.model,
+                config = _this$props2.config;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -119,6 +125,7 @@ var RenderColumn = function (_Component) {
                             _RenderCell2["default"],
                             { text: value, textAlign: textAlign },
                             _react2["default"].createElement(_NumberField2["default"], {
+                                textAlign: textAlign,
                                 field: dataIndex,
                                 validate: validate,
                                 required: required,
@@ -189,6 +196,35 @@ var RenderColumn = function (_Component) {
                                 value: value,
                                 onChange: function onChange(field, v) {
                                     _this.onChange(index, dataIndex, v);
+                                } })
+                        )
+                    );
+                    break;
+                case 'refer':
+                    return _react2["default"].createElement(
+                        'div',
+                        null,
+                        disabled ? _react2["default"].createElement(
+                            _beeTooltip2["default"],
+                            { overlay: value, inverse: true, placement: placement },
+                            _react2["default"].createElement(
+                                'span',
+                                { className: 'ac-grid-cell' },
+                                value
+                            )
+                        ) : _react2["default"].createElement(
+                            _RenderCell2["default"],
+                            { text: value, textAlign: textAlign },
+                            _react2["default"].createElement(_ReferField2["default"], {
+                                model: model,
+                                config: config,
+                                textAlign: textAlign,
+                                field: dataIndex,
+                                validate: validate,
+                                required: required,
+                                value: value,
+                                onChange: function onChange(field, v) {
+                                    _this.props.onChange(index, dataIndex, v);
                                 } })
                         )
                     );

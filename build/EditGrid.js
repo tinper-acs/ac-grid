@@ -112,6 +112,8 @@ var EditGrid = function (_Component) {
                     if (!disabled) {
                         item.render = function (text, record, index) {
                             return _react2["default"].createElement(_RenderColumn2["default"], {
+                                model: item.model,
+                                config: item.config,
                                 textAlign: item.textAlign,
                                 type: item.type,
                                 index: index,

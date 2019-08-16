@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TextField from './RowField/TextField';
 import NumberField from './RowField/NumberField';
 import SelectField from './RowField/SelectField';
+import ReferField from './RowField/ReferField';
 import RenderCell from './RenderCell';
 import ToolTip from 'bee-tooltip'
 
@@ -51,7 +52,12 @@ class RenderColumn extends Component {
      * @returns JSX
      */
     renderComp = () => {
-        let { type, value,index,dataIndex,textAlign, validate, disabled, options,required,pattern,patternMessage,iconStyle, max, min, step, precision } = this.props;
+        let { type, value,index,dataIndex,
+            textAlign, validate, disabled, 
+            options,required,pattern,patternMessage,
+            iconStyle, max, min, step, precision,
+            model,config 
+        } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
         switch (type) {
@@ -64,6 +70,7 @@ class RenderColumn extends Component {
                             </ToolTip>
                             :<RenderCell text = {value} textAlign={textAlign}>
                             <NumberField 
+                                textAlign={textAlign}
                                 field={dataIndex} 
                                 validate={validate} 
                                 required={required} 
@@ -120,6 +127,26 @@ class RenderColumn extends Component {
                         }
                     </div>
                 )
+            break;
+            case 'refer':
+                    return (<div>
+                        {
+                            disabled?
+                            <ToolTip overlay={value} inverse placement={placement}>
+                                <span className='ac-grid-cell'>{value}</span>
+                            </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
+                            <ReferField 
+                                model={model}
+                                config={config}
+                                textAlign={textAlign}
+                                field={dataIndex}  
+                                validate={validate} 
+                                required={required} 
+                                value={value} 
+                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                            </RenderCell>
+                        }
+                    </div>)
             break;
         }
         
