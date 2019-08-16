@@ -107,6 +107,7 @@ var EditGrid = function (_Component) {
                 });
             }
             columns.forEach(function (item) {
+                item.oldRender = item.render;
                 if (item.type) {
                     if (!disabled) {
                         item.render = function (text, record, index) {
@@ -140,15 +141,16 @@ var EditGrid = function (_Component) {
                     }
                 } else {
                     item.render = function (text, record, index) {
+                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
                         var placement = 'left';
                         if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
                         return _react2["default"].createElement(
                             _beeTooltip2["default"],
-                            { overlay: text, inverse: true, placement: placement },
+                            { overlay: value, inverse: true, placement: placement },
                             _react2["default"].createElement(
                                 "span",
                                 { className: "ac-grid-cell" },
-                                text
+                                value
                             )
                         );
                     };

@@ -63,6 +63,7 @@ class EditGrid extends Component {
               })
         }
         columns.forEach(item => {
+            item.oldRender = item.render;
             if(item.type){
                 if(!disabled){
                     item.render=(text,record,index)=>{
@@ -92,10 +93,11 @@ class EditGrid extends Component {
                 }
             }else{
                 item.render=(text,record,index)=>{
+                    let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text;
                     let placement = 'left';
                     if(item.textAlign)placement=item.textAlign=='center'?'bottom':item.textAlign;
-                    return <Tooltip overlay={text} inverse placement={placement}>
-                                <span className='ac-grid-cell'>{text}</span>
+                    return <Tooltip overlay={value} inverse placement={placement}>
+                                <span className='ac-grid-cell'>{value}</span>
                             </Tooltip>
                 }
             }

@@ -58,7 +58,7 @@ const column = [
     title: "采购组织",
     dataIndex: "purchasing",
     key: "purchasing",
-    width: 150
+    width: 150,
   },
   {
     title: "采购组",
