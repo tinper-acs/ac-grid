@@ -9,6 +9,7 @@ import Button from 'bee-button';
 import Icon from 'bee-icon';
 import ButtonGroup from 'bee-button-group';
 import Tooltip from 'bee-tooltip';
+import Btns from 'ac-btns'
 
 
 const propTypes = {
@@ -297,6 +298,30 @@ class EditGrid extends Component {
         const { exportData, clsfix,title, data:propsData,columns:cl,disabled, ...otherProps } = this.props; 
         let { data,open,columns,copying,isMax } = this.state;
         let _exportData = exportData || data;
+        let btnsObj = {
+            addRow:{
+                onClick:this.addRow,
+                disabled:disabled
+            },
+            delRow:{
+                onClick:this.delRow,
+                disabled:this.state.selectData==0||disabled
+            },
+            copyRow:{
+                onClick:this.copyRow,
+                disabled:this.state.selectData==0||disabled
+            },
+        }
+        if(isMax){
+            btnsObj.min={
+                onClick:this.max
+            }
+        }else{
+            btnsObj.max={
+                onClick:this.max
+            }
+        }
+
         return (
             <div className={`${clsfix} ${isMax?'max':''}`}>
                 <div className={`${clsfix}-panel ${open?'':'close'}`}>
@@ -314,17 +339,27 @@ class EditGrid extends Component {
                         open?<span className={`${clsfix}-panel-btns`}>
                             {
                                 copying?<ButtonGroup>
-                                            <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
-                                            <Button bordered onClick={this.cancelCopy}>取消</Button>
+                                            <Btns btns={{
+                                                copyToEnd:{
+                                                    onClick:this.copyToEnd
+                                                },
+                                                cancel:{
+                                                    onClick:this.cancelCopy
+                                                }
+                                            }}/>
+                                            {/* <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
+                                            <Button bordered onClick={this.cancelCopy}>取消</Button> */}
                                         </ButtonGroup>:<ButtonGroup>
-                                                        <Button bordered onClick={this.addRow} disabled={disabled}>增行</Button>
+                                                        <Btns btns={btnsObj}/>
+                                                        {/* <Button bordered onClick={this.addRow} disabled={disabled}>增行</Button>
                                                         <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.delRow}>删行</Button>
-                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.copyRow}>复制行</Button>
-
+                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.copyRow}>复制行</Button> */}
+{/* 
                                                         {
-                                                            isMax?<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>
+                                                            isMax?
+                                                            <Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>
                                                             :<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-maxmize'/></Button>
-                                                        }
+                                                        } */}
                                                         
                                                     </ButtonGroup>
                             }

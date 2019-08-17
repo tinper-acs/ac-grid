@@ -50,6 +50,10 @@ var _beeTooltip = require("bee-tooltip");
 
 var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
 
+var _acBtns = require("ac-btns");
+
+var _acBtns2 = _interopRequireDefault(_acBtns);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -351,6 +355,30 @@ var EditGrid = function (_Component) {
                 isMax = _this$state2.isMax;
 
             var _exportData = exportData || data;
+            var btnsObj = {
+                addRow: {
+                    onClick: _this.addRow,
+                    disabled: disabled
+                },
+                delRow: {
+                    onClick: _this.delRow,
+                    disabled: _this.state.selectData == 0 || disabled
+                },
+                copyRow: {
+                    onClick: _this.copyRow,
+                    disabled: _this.state.selectData == 0 || disabled
+                }
+            };
+            if (isMax) {
+                btnsObj.min = {
+                    onClick: _this.max
+                };
+            } else {
+                btnsObj.max = {
+                    onClick: _this.max
+                };
+            }
+
             return _react2["default"].createElement(
                 "div",
                 { className: clsfix + " " + (isMax ? 'max' : '') },
@@ -377,43 +405,18 @@ var EditGrid = function (_Component) {
                         copying ? _react2["default"].createElement(
                             _beeButtonGroup2["default"],
                             null,
-                            _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { bordered: true, onClick: _this.copyToEnd },
-                                "\u7C98\u8D34\u81F3\u672B\u884C"
-                            ),
-                            _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { bordered: true, onClick: _this.cancelCopy },
-                                "\u53D6\u6D88"
-                            )
+                            _react2["default"].createElement(_acBtns2["default"], { btns: {
+                                    copyToEnd: {
+                                        onClick: _this.copyToEnd
+                                    },
+                                    cancel: {
+                                        onClick: _this.cancelCopy
+                                    }
+                                } })
                         ) : _react2["default"].createElement(
                             _beeButtonGroup2["default"],
                             null,
-                            _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { bordered: true, onClick: _this.addRow, disabled: disabled },
-                                "\u589E\u884C"
-                            ),
-                            _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.delRow },
-                                "\u5220\u884C"
-                            ),
-                            _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { bordered: true, disabled: _this.state.selectData == 0 || disabled, onClick: _this.copyRow },
-                                "\u590D\u5236\u884C"
-                            ),
-                            isMax ? _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { className: "maxmin-btn", bordered: true, onClick: _this.max },
-                                _react2["default"].createElement(_beeIcon2["default"], { type: "uf-minimize" })
-                            ) : _react2["default"].createElement(
-                                _beeButton2["default"],
-                                { className: "maxmin-btn", bordered: true, onClick: _this.max },
-                                _react2["default"].createElement(_beeIcon2["default"], { type: "uf-maxmize" })
-                            )
+                            _react2["default"].createElement(_acBtns2["default"], { btns: btnsObj })
                         )
                     ) : ''
                 ),

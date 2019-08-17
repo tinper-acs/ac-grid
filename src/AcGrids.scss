@@ -1,4 +1,5 @@
 @import '../node_modules/bee-complex-grid/src/Grid.scss';
+@import '../node_modules/ac-btns/src/Btns.scss';
 
 .ac-grids-wrapper {
     .u-grid.ac-grids {
@@ -138,7 +139,7 @@
         padding-left: 12px;
         padding-right: 20px;
         &-btns{
-            .u-button.u-button[disabled],.u-button.u-button[disabled]:hover{
+            button.u-button.u-button[disabled],button.u-button.u-button[disabled]:hover{
                 background: #fff;
                 color: #dfe1e6;
                 border-color: #a5adba;
