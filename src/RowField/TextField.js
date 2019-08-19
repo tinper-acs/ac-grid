@@ -119,7 +119,7 @@ class TextField extends Component {
     render() {
         let { value, error, flag } = this.state;
 
-        let { className, message, required, onBlur, pattern,patternMessage } = this.props;
+        let { className, message, required, onBlur, pattern,patternMessage,maxLength } = this.props;
 
         return (
             <FieldWrap
@@ -133,6 +133,7 @@ class TextField extends Component {
                     value={value}
                     onChange={this.handlerChange}
                     onBlur={onBlur}
+                    maxLength={maxLength}
                 />
             </FieldWrap>
         );

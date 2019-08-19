@@ -106,7 +106,8 @@ var RenderColumn = function (_Component) {
                 cRefType = _this$props2.cRefType,
                 displayname = _this$props2.displayname,
                 valueField = _this$props2.valueField,
-                config = _this$props2.config;
+                config = _this$props2.config,
+                maxLength = _this$props2.maxLength;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -161,6 +162,7 @@ var RenderColumn = function (_Component) {
                             _RenderCell2["default"],
                             { text: value, textAlign: textAlign },
                             _react2["default"].createElement(_TextField2["default"], {
+                                maxLength: maxLength,
                                 textAlign: textAlign,
                                 field: dataIndex,
                                 validate: validate,

@@ -13,9 +13,6 @@ const column = [
     dataIndex: "orderCode",
     key: "orderCode",
     width: 150,
-    render:(text)=>{
-      return '123'
-    }
   },
   {
     title: "金额",

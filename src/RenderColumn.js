@@ -56,7 +56,7 @@ class RenderColumn extends Component {
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
             iconStyle, max, min, step, precision,
-            cRefType,displayname,valueField,config 
+            cRefType,displayname,valueField,config,maxLength
         } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
@@ -95,6 +95,7 @@ class RenderColumn extends Component {
                             <span className='ac-grid-cell'>{value}</span>
                         </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
                         <TextField 
+                            maxLength={maxLength}
                             textAlign={textAlign}
                             field={dataIndex}  
                             validate={validate} 

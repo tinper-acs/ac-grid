@@ -127,7 +127,7 @@ var AcGrids = function (_Component) {
                         var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
                         return _react2["default"].createElement(
                             "span",
-                            { className: "ac-grid-cell", title: _value },
+                            { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
                             _value
                         );
                     }

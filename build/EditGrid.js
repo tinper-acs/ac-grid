@@ -34,10 +34,6 @@ var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _beeButton = require("bee-button");
-
-var _beeButton2 = _interopRequireDefault(_beeButton);
-
 var _beeIcon = require("bee-icon");
 
 var _beeIcon2 = _interopRequireDefault(_beeIcon);
@@ -137,7 +133,8 @@ var EditGrid = function (_Component) {
                                 min: item.min,
                                 step: item.step,
                                 precision: item.precision,
-                                disabled: item.disabled
+                                disabled: item.disabled,
+                                maxLength: item.maxLength
                             });
                         };
                         if (item.required) {

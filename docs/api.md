@@ -42,6 +42,7 @@ import 'ac-grids/build/AcGrids.css';
 |defaultOpen|默认是否打开|bool|-|
 |showIndex|是否显示序号列|bool|true|
 |excludeKeys|粘贴时不需要粘贴的key值合集|array|[]|
+|maxLength|最大长度|string|-|
 
 
 ### columns

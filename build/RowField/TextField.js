@@ -179,7 +179,8 @@ var TextField = function (_Component) {
             required = _props.required,
             onBlur = _props.onBlur,
             pattern = _props.pattern,
-            patternMessage = _props.patternMessage;
+            patternMessage = _props.patternMessage,
+            maxLength = _props.maxLength;
 
 
         return _react2["default"].createElement(
@@ -194,7 +195,8 @@ var TextField = function (_Component) {
                 className: className + ' triangle-element',
                 value: value,
                 onChange: this.handlerChange,
-                onBlur: onBlur
+                onBlur: onBlur,
+                maxLength: maxLength
             })
         );
     };

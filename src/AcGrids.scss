@@ -155,12 +155,6 @@
             margin-left: 8px;
             margin-right: 8px;
         }
-        .maxmin-btn{
-            padding: 3px;
-            .uf{
-                font-size: 19px!important;
-            }
-        }
     }
 
     .copy-to-here{
@@ -185,7 +179,12 @@
             height: 100%;
         }
     }
-    
+    .ac-btns button.ac-btns-item.u-button.ac-btns-max,
+    .ac-btns button.ac-btns-item.u-button.ac-btns-min{
+        margin-left: 6px;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
 }
 
 

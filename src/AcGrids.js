@@ -81,7 +81,7 @@ class AcGrids extends Component {
                             </Tooltip>
                 }else{
                     let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text;
-                    return <span className='ac-grid-cell' title={value}>
+                    return <span className='ac-grid-cell' title={typeof value =='string'||typeof value == 'number'?value:''}>
                                 {value}
                             </span>
                 }

@@ -5,7 +5,6 @@ import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
 import ReactDOM from 'react-dom'
-import Button from 'bee-button';
 import Icon from 'bee-icon';
 import ButtonGroup from 'bee-button-group';
 import Tooltip from 'bee-tooltip';
@@ -91,6 +90,7 @@ class EditGrid extends Component {
                                     step={item.step} 
                                     precision={item.precision}
                                     disabled={item.disabled}
+                                    maxLength={item.maxLength}
                                 />
                     }
                     if(item.required){

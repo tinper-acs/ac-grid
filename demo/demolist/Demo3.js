@@ -18,9 +18,9 @@ const column = [
     type:'input',
     required:true,
     validate:true,
-    disabled:true,
     pattern:/^2$/,
-    patternMessage:'格式错误'
+    patternMessage:'格式错误',
+    maxLength:'9'
   },
   {
     title: "金额",
