@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -35,16 +39,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Text (文本输入框)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * mdf参照
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 //React导入
-
-//类型校验
-
-//验证组件 https://www.npmjs.com/package/async-validator
-
-//Tinper-bee
 
 
 //类型校验
@@ -105,7 +103,7 @@ var ReferField = function (_Component) {
                 _this.validate();
             });
             //回调外部函数
-            onChange && onChange(field, value[valueField], index);
+            onChange && onChange(field, value ? value[valueField] : '', index);
         };
 
         _this.validate = function () {
@@ -167,6 +165,12 @@ var ReferField = function (_Component) {
         }
     };
 
+    ReferField.prototype.componentDidMount = function componentDidMount() {
+        var field = _reactDom2["default"].findDOMNode(this.refs.field);
+        var input = field.querySelector('.container-refer input');
+        input.onblur = this.props.onBlur;
+    };
+
     /**
      * 有输入值改变的回调
      *
@@ -205,14 +209,18 @@ var ReferField = function (_Component) {
                 message: pattern ? patternMessage : message,
                 flag: flag
             },
-            _react2["default"].createElement(_mdfRefer2["default"], {
-                value: value,
-                onChange: this.handlerChange,
-                onBlur: onBlur,
-                model: this.model,
-                modelName: 'refer',
-                config: config
-            })
+            _react2["default"].createElement(
+                'span',
+                { ref: 'field' },
+                _react2["default"].createElement(_mdfRefer2["default"], {
+                    value: value,
+                    onChange: this.handlerChange,
+                    onBlur: onBlur,
+                    model: this.model,
+                    modelName: 'refer',
+                    config: config
+                })
+            )
         );
     };
 

@@ -1,16 +1,15 @@
 /**
- * Text (文本输入框)
+ * mdf参照
  */
 
 //React导入
 import React, { Component } from 'react';
-//类型校验
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-//验证组件 https://www.npmjs.com/package/async-validator
 import schema from 'async-validator';
-//Tinper-bee
 import MdfRefer,{cb} from '@yonyou/mdf-refer'
-import FieldWrap from './FieldWrap'
+import FieldWrap from './FieldWrap';
+
 
 
 
@@ -77,6 +76,11 @@ class ReferField extends Component {
             this.validate();
         }
     }
+    componentDidMount(){
+        // let field = ReactDOM.findDOMNode(this.refs.field);
+        // let input = field.querySelector('.container-refer input');
+        // input.onblur=this.props.onBlur;
+    }
 
     /**
      * 有输入值改变的回调
@@ -90,7 +94,7 @@ class ReferField extends Component {
             this.validate();
         });
         //回调外部函数
-        onChange && onChange(field, value[valueField], index);
+        onChange && onChange(field, value?value[valueField]:'', index);
     }
     /**
      * 校验方法
@@ -136,14 +140,16 @@ class ReferField extends Component {
                 message={pattern?patternMessage:message}
                 flag={flag}
             >
-                <MdfRefer
-                    value={value}
-                    onChange={this.handlerChange}
-                    onBlur={onBlur}
-                    model={this.model}
-                    modelName={'refer'}
-                    config={config}
-                />
+                <span ref='field'>
+                    <MdfRefer
+                        value={value}
+                        onChange={this.handlerChange}
+                        onBlur={onBlur}
+                        model={this.model}
+                        modelName={'refer'}
+                        config={config}
+                    />
+                </span>
             </FieldWrap>
         );
     }
