@@ -165,18 +165,18 @@ var ReferField = function (_Component) {
         }
     };
 
-    ReferField.prototype.componentDidMount = function componentDidMount() {
-        var field = _reactDom2["default"].findDOMNode(this.refs.field);
-        var input = field.querySelector('.container-refer input');
-        input.onblur = this.props.onBlur;
-    };
+    ReferField.prototype.componentDidMount = function componentDidMount() {}
+    // let field = ReactDOM.findDOMNode(this.refs.field);
+    // let input = field.querySelector('.container-refer input');
+    // input.onblur=this.props.onBlur;
+
 
     /**
      * 有输入值改变的回调
      *
      * @param {string} value
      */
-
+    ;
     /**
      * 校验方法
      *

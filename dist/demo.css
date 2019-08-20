@@ -6159,6 +6159,13 @@ ul {
 .u-button-group .ac-btns .u-button-group + .v-group {
   margin-left: -1px; }
 
+.ac-btns-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected {
+  color: #000;
+  background-color: #fff; }
+
+.ac-btns-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected:hover {
+  background-color: #ebecf0; }
+
 .ac-grids-wrapper .u-grid.ac-grids {
   background: #fff;
   overflow: hidden; }

@@ -352,27 +352,52 @@ var EditGrid = function (_Component) {
                 isMax = _this$state2.isMax;
 
             var _exportData = exportData || data;
-            var btnsObj = {
-                addRow: {
-                    onClick: _this.addRow,
-                    disabled: disabled
-                },
-                delRow: {
-                    onClick: _this.delRow,
-                    disabled: _this.state.selectData == 0 || disabled
-                },
-                copyRow: {
-                    onClick: _this.copyRow,
-                    disabled: _this.state.selectData == 0 || disabled
-                }
-            };
+            var btnsObj = {};
             if (isMax) {
-                btnsObj.min = {
-                    onClick: _this.max
+                btnsObj = {
+                    addRow: {
+                        onClick: _this.addRow,
+                        disabled: disabled
+                    },
+                    delRow: {
+                        onClick: _this.delRow,
+                        disabled: _this.state.selectData == 0 || disabled
+                    },
+                    copyRow: {
+                        onClick: _this.copyRow,
+                        disabled: _this.state.selectData == 0 || disabled
+                    },
+                    min: {
+                        onClick: _this.max
+                    }
                 };
             } else {
-                btnsObj.max = {
-                    onClick: _this.max
+                btnsObj = {
+                    addRow: {
+                        onClick: _this.addRow,
+                        disabled: disabled
+                    },
+                    delRow: {
+                        onClick: _this.delRow,
+                        disabled: _this.state.selectData == 0 || disabled
+                    },
+                    copyRow: {
+                        onClick: _this.copyRow,
+                        disabled: _this.state.selectData == 0 || disabled
+                    },
+                    max: {
+                        onClick: _this.max
+                    }
+                };
+            }
+            if (copying) {
+                btnsObj = {
+                    copyToEnd: {
+                        onClick: _this.copyToEnd
+                    },
+                    cancel: {
+                        onClick: _this.cancelCopy
+                    }
                 };
             }
 
@@ -399,18 +424,7 @@ var EditGrid = function (_Component) {
                     open ? _react2["default"].createElement(
                         "span",
                         { className: clsfix + "-panel-btns" },
-                        copying ? _react2["default"].createElement(
-                            _beeButtonGroup2["default"],
-                            null,
-                            _react2["default"].createElement(_acBtns2["default"], { btns: {
-                                    copyToEnd: {
-                                        onClick: _this.copyToEnd
-                                    },
-                                    cancel: {
-                                        onClick: _this.cancelCopy
-                                    }
-                                } })
-                        ) : _react2["default"].createElement(
+                        _react2["default"].createElement(
                             _beeButtonGroup2["default"],
                             null,
                             _react2["default"].createElement(_acBtns2["default"], { btns: btnsObj })

@@ -298,27 +298,52 @@ class EditGrid extends Component {
         const { exportData, clsfix,title, data:propsData,columns:cl,disabled, ...otherProps } = this.props; 
         let { data,open,columns,copying,isMax } = this.state;
         let _exportData = exportData || data;
-        let btnsObj = {
-            addRow:{
-                onClick:this.addRow,
-                disabled:disabled
-            },
-            delRow:{
-                onClick:this.delRow,
-                disabled:this.state.selectData==0||disabled
-            },
-            copyRow:{
-                onClick:this.copyRow,
-                disabled:this.state.selectData==0||disabled
-            },
-        }
+        let btnsObj = {}
         if(isMax){
-            btnsObj.min={
-                onClick:this.max
+            btnsObj= {
+                addRow:{
+                    onClick:this.addRow,
+                    disabled:disabled
+                },
+                delRow:{
+                    onClick:this.delRow,
+                    disabled:this.state.selectData==0||disabled
+                },
+                copyRow:{
+                    onClick:this.copyRow,
+                    disabled:this.state.selectData==0||disabled
+                },
+                min:{
+                    onClick:this.max
+                }
             }
         }else{
-            btnsObj.max={
-                onClick:this.max
+            btnsObj= {
+                addRow:{
+                    onClick:this.addRow,
+                    disabled:disabled
+                },
+                delRow:{
+                    onClick:this.delRow,
+                    disabled:this.state.selectData==0||disabled
+                },
+                copyRow:{
+                    onClick:this.copyRow,
+                    disabled:this.state.selectData==0||disabled
+                },
+                max:{
+                    onClick:this.max
+                }
+            }
+        }
+        if(copying){
+            btnsObj={
+                copyToEnd:{
+                    onClick:this.copyToEnd
+                },
+                cancel:{
+                    onClick:this.cancelCopy
+                }
             }
         }
 
@@ -337,32 +362,9 @@ class EditGrid extends Component {
                     </span>
                     {
                         open?<span className={`${clsfix}-panel-btns`}>
-                            {
-                                copying?<ButtonGroup>
-                                            <Btns btns={{
-                                                copyToEnd:{
-                                                    onClick:this.copyToEnd
-                                                },
-                                                cancel:{
-                                                    onClick:this.cancelCopy
-                                                }
-                                            }}/>
-                                            {/* <Button bordered onClick={this.copyToEnd}>粘贴至末行</Button>
-                                            <Button bordered onClick={this.cancelCopy}>取消</Button> */}
-                                        </ButtonGroup>:<ButtonGroup>
-                                                        <Btns btns={btnsObj}/>
-                                                        {/* <Button bordered onClick={this.addRow} disabled={disabled}>增行</Button>
-                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.delRow}>删行</Button>
-                                                        <Button bordered disabled={this.state.selectData==0||disabled} onClick={this.copyRow}>复制行</Button> */}
-{/* 
-                                                        {
-                                                            isMax?
-                                                            <Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-minimize'/></Button>
-                                                            :<Button className='maxmin-btn' bordered onClick={this.max}><Icon type='uf-maxmize'/></Button>
-                                                        } */}
-                                                        
-                                                    </ButtonGroup>
-                            }
+                            <ButtonGroup>
+                                <Btns btns={btnsObj}/>
+                            </ButtonGroup>
                         </span>:''
                     }
                     
