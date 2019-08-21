@@ -185,6 +185,27 @@
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
     }
+
+    //参照
+    .refer-out{
+        position: relative;
+        width: calc(100% - 4px);
+        height: 32px;
+        top: 0;
+        .u-form-control{
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: calc(100% - 45px);
+            z-index: 22;
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        input.ant-input{
+            border-color: #a5adba;
+        }
+    }
 }
 
 

@@ -10,6 +10,7 @@ import schema from 'async-validator';
 import MdfRefer,{cb} from '@yonyou/mdf-refer'
 import FieldWrap from './FieldWrap';
 import isEqual from 'lodash.isequal'
+import FormControl from 'bee-form-control';
 
 
 
@@ -56,7 +57,7 @@ class ReferField extends Component {
         this.state = {
             value: props.value,
             flag: false,
-            error: false
+            error: false,
         };
 
         this.model=new cb.models.ReferModel({
@@ -82,17 +83,16 @@ class ReferField extends Component {
     }
     componentDidMount(){
         if(this.props.value)this.model.setValue(this.state.value);
-
-        // document.addEventListener('click',(e)=>{
-        //     let className=e.target.className;
-        //     if(className=='ant-input'||
-        //         className=='anticon anticon-canzhao'||
-        //         className=='ac-grid-cell'){
-
-        //     }else{
-        //         this.props.onBlur()
-        //     }
-        // })
+        let field = ReactDOM.findDOMNode(this.refs.field);
+        field.addEventListener('click',(e)=>{
+            if(e.target.className=='anticon anticon-canzhao'||e.target.className=='anticon anticon-close-circle'){
+                this.clickOut()
+            }
+        })
+        // let openRef = field.querySelector('.container-refer .anticon-canzhao');
+        // if(openRef)openRef.onclick=this.clickOut;
+        // let close = field.querySelector('.container-refer .close-circle')
+        // if(close)close.onclick=this.clickOut;
     }
 
     /**
@@ -101,19 +101,22 @@ class ReferField extends Component {
      * @param {string} value
      */
     handlerChange = (value) => {
+        this.clickOut();
+        ReactDOM.findDOMNode(this.refs.input)&&ReactDOM.findDOMNode(this.refs.input).focus();
         value = value.value;
-        if(typeof value == 'object'){
-            if(value){
-                value.id=value[this.model._get_data('valueField')];
-                value.name=value[this.model._get_data('textField')];
-            }
+        let stateValue = '';
+        if(value&&value.id){
+            value.id=value[this.model._get_data('valueField')];
+            value.name=value[this.model._get_data('textField')];
+            stateValue=value[this.model._get_data('textField')];
         }else{
             this.model.setValue(value)
+            stateValue=value
         }
         
         let { onChange, field, index, status,valueField } = this.props;
         //处理是否有修改状态改变、状态同步之后校验输入是否正确
-        this.setState({ value, flag: status == 'edit' }, () => {
+        this.setState({ value:stateValue, flag: status == 'edit' }, () => {
             this.validate();
         });
         
@@ -154,6 +157,18 @@ class ReferField extends Component {
             onValidate && onValidate(field, fields, index);
         });
     }
+    clickOut=()=>{
+        this.onBlurTimer&&clearTimeout(this.onBlurTimer);
+    }
+
+    onBlur=()=>{
+        this.onBlurTimer&&clearTimeout(this.onBlurTimer);
+        this.onBlurTimer=setTimeout(()=>{
+            this.props.onBlur();
+        },100)
+    }
+
+
     render() {
         let { value, error, flag } = this.state;
         let { className,cRefType,displayname,valueField,config={}, message, required, onBlur, pattern,patternMessage } = this.props;
@@ -164,10 +179,15 @@ class ReferField extends Component {
                 message={pattern?patternMessage:message}
                 flag={flag}
             >
-                <span ref='field'>
+                <span className='refer-out' ref='field'>
+                    <FormControl 
+                        value={this.state.value}
+                        onBlur={this.onBlur} 
+                        ref='input' onChange={(value)=>{
+                        this.handlerChange({value:value})
+                    }}/>
                     <MdfRefer
                         value={value}
-                        onBlur={onBlur}
                         model={this.model}
                         modelName={'refer'}
                         config={

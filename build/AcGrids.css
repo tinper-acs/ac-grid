@@ -7689,6 +7689,23 @@ ul {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px; }
 
+.ac-edit-grid .refer-out {
+  position: relative;
+  width: calc(100% - 4px);
+  height: 32px;
+  top: 0; }
+  .ac-edit-grid .refer-out .u-form-control {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: calc(100% - 45px);
+    z-index: 22;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
+  .ac-edit-grid .refer-out input.ant-input {
+    border-color: #a5adba; }
+
 .u-table-filter-column-pop-cont-item > span {
   margin: 0 !important; }
 

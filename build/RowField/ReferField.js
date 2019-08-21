@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -33,6 +31,10 @@ var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 var _lodash = require('lodash.isequal');
 
 var _lodash2 = _interopRequireDefault(_lodash);
+
+var _beeFormControl = require('bee-form-control');
+
+var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -96,14 +98,17 @@ var ReferField = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.handlerChange = function (value) {
+            _this.clickOut();
+            _reactDom2["default"].findDOMNode(_this.refs.input) && _reactDom2["default"].findDOMNode(_this.refs.input).focus();
             value = value.value;
-            if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') {
-                if (value) {
-                    value.id = value[_this.model._get_data('valueField')];
-                    value.name = value[_this.model._get_data('textField')];
-                }
+            var stateValue = '';
+            if (value && value.id) {
+                value.id = value[_this.model._get_data('valueField')];
+                value.name = value[_this.model._get_data('textField')];
+                stateValue = value[_this.model._get_data('textField')];
             } else {
                 _this.model.setValue(value);
+                stateValue = value;
             }
 
             var _this$props = _this.props,
@@ -114,7 +119,7 @@ var ReferField = function (_Component) {
                 valueField = _this$props.valueField;
             //处理是否有修改状态改变、状态同步之后校验输入是否正确
 
-            _this.setState({ value: value, flag: status == 'edit' }, function () {
+            _this.setState({ value: stateValue, flag: status == 'edit' }, function () {
                 _this.validate();
             });
 
@@ -154,6 +159,17 @@ var ReferField = function (_Component) {
             });
         };
 
+        _this.clickOut = function () {
+            _this.onBlurTimer && clearTimeout(_this.onBlurTimer);
+        };
+
+        _this.onBlur = function () {
+            _this.onBlurTimer && clearTimeout(_this.onBlurTimer);
+            _this.onBlurTimer = setTimeout(function () {
+                _this.props.onBlur();
+            }, 100);
+        };
+
         _this.state = {
             value: props.value,
             flag: false,
@@ -185,18 +201,19 @@ var ReferField = function (_Component) {
     };
 
     ReferField.prototype.componentDidMount = function componentDidMount() {
+        var _this2 = this;
+
         if (this.props.value) this.model.setValue(this.state.value);
-
-        // document.addEventListener('click',(e)=>{
-        //     let className=e.target.className;
-        //     if(className=='ant-input'||
-        //         className=='anticon anticon-canzhao'||
-        //         className=='ac-grid-cell'){
-
-        //     }else{
-        //         this.props.onBlur()
-        //     }
-        // })
+        var field = _reactDom2["default"].findDOMNode(this.refs.field);
+        field.addEventListener('click', function (e) {
+            if (e.target.className == 'anticon anticon-canzhao' || e.target.className == 'anticon anticon-close-circle') {
+                _this2.clickOut();
+            }
+        });
+        // let openRef = field.querySelector('.container-refer .anticon-canzhao');
+        // if(openRef)openRef.onclick=this.clickOut;
+        // let close = field.querySelector('.container-refer .close-circle')
+        // if(close)close.onclick=this.clickOut;
     };
 
     /**
@@ -212,6 +229,8 @@ var ReferField = function (_Component) {
 
 
     ReferField.prototype.render = function render() {
+        var _this3 = this;
+
         var _state = this.state,
             value = _state.value,
             error = _state.error,
@@ -239,10 +258,15 @@ var ReferField = function (_Component) {
             },
             _react2["default"].createElement(
                 'span',
-                { ref: 'field' },
+                { className: 'refer-out', ref: 'field' },
+                _react2["default"].createElement(_beeFormControl2["default"], {
+                    value: this.state.value,
+                    onBlur: this.onBlur,
+                    ref: 'input', onChange: function onChange(value) {
+                        _this3.handlerChange({ value: value });
+                    } }),
                 _react2["default"].createElement(_mdfRefer2["default"], {
                     value: value,
-                    onBlur: onBlur,
                     model: this.model,
                     modelName: 'refer',
                     config: {
