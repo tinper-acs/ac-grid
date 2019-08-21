@@ -100,7 +100,7 @@ var NumberField = function (_Component) {
             _this.setState({ value: value, flag: status == 'edit' }, function () {
                 _this.validate();
             });
-            value = parseFloat(value);
+            value = parseFloat(value) ? parseFloat(value) : value;
             if (value > max || value < 0) {
                 _this.setState({
                     required: true
@@ -115,7 +115,7 @@ var NumberField = function (_Component) {
                 });
                 _this._value = value;
                 //回调外部函数
-                onChange && onChange(field, value, index);
+                onChange && onChange(field, value == null ? '' : value, index);
             }
         };
 

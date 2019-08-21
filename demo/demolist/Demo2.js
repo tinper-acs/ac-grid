@@ -33,7 +33,7 @@ const column = [
     type:'inputNumber',
     required:true,
     validate:true,
-    precision:0
+    precision:2
   },
   {
     title: "类型",

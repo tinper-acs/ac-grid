@@ -83,7 +83,7 @@ class NumberField extends Component {
         this.setState({ value, flag: status == 'edit' }, () => {
             this.validate();
         });
-        value = parseFloat(value);
+        value = parseFloat(value)?parseFloat(value):value;
         if(value > max || value < 0){
             this.setState({
                 required:true,
@@ -98,8 +98,10 @@ class NumberField extends Component {
             })
             this._value = value;
             //回调外部函数
-            onChange && onChange(field, value, index);
+            onChange && onChange(field, value==null?'':value, index);
         }
+        
+        
     }
 
     /**
