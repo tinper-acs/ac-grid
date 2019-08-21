@@ -1,3 +1,13 @@
+<a name="0.0.30"></a>
+## [0.0.30](https://github.com/tinper-bee/ac-grids/compare/v0.0.29...v0.0.30) (2019-08-21)
+
+
+### Features
+
+* **ac-grids:** 数字NaN问题 ([41855ce](https://github.com/tinper-bee/ac-grids/commit/41855ce))
+
+
+
 <a name="0.0.29"></a>
 ## [0.0.29](https://github.com/tinper-bee/ac-grids/compare/v0.0.28...v0.0.29) (2019-08-21)
 
