@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import schema from 'async-validator';
 import MdfRefer,{cb} from '@yonyou/mdf-refer'
 import FieldWrap from './FieldWrap';
+import isEqual from 'lodash.isequal'
 
 
 
@@ -28,7 +29,7 @@ const propTypes = {
     validate: PropTypes.bool,
     cRefType:PropTypes.string.isRequired,//参照唯一标示
     displayname:PropTypes.string,//参照展示字段
-    valueField:PropTypes.string,//参照保存字段
+    // valueField:PropTypes.string,//参照保存字段
 };
 
 //默认参数值
@@ -42,7 +43,6 @@ const defaultProps = {
     validate: false,
     className: '',
     displayname:'name',
-    valueField:'id'
 }
 
 class ReferField extends Component {
@@ -75,11 +75,24 @@ class ReferField extends Component {
         if (nextProps.validate == true) {
             this.validate();
         }
+        if(nextProps.value){
+            if(isEqual(nextProps.value,this.props.value))this.model.setValue(nextProps.value);
+        }
+        
     }
     componentDidMount(){
-        // let field = ReactDOM.findDOMNode(this.refs.field);
-        // let input = field.querySelector('.container-refer input');
-        // input.onblur=this.props.onBlur;
+        if(this.props.value)this.model.setValue(this.state.value);
+
+        // document.addEventListener('click',(e)=>{
+        //     let className=e.target.className;
+        //     if(className=='ant-input'||
+        //         className=='anticon anticon-canzhao'||
+        //         className=='ac-grid-cell'){
+
+        //     }else{
+        //         this.props.onBlur()
+        //     }
+        // })
     }
 
     /**
@@ -88,13 +101,24 @@ class ReferField extends Component {
      * @param {string} value
      */
     handlerChange = (value) => {
+        value = value.value;
+        if(typeof value == 'object'){
+            if(value){
+                value.id=value[this.model._get_data('valueField')];
+                value.name=value[this.model._get_data('textField')];
+            }
+        }else{
+            this.model.setValue(value)
+        }
+        
         let { onChange, field, index, status,valueField } = this.props;
         //处理是否有修改状态改变、状态同步之后校验输入是否正确
         this.setState({ value, flag: status == 'edit' }, () => {
             this.validate();
         });
+        
         //回调外部函数
-        onChange && onChange(field, value?value[valueField]:'', index);
+        onChange && onChange(field, value, index);
     }
     /**
      * 校验方法
@@ -143,11 +167,16 @@ class ReferField extends Component {
                 <span ref='field'>
                     <MdfRefer
                         value={value}
-                        onChange={this.handlerChange}
                         onBlur={onBlur}
                         model={this.model}
                         modelName={'refer'}
-                        config={config}
+                        config={
+                            {
+                                modelconfig:{
+                                    afterValueChange:this.handlerChange
+                                }
+                            }
+                        }
                     />
                 </span>
             </FieldWrap>

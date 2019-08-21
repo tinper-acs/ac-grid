@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -27,6 +29,10 @@ var _mdfRefer2 = _interopRequireDefault(_mdfRefer);
 var _FieldWrap = require('./FieldWrap');
 
 var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
+
+var _lodash = require('lodash.isequal');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -59,8 +65,8 @@ var propTypes = {
     isFlag: _propTypes2["default"].bool,
     validate: _propTypes2["default"].bool,
     cRefType: _propTypes2["default"].string.isRequired, //参照唯一标示
-    displayname: _propTypes2["default"].string, //参照展示字段
-    valueField: _propTypes2["default"].string //参照保存字段
+    displayname: _propTypes2["default"].string //参照展示字段
+    // valueField:PropTypes.string,//参照保存字段
 };
 
 //默认参数值
@@ -73,8 +79,7 @@ var defaultProps = {
     isFlag: false,
     validate: false,
     className: '',
-    displayname: 'name',
-    valueField: 'id'
+    displayname: 'name'
 };
 
 var ReferField = function (_Component) {
@@ -91,6 +96,16 @@ var ReferField = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.handlerChange = function (value) {
+            value = value.value;
+            if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') {
+                if (value) {
+                    value.id = value[_this.model._get_data('valueField')];
+                    value.name = value[_this.model._get_data('textField')];
+                }
+            } else {
+                _this.model.setValue(value);
+            }
+
             var _this$props = _this.props,
                 onChange = _this$props.onChange,
                 field = _this$props.field,
@@ -102,8 +117,9 @@ var ReferField = function (_Component) {
             _this.setState({ value: value, flag: status == 'edit' }, function () {
                 _this.validate();
             });
+
             //回调外部函数
-            onChange && onChange(field, value ? value[valueField] : '', index);
+            onChange && onChange(field, value, index);
         };
 
         _this.validate = function () {
@@ -163,20 +179,32 @@ var ReferField = function (_Component) {
         if (nextProps.validate == true) {
             this.validate();
         }
+        if (nextProps.value) {
+            if ((0, _lodash2["default"])(nextProps.value, this.props.value)) this.model.setValue(nextProps.value);
+        }
     };
 
-    ReferField.prototype.componentDidMount = function componentDidMount() {}
-    // let field = ReactDOM.findDOMNode(this.refs.field);
-    // let input = field.querySelector('.container-refer input');
-    // input.onblur=this.props.onBlur;
+    ReferField.prototype.componentDidMount = function componentDidMount() {
+        if (this.props.value) this.model.setValue(this.state.value);
 
+        // document.addEventListener('click',(e)=>{
+        //     let className=e.target.className;
+        //     if(className=='ant-input'||
+        //         className=='anticon anticon-canzhao'||
+        //         className=='ac-grid-cell'){
+
+        //     }else{
+        //         this.props.onBlur()
+        //     }
+        // })
+    };
 
     /**
      * 有输入值改变的回调
      *
      * @param {string} value
      */
-    ;
+
     /**
      * 校验方法
      *
@@ -214,11 +242,14 @@ var ReferField = function (_Component) {
                 { ref: 'field' },
                 _react2["default"].createElement(_mdfRefer2["default"], {
                     value: value,
-                    onChange: this.handlerChange,
                     onBlur: onBlur,
                     model: this.model,
                     modelName: 'refer',
-                    config: config
+                    config: {
+                        modelconfig: {
+                            afterValueChange: this.handlerChange
+                        }
+                    }
                 })
             )
         );
