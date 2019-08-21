@@ -110,33 +110,6 @@ var EditGrid = function (_Component) {
                 item.oldRender = item.render;
                 if (item.type) {
                     if (!disabled) {
-                        item.render = function (text, record, index) {
-                            return _react2["default"].createElement(_RenderColumn2["default"], {
-                                model: item.model,
-                                cRefType: item.cRefType,
-                                displayname: item.displayname,
-                                valueField: item.valueField,
-                                config: item.config,
-                                textAlign: item.textAlign,
-                                type: item.type,
-                                index: index,
-                                dataIndex: item.dataIndex,
-                                value: text,
-                                options: item.options,
-                                onChange: _this.onChange,
-                                validate: item.validate,
-                                required: item.required,
-                                pattern: item.pattern,
-                                patternMessage: item.patternMessage,
-                                iconStyle: item.iconStyle,
-                                max: item.max,
-                                min: item.min,
-                                step: item.step,
-                                precision: item.precision,
-                                disabled: item.disabled,
-                                maxLength: item.maxLength
-                            });
-                        };
                         if (item.required) {
                             item.title = _react2["default"].createElement(
                                 "span",
@@ -145,6 +118,33 @@ var EditGrid = function (_Component) {
                             );
                         }
                     }
+                    item.render = function (text, record, index) {
+                        return _react2["default"].createElement(_RenderColumn2["default"], {
+                            model: item.model,
+                            cRefType: item.cRefType,
+                            displayname: item.displayname,
+                            valueField: item.valueField,
+                            config: item.config,
+                            textAlign: item.textAlign,
+                            type: item.type,
+                            index: index,
+                            dataIndex: item.dataIndex,
+                            value: text,
+                            options: item.options,
+                            onChange: _this.onChange,
+                            validate: item.validate,
+                            required: item.required,
+                            pattern: item.pattern,
+                            patternMessage: item.patternMessage,
+                            iconStyle: item.iconStyle,
+                            max: item.max,
+                            min: item.min,
+                            step: item.step,
+                            precision: item.precision,
+                            disabled: disabled ? true : item.disabled,
+                            maxLength: item.maxLength
+                        });
+                    };
                 } else {
                     item.render = function (text, record, index) {
                         var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;

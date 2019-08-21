@@ -69,8 +69,8 @@ class RenderColumn extends Component {
                                 <span className='ac-grid-cell'>{value}</span>
                             </ToolTip>
                             :<RenderCell text = {value} textAlign={textAlign}>
-                            <NumberField 
-                                textAlign={textAlign}
+                                <NumberField 
+                                    textAlign={textAlign}
                                 field={dataIndex} 
                                 validate={validate} 
                                 required={required} 
@@ -82,7 +82,7 @@ class RenderColumn extends Component {
                                 min={min}
                                 step={step} 
                                 precision={precision}
-                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                             </RenderCell>
                         }
                     </div>);
@@ -93,17 +93,18 @@ class RenderColumn extends Component {
                         disabled?
                         <ToolTip overlay={value} inverse placement={placement}>
                             <span className='ac-grid-cell'>{value}</span>
-                        </ToolTip>:<RenderCell text = {value} textAlign={textAlign}>
-                        <TextField 
-                            maxLength={maxLength}
-                            textAlign={textAlign}
-                            field={dataIndex}  
-                            validate={validate} 
-                            required={required} 
-                            value={value} 
-                            pattern={pattern}
-                            patternMessage={patternMessage}
-                            onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                        </ToolTip>
+                        :<RenderCell text = {value} textAlign={textAlign}>
+                            <TextField 
+                                maxLength={maxLength}
+                                textAlign={textAlign}
+                                field={dataIndex}  
+                                validate={validate} 
+                                required={required} 
+                                value={value} 
+                                pattern={pattern}
+                                patternMessage={patternMessage}
+                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                         </RenderCell>
                     }
                 </div>);

@@ -167,7 +167,7 @@ class Demo1 extends Component {
   }
   click=()=>{
     this.setState({
-      disabled:true
+      disabled:!this.state.disabled
     })
   }
   render() {
@@ -182,7 +182,7 @@ class Demo1 extends Component {
     return (
       <div>
           <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>
-            设置不可编辑
+            {this.state.disabled?'设置可编辑':'设置不可编辑'}
           </Button>
           <EditGrid
           showIndex={false}

@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom'
 import Icon from 'bee-icon';
 import ButtonGroup from 'bee-button-group';
 import Tooltip from 'bee-tooltip';
-import Btns from 'ac-btns'
+import Btns from 'ac-btns';
 
 
 const propTypes = {
@@ -66,36 +66,36 @@ class EditGrid extends Component {
             item.oldRender = item.render;
             if(item.type){
                 if(!disabled){
-                    item.render=(text,record,index)=>{
-                        return <RenderColumn
-                                    model={item.model}
-                                    cRefType={item.cRefType}
-                                    displayname={item.displayname}
-                                    valueField={item.valueField}
-                                    config={item.config}
-                                    textAlign={item.textAlign}
-                                    type={item.type}
-                                    index={index}
-                                    dataIndex={item.dataIndex}
-                                    value={text}
-                                    options={item.options}
-                                    onChange={this.onChange}
-                                    validate={item.validate} 
-                                    required={item.required}
-                                    pattern={item.pattern}
-                                    patternMessage={item.patternMessage}
-                                    iconStyle={item.iconStyle}
-                                    max={item.max}
-                                    min={item.min}
-                                    step={item.step} 
-                                    precision={item.precision}
-                                    disabled={item.disabled}
-                                    maxLength={item.maxLength}
-                                />
-                    }
                     if(item.required){
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
                     }
+                }
+                item.render=(text,record,index)=>{
+                    return <RenderColumn
+                                model={item.model}
+                                cRefType={item.cRefType}
+                                displayname={item.displayname}
+                                valueField={item.valueField}
+                                config={item.config}
+                                textAlign={item.textAlign}
+                                type={item.type}
+                                index={index}
+                                dataIndex={item.dataIndex}
+                                value={text}
+                                options={item.options}
+                                onChange={this.onChange}
+                                validate={item.validate} 
+                                required={item.required}
+                                pattern={item.pattern}
+                                patternMessage={item.patternMessage}
+                                iconStyle={item.iconStyle}
+                                max={item.max}
+                                min={item.min}
+                                step={item.step} 
+                                precision={item.precision}
+                                disabled={disabled?true:item.disabled}
+                                maxLength={item.maxLength}
+                            />
                 }
             }else{
                 item.render=(text,record,index)=>{
