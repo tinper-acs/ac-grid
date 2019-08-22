@@ -98,6 +98,7 @@ var EditGrid = function (_Component) {
 
         _this.setDataColumn = function (disabled, col, da) {
             var columns = (0, _lodash4["default"])(col);
+            var defaultValueKeyValue = {};
             if (_this.props.showIndex) {
                 columns.unshift({
                     title: "序号",
@@ -118,6 +119,7 @@ var EditGrid = function (_Component) {
                             );
                         }
                     }
+                    if (item.defaultValue) defaultValueKeyValue[item.dataIndex] = item.defaultValue;
                     item.render = function (text, record, index) {
                         return _react2["default"].createElement(_RenderColumn2["default"], {
                             model: item.model,
@@ -142,7 +144,8 @@ var EditGrid = function (_Component) {
                             step: item.step,
                             precision: item.precision,
                             disabled: disabled ? true : item.disabled,
-                            maxLength: item.maxLength
+                            maxLength: item.maxLength,
+                            defaultValue: item.defaultValue
                         });
                     };
                 } else {
@@ -163,7 +166,8 @@ var EditGrid = function (_Component) {
                 }
             });
             _this.setState({
-                columns: columns
+                columns: columns,
+                defaultValueKeyValue: defaultValueKeyValue
             });
             //给data加index
             var data = (0, _lodash4["default"])(da);
@@ -215,6 +219,7 @@ var EditGrid = function (_Component) {
         };
 
         _this.addRow = function () {
+            var defaultValueKeyValue = _this.state.defaultValueKeyValue;
             var data = (0, _lodash4["default"])(_this.state.data);
             var length = data.length;
             var obj = (0, _lodash4["default"])(data[0] || {});
@@ -226,6 +231,9 @@ var EditGrid = function (_Component) {
                 } else {
                     obj[attr] = '';
                 }
+            }
+            for (var _attr in defaultValueKeyValue) {
+                obj[_attr] = defaultValueKeyValue[_attr];
             }
             data.push(obj);
             _this.props.onChange(data);
@@ -403,7 +411,7 @@ var EditGrid = function (_Component) {
 
             return _react2["default"].createElement(
                 "div",
-                { className: clsfix + " " + (isMax ? 'max' : '') },
+                { className: clsfix + " " + (disabled ? 'disabled' : '') + " " + (isMax ? 'max' : '') },
                 _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-panel " + (open ? '' : 'close') },
@@ -454,7 +462,8 @@ var EditGrid = function (_Component) {
             selectData: [], //选中的数据
             copying: false, //是否正在拷贝
             open: props.defaultOpen || true, //默认展开收起
-            isMax: false //是否最大化了
+            isMax: false, //是否最大化了
+            defaultValueKeyValue: {} //带默认值的key，value键值对
         };
         return _this;
     }

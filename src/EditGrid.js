@@ -357,7 +357,7 @@ class EditGrid extends Component {
         }
 
         return (
-            <div className={`${clsfix} ${isMax?'max':''}`}>
+            <div className={`${clsfix} ${disabled?'disabled':''} ${isMax?'max':''}`}>
                 <div className={`${clsfix}-panel ${open?'':'close'}`}>
                     <span onClick={this.open}>
                         <span className={`${clsfix}-panel-icon`}>

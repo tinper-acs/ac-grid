@@ -206,6 +206,24 @@
             border-color: #a5adba;
         }
     }
+
+    //disabled状态
+    &.disabled{
+        .u-table {
+            .u-table-multiSelect-column{
+                cursor: not-allowed;
+            }
+            .u-checkbox{
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+            .u-checkbox-label:before,.u-checkbox-label:after{
+                border-color: #DFE1E6;
+                color: #909090;
+                cursor: not-allowed;
+            }
+        }
+    }
 }
 
 

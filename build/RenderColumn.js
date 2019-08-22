@@ -65,9 +65,10 @@ var RenderColumn = function (_Component) {
         _this.getValue = function (text) {
             var _this$props = _this.props,
                 type = _this$props.type,
-                options = _this$props.options;
+                options = _this$props.options,
+                defaultValue = _this$props.defaultValue;
 
-            var value = '';
+            var value = defaultValue ? defaultValue : '';
             if (type && type == 'select') {
                 options.forEach(function (item) {
                     if (item.value == text) {
@@ -107,7 +108,8 @@ var RenderColumn = function (_Component) {
                 displayname = _this$props2.displayname,
                 valueField = _this$props2.valueField,
                 config = _this$props2.config,
-                maxLength = _this$props2.maxLength;
+                maxLength = _this$props2.maxLength,
+                defaultValue = _this$props2.defaultValue;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -177,6 +179,7 @@ var RenderColumn = function (_Component) {
                     );
                     break;
                 case 'select':
+                    value = value ? value : defaultValue;
                     return _react2["default"].createElement(
                         'div',
                         null,
@@ -229,7 +232,6 @@ var RenderColumn = function (_Component) {
                                 validate: validate,
                                 required: required,
                                 value: value,
-
                                 onChange: function onChange(field, v) {
                                     _this.props.onChange(index, dataIndex, v);
                                 } })

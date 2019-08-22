@@ -6329,6 +6329,18 @@ ul {
   .ac-edit-grid .refer-out input.ant-input {
     border-color: #a5adba; }
 
+.ac-edit-grid.disabled .u-table .u-table-multiSelect-column {
+  cursor: not-allowed; }
+
+.ac-edit-grid.disabled .u-table .u-checkbox {
+  pointer-events: none;
+  cursor: not-allowed; }
+
+.ac-edit-grid.disabled .u-table .u-checkbox-label:before, .ac-edit-grid.disabled .u-table .u-checkbox-label:after {
+  border-color: #DFE1E6;
+  color: #909090;
+  cursor: not-allowed; }
+
 .u-table-filter-column-pop-cont-item > span {
   margin: 0 !important; }
 
