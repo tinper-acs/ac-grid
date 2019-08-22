@@ -1,3 +1,13 @@
+<a name="0.0.31"></a>
+## [0.0.31](https://github.com/tinper-bee/ac-grids/compare/v0.0.30...v0.0.31) (2019-08-22)
+
+
+### Features
+
+* **ac-grids:** disable将多选置位不可用 ([adcbb3a](https://github.com/tinper-bee/ac-grids/commit/adcbb3a))
+
+
+
 <a name="0.0.30"></a>
 ## [0.0.30](https://github.com/tinper-bee/ac-grids/compare/v0.0.29...v0.0.30) (2019-08-21)
 
