@@ -33,6 +33,7 @@ const column = [
     type:'inputNumber',
     required:true,
     validate:true,
+    defaultValue:'123',
     precision:2
   },
   {
@@ -43,6 +44,7 @@ const column = [
     type:'select',
     required:true,
     validate:true,
+    defaultValue:'1',
     options:[
       {
         key:'类型1',value:'1'
@@ -61,16 +63,6 @@ const column = [
     key: "purchasing",
     width: 150,
     type:'refer',
-    model:new cb.models.ReferModel({
-      cRefType:'ucf-org-center.bd_adminorgtreeviewref',
-      displayname:'name',
-      valueField:'id',
-    }),
-    config:{
-      modelconfig:{
-          afterOkClick:()=>{alert()}
-      }
-  }
   },
   {
     title: "采购组",

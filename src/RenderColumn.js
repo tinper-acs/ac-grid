@@ -28,8 +28,8 @@ class RenderColumn extends Component {
     
 
     getValue=(text)=>{
-        let { type,options } = this.props;
-        let value = '';
+        let { type,options,defaultValue } = this.props;
+        let value = defaultValue?defaultValue:'';
         if(type&&type=='select'){
             options.forEach(item => {
                 if(item.value==text){
@@ -56,7 +56,8 @@ class RenderColumn extends Component {
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
             iconStyle, max, min, step, precision,
-            cRefType,displayname,valueField,config,maxLength
+            cRefType,displayname,valueField,config,maxLength,
+            defaultValue
         } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
@@ -110,6 +111,7 @@ class RenderColumn extends Component {
                 </div>);
             break;
             case 'select':
+                value = value?value:defaultValue;
                 return (<div>
                         {
                             disabled?
@@ -147,7 +149,6 @@ class RenderColumn extends Component {
                                 validate={validate} 
                                 required={required} 
                                 value={value} 
-                                
                                 onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
                             </RenderCell>
                         }

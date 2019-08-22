@@ -45,6 +45,7 @@ class EditGrid extends Component {
             copying:false,//是否正在拷贝
             open:props.defaultOpen||true,//默认展开收起
             isMax:false,//是否最大化了
+            defaultValueKeyValue:{},//带默认值的key，value键值对
         }
     }
 
@@ -54,6 +55,7 @@ class EditGrid extends Component {
 
     setDataColumn=(disabled,col,da)=>{
         let columns = cloneDeep(col);
+        let defaultValueKeyValue = {};
         if(this.props.showIndex){
             columns.unshift({
                 title: "序号",
@@ -70,6 +72,7 @@ class EditGrid extends Component {
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
                     }
                 }
+                if(item.defaultValue)defaultValueKeyValue[item.dataIndex]=item.defaultValue;
                 item.render=(text,record,index)=>{
                     return <RenderColumn
                                 model={item.model}
@@ -95,6 +98,7 @@ class EditGrid extends Component {
                                 precision={item.precision}
                                 disabled={disabled?true:item.disabled}
                                 maxLength={item.maxLength}
+                                defaultValue={item.defaultValue}
                             />
                 }
             }else{
@@ -109,7 +113,8 @@ class EditGrid extends Component {
             }
         });
         this.setState({
-            columns
+            columns,
+            defaultValueKeyValue
         })
         //给data加index
         let data  = cloneDeep(da);
@@ -182,6 +187,7 @@ class EditGrid extends Component {
 
     //增行
     addRow=()=>{
+        let defaultValueKeyValue = this.state.defaultValueKeyValue;
         let data = cloneDeep(this.state.data);
         let length = data.length;
         let obj = cloneDeep(data[0]||{});
@@ -193,6 +199,9 @@ class EditGrid extends Component {
             }else{
                 obj[attr] = ''
             }
+        }
+        for(let attr in defaultValueKeyValue ){
+            obj[attr]=defaultValueKeyValue[attr];
         }
         data.push(obj)
         this.props.onChange(data);
