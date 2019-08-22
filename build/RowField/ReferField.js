@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -101,14 +103,21 @@ var ReferField = function (_Component) {
             _this.clickOut();
             _reactDom2["default"].findDOMNode(_this.refs.input) && _reactDom2["default"].findDOMNode(_this.refs.input).focus();
             value = value.value;
+            var idKey = _this.model._get_data('valueField');
+            var nameKey = _this.model._get_data('textField');
+            var id = '';
+            var name = '';
             var stateValue = '';
-            if (value && value.id) {
-                value.id = value[_this.model._get_data('valueField')];
-                value.name = value[_this.model._get_data('textField')];
-                stateValue = value[_this.model._get_data('textField')];
+
+            if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object') {
+                id = value[idKey];
+                name = value[nameKey];
+                stateValue = value[nameKey];
             } else {
                 _this.model.setValue(value);
                 stateValue = value;
+                id = '';
+                name = value;
             }
 
             var _this$props = _this.props,
@@ -124,7 +133,7 @@ var ReferField = function (_Component) {
             });
 
             //回调外部函数
-            onChange && onChange(field, value, index);
+            onChange && onChange(field, { id: id, name: name }, index);
         };
 
         _this.validate = function () {

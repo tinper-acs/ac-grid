@@ -104,14 +104,21 @@ class ReferField extends Component {
         this.clickOut();
         ReactDOM.findDOMNode(this.refs.input)&&ReactDOM.findDOMNode(this.refs.input).focus();
         value = value.value;
+        let idKey = this.model._get_data('valueField');
+        let nameKey = this.model._get_data('textField');
+        let id = '';
+        let name = '';
         let stateValue = '';
-        if(value&&value.id){
-            value.id=value[this.model._get_data('valueField')];
-            value.name=value[this.model._get_data('textField')];
-            stateValue=value[this.model._get_data('textField')];
+
+        if(value&&typeof value=='object'){
+            id=value[idKey];
+            name=value[nameKey];
+            stateValue=value[nameKey];
         }else{
             this.model.setValue(value)
-            stateValue=value
+            stateValue=value;
+            id='';
+            name=value;
         }
         
         let { onChange, field, index, status,valueField } = this.props;
@@ -121,7 +128,7 @@ class ReferField extends Component {
         });
         
         //回调外部函数
-        onChange && onChange(field, value, index);
+        onChange && onChange(field, {id:id,name:name}, index);
     }
     /**
      * 校验方法
