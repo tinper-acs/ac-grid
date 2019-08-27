@@ -180,7 +180,7 @@ class Demo1 extends Component {
       noBorder:true
     }
     return (
-      <div>
+      <div className='ac-grid-demo'>
           <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>
             {this.state.disabled?'设置可编辑':'设置不可编辑'}
           </Button>

@@ -6299,8 +6299,10 @@ ul {
   height: auto;
   min-height: 76px; }
 
-.ac-edit-grid-inner.hide .u-grid {
-  height: 0; }
+.ac-edit-grid-inner.hide {
+  display: none; }
+  .ac-edit-grid-inner.hide .u-grid {
+    height: 0; }
 
 .ac-edit-grid-inner.max {
   width: 100%;
@@ -6479,5 +6481,9 @@ ul {
   .ac-input-number-disabled .ac-input-number-handler:hover {
     color: #999;
     border-color: #d9d9d9; }
+
+.ac-grid-demo {
+  background: #F4F4F4;
+  padding: 10px; }
 
 /*# sourceMappingURL=demo.css.map */

@@ -7676,8 +7676,10 @@ ul {
   height: auto;
   min-height: 76px; }
 
-.ac-edit-grid-inner.hide .u-grid {
-  height: 0; }
+.ac-edit-grid-inner.hide {
+  display: none; }
+  .ac-edit-grid-inner.hide .u-grid {
+    height: 0; }
 
 .ac-edit-grid-inner.max {
   width: 100%;

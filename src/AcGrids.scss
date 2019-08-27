@@ -170,6 +170,7 @@
             
         }
         &.hide{
+            display: none;
             .u-grid {
                 height: 0;
             }

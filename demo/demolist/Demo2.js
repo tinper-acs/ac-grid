@@ -186,7 +186,7 @@ class Demo1 extends Component {
       noBorder:true
     }
     return (
-      <div>
+      <div className='ac-grid-demo'>
           <EditGrid
           defaultOpen={true}
           columns={column}
