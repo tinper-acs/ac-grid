@@ -42,7 +42,6 @@ import 'ac-grids/build/AcGrids.css';
 |defaultOpen|默认是否打开|bool|-|
 |showIndex|是否显示序号列|bool|true|
 |excludeKeys|粘贴时不需要粘贴的key值合集|array|[]|
-|maxLength|最大长度|string|-|
 
 
 ### columns
@@ -51,7 +50,7 @@ import 'ac-grids/build/AcGrids.css';
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|type|表单类型|目前支持 `input/inputNumber/select`，正在继续完善，不写则不render成表单|-|
+|type|表单类型|目前支持 `input/inputNumber/select/refer`，正在继续完善，不写则不render成表单|-|
 |validate|是否校验|bool|-|
 |required|是否必填|bool|-|
 |message|必填校验失败错误信息|string|-|
