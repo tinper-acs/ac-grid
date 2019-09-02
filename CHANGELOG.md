@@ -1,3 +1,13 @@
+<a name="0.0.35"></a>
+## [0.0.35](https://github.com/tinper-bee/ac-grids/compare/v0.0.34...v0.0.35) (2019-09-02)
+
+
+### Features
+
+* **ac-grids:** 参照升级 ([3dbd517](https://github.com/tinper-bee/ac-grids/commit/3dbd517))
+
+
+
 <a name="0.0.34"></a>
 ## [0.0.34](https://github.com/tinper-bee/ac-grids/compare/v0.0.33...v0.0.34) (2019-08-30)
 
