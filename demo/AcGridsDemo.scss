@@ -4,3 +4,14 @@
     background: #F4F4F4;
     padding: 10px;
 }
+
+.demo1-input{
+    position: relative;
+    input{
+
+    }
+    span{
+        position: absolute;
+        right: 0;
+    }
+}

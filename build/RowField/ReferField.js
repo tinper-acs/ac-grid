@@ -168,7 +168,8 @@ var ReferField = function (_Component) {
             });
         };
 
-        _this.clickOut = function () {
+        _this.clickOut = function (e) {
+            e && e.stopPropagation && e.stopPropagation();
             _this.onBlurTimer && clearTimeout(_this.onBlurTimer);
         };
 
@@ -177,6 +178,11 @@ var ReferField = function (_Component) {
             _this.onBlurTimer = setTimeout(function () {
                 _this.props.onBlur();
             }, 100);
+        };
+
+        _this.iconClick = function (e) {
+            _this.model.browse();
+            _this.clickOut(e);
         };
 
         _this.state = {
@@ -189,6 +195,12 @@ var ReferField = function (_Component) {
             cRefType: props.cRefType,
             displayname: props.displayname
         });
+        _this.config = {
+            modelconfig: {
+                afterValueChange: _this.handlerChange
+                // afterOkClick:this.handlerChange
+            }
+        };
         return _this;
     }
     /**
@@ -219,10 +231,6 @@ var ReferField = function (_Component) {
                 _this2.clickOut();
             }
         });
-        // let openRef = field.querySelector('.container-refer .anticon-canzhao');
-        // if(openRef)openRef.onclick=this.clickOut;
-        // let close = field.querySelector('.container-refer .close-circle')
-        // if(close)close.onclick=this.clickOut;
     };
 
     /**
@@ -267,23 +275,29 @@ var ReferField = function (_Component) {
             },
             _react2["default"].createElement(
                 'span',
+                { style: { 'display': 'none' } },
+                _react2["default"].createElement(_mdfRefer2["default"], {
+                    wrapClassName: 'user-refer-modal',
+                    modelName: 'refer', model: this.model, config: this.config })
+            ),
+            _react2["default"].createElement(
+                'span',
                 { className: 'refer-out', ref: 'field' },
                 _react2["default"].createElement(_beeFormControl2["default"], {
                     value: this.state.value,
                     onBlur: this.onBlur,
-                    ref: 'input', onChange: function onChange(value) {
+                    ref: 'input',
+                    onClick: function onClick() {
+                        _reactDom2["default"].findDOMNode(_this3.refs.input) && _reactDom2["default"].findDOMNode(_this3.refs.input).focus();
+                    },
+                    onChange: function onChange(value) {
                         _this3.handlerChange({ value: value });
                     } }),
-                _react2["default"].createElement(_mdfRefer2["default"], {
-                    value: value,
-                    model: this.model,
-                    modelName: 'refer',
-                    config: {
-                        modelconfig: {
-                            afterValueChange: this.handlerChange
-                        }
-                    }
-                })
+                _react2["default"].createElement(
+                    'span',
+                    { className: 'uf uf-symlist', onClick: this.iconClick },
+                    ' '
+                )
             )
         );
     };

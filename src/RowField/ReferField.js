@@ -14,7 +14,6 @@ import FormControl from 'bee-form-control';
 
 
 
-
 //类型校验
 const propTypes = {
     value: PropTypes.any,
@@ -64,6 +63,12 @@ class ReferField extends Component {
             cRefType:props.cRefType,
             displayname:props.displayname
         })
+        this.config={
+            modelconfig :{
+                afterValueChange:this.handlerChange,
+                // afterOkClick:this.handlerChange
+            }
+        }
     }
     /**
      *  参数发生变化回调
@@ -89,10 +94,6 @@ class ReferField extends Component {
                 this.clickOut()
             }
         })
-        // let openRef = field.querySelector('.container-refer .anticon-canzhao');
-        // if(openRef)openRef.onclick=this.clickOut;
-        // let close = field.querySelector('.container-refer .close-circle')
-        // if(close)close.onclick=this.clickOut;
     }
 
     /**
@@ -164,7 +165,8 @@ class ReferField extends Component {
             onValidate && onValidate(field, fields, index);
         });
     }
-    clickOut=()=>{
+    clickOut=(e)=>{
+        e&&e.stopPropagation&&e.stopPropagation()
         this.onBlurTimer&&clearTimeout(this.onBlurTimer);
     }
 
@@ -173,6 +175,11 @@ class ReferField extends Component {
         this.onBlurTimer=setTimeout(()=>{
             this.props.onBlur();
         },100)
+    }
+
+    iconClick=(e)=>{
+        this.model.browse();
+        this.clickOut(e)
     }
 
 
@@ -186,25 +193,20 @@ class ReferField extends Component {
                 message={pattern?patternMessage:message}
                 flag={flag}
             >
+                <span style={{'display':'none'}}>
+                    <MdfRefer 
+                        wrapClassName="user-refer-modal"
+                        modelName={'refer'} model={this.model} config={this.config} ></MdfRefer>
+                </span>
                 <span className='refer-out' ref='field'>
                     <FormControl 
                         value={this.state.value}
                         onBlur={this.onBlur} 
-                        ref='input' onChange={(value)=>{
-                        this.handlerChange({value:value})
+                        ref='input' 
+                        onClick={()=>{ReactDOM.findDOMNode(this.refs.input)&&ReactDOM.findDOMNode(this.refs.input).focus();}}
+                        onChange={(value)=>{this.handlerChange({value:value})
                     }}/>
-                    <MdfRefer
-                        value={value}
-                        model={this.model}
-                        modelName={'refer'}
-                        config={
-                            {
-                                modelconfig:{
-                                    afterValueChange:this.handlerChange
-                                }
-                            }
-                        }
-                    />
+                    <span className="uf uf-symlist" onClick={this.iconClick}> </span>
                 </span>
             </FieldWrap>
         );

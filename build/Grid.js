@@ -62,7 +62,8 @@ var Grid = function (_Component) {
             columnFilterAble: false,
             ref: function ref(_ref) {
                 return _this2.grid = _ref;
-            }
+            },
+            syncHover: true
         }));
     };
 

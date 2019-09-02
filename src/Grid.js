@@ -24,6 +24,7 @@ class Grid extends Component {
                 paginationObj='none'  
                 columnFilterAble={false}
                 ref={ref=>this.grid=ref}
+                syncHover={true}
             />
         );
     }

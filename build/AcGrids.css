@@ -7699,14 +7699,19 @@ ul {
   .ac-edit-grid .refer-out .u-form-control {
     position: absolute;
     left: 0;
+    right: 0; }
+  .ac-edit-grid .refer-out .uf-symlist {
+    position: absolute;
     right: 0;
-    width: calc(100% - 45px);
-    z-index: 22;
-    border-right: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0; }
-  .ac-edit-grid .refer-out input.ant-input {
-    border-color: #a5adba; }
+    height: 34px;
+    line-height: 32px;
+    color: #adb4bc;
+    cursor: pointer;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 20px;
+    top: -1px;
+    padding-top: 1px; }
 
 .ac-edit-grid.disabled .u-table .u-table-multiSelect-column {
   cursor: not-allowed; }
