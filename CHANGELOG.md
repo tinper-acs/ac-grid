@@ -1,3 +1,13 @@
+<a name="0.0.36"></a>
+## [0.0.36](https://github.com/tinper-bee/ac-grids/compare/v0.0.35...v0.0.36) (2019-09-03)
+
+
+### Features
+
+* **ac-grids:** 记录选中的数据,下次更新设置数据选中 ([840517b](https://github.com/tinper-bee/ac-grids/commit/840517b))
+
+
+
 <a name="0.0.35"></a>
 ## [0.0.35](https://github.com/tinper-bee/ac-grids/compare/v0.0.34...v0.0.35) (2019-09-02)
 
