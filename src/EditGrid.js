@@ -42,11 +42,13 @@ class EditGrid extends Component {
             columns:props.columns,
             data:props.data||[],
             selectData:[],//选中的数据
+            selectDataIds:[],//记录选中数据的id，id在这里生成，componentWillReceiveProps更新data时，设置选中的数据
             copying:false,//是否正在拷贝
             open:props.defaultOpen||true,//默认展开收起
             isMax:false,//是否最大化了
             defaultValueKeyValue:{},//带默认值的key，value键值对
         }
+        this.selectDataId = 1;
     }
 
     componentWillMount(){
@@ -143,13 +145,20 @@ class EditGrid extends Component {
     //选中数据的回调
     getSelectedDataFunc=(selectData)=>{
         let data = this.resetChecked(this.state.data)
+        let selectDataIds = []
         selectData.forEach((item)=>{
-            data[item.index-1]._checked=!data[item.index-1]._checked
+            data[item.index-1]._checked=!data[item.index-1]._checked;
+            let id = 'selectDataId'+this.selectDataId;
+            data.selectDataId = id;
+            selectDataIds.push(id);
+            this.selectDataId++;
         })
         this.setState({
+            selectDataIds,
             selectData,
             data
         })
+        this.props.onChange(data);
     }
 
     resetChecked=(dataValue)=>{
@@ -165,8 +174,10 @@ class EditGrid extends Component {
 
     componentWillReceiveProps(nextProps){
         if(!isequal(nextProps.data,this.state.data)){
+            let selectDataIds = this.state.selectDataIds;
             nextProps.data.forEach((item,index)=>{
-                item.index=index+1
+                item.index=index+1;
+                if(selectDataIds.indexOf(item.selectDataId)!=-1)item._checked=true;
             })
             this.setState({
                 data:nextProps.data

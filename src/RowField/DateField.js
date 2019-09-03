@@ -14,7 +14,7 @@ import schema from 'async-validator';
 //日期组件
 import DatePicker from "bee-datepicker";
 //本地化日期
-import zhCN from "rc-calendar/lib/locale/zh_CN";
+import zhCN from 'bee-datepicker/build/locale/zh_CN'
 
 import FieldWrap from './FieldWrap'
 

@@ -24,7 +24,7 @@ var _beeDatepicker = require('bee-datepicker');
 
 var _beeDatepicker2 = _interopRequireDefault(_beeDatepicker);
 
-var _zh_CN = require('rc-calendar/lib/locale/zh_CN');
+var _zh_CN = require('bee-datepicker/build/locale/zh_CN');
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 

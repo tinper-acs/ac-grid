@@ -193,13 +193,20 @@ var EditGrid = function (_Component) {
 
         _this.getSelectedDataFunc = function (selectData) {
             var data = _this.resetChecked(_this.state.data);
+            var selectDataIds = [];
             selectData.forEach(function (item) {
                 data[item.index - 1]._checked = !data[item.index - 1]._checked;
+                var id = 'selectDataId' + _this.selectDataId;
+                data.selectDataId = id;
+                selectDataIds.push(id);
+                _this.selectDataId++;
             });
             _this.setState({
+                selectDataIds: selectDataIds,
                 selectData: selectData,
                 data: data
             });
+            _this.props.onChange(data);
         };
 
         _this.resetChecked = function (dataValue) {
@@ -460,11 +467,13 @@ var EditGrid = function (_Component) {
             columns: props.columns,
             data: props.data || [],
             selectData: [], //选中的数据
+            selectDataIds: [], //记录选中数据的id，id在这里生成，componentWillReceiveProps更新data时，设置选中的数据
             copying: false, //是否正在拷贝
             open: props.defaultOpen || true, //默认展开收起
             isMax: false, //是否最大化了
             defaultValueKeyValue: {} //带默认值的key，value键值对
         };
+        _this.selectDataId = 1;
         return _this;
     }
 
@@ -477,8 +486,10 @@ var EditGrid = function (_Component) {
 
     EditGrid.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         if (!(0, _lodash2["default"])(nextProps.data, this.state.data)) {
+            var selectDataIds = this.state.selectDataIds;
             nextProps.data.forEach(function (item, index) {
                 item.index = index + 1;
+                if (selectDataIds.indexOf(item.selectDataId) != -1) item._checked = true;
             });
             this.setState({
                 data: nextProps.data
