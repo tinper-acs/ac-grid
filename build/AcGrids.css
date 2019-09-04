@@ -8628,6 +8628,9 @@ ul {
   .ac-grids-wrapper .ac-grids-wrapper-pages .u-pagination-total {
     display: none; }
 
+.ac-edit-grid .u-table-thead th .required {
+  display: none; }
+
 .ac-edit-grid-column-title-required:before {
   content: '*';
   color: #f53c32;

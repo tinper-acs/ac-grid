@@ -31,7 +31,8 @@ class RenderColumn extends Component {
     
 
     getValue=(text)=>{
-        let { type,filedProps:{ options,defaultValue } } = this.props;
+        let { type,filedProps } = this.props;
+        let { options=[],defaultValue } = filedProps;
         let value = defaultValue?defaultValue:'';
         if(type&&type=='select'){
             options.forEach(item => {
@@ -149,7 +150,7 @@ class RenderColumn extends Component {
                                 :<RenderCell text ={this.getValue(value)} textAlign={textAlign}>
                                     <SelectField 
                                         textAlign={textAlign}
-                                        data={options}
+                                        data={filedProps.options||[]}
                                         field={dataIndex}  
                                         validate={validate} 
                                         required={required} 

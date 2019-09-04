@@ -73,9 +73,10 @@ var RenderColumn = function (_Component) {
         _this.getValue = function (text) {
             var _this$props = _this.props,
                 type = _this$props.type,
-                _this$props$filedProp = _this$props.filedProps,
-                options = _this$props$filedProp.options,
-                defaultValue = _this$props$filedProp.defaultValue;
+                filedProps = _this$props.filedProps;
+            var _filedProps$options = filedProps.options,
+                options = _filedProps$options === undefined ? [] : _filedProps$options,
+                defaultValue = filedProps.defaultValue;
 
             var value = defaultValue ? defaultValue : '';
             if (type && type == 'select') {
@@ -228,7 +229,7 @@ var RenderColumn = function (_Component) {
                                 { text: _this.getValue(value), textAlign: textAlign },
                                 _react2["default"].createElement(_SelectField2["default"], _extends({
                                     textAlign: textAlign,
-                                    data: options,
+                                    data: filedProps.options || [],
                                     field: dataIndex,
                                     validate: validate,
                                     required: required,

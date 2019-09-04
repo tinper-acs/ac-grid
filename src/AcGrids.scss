@@ -92,6 +92,9 @@
     }
 }
 .ac-edit-grid{
+    .u-table-thead th .required{
+        display: none;
+    }
     &-column-title-required:before{
         content: '*';
         color: #f53c32;

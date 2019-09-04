@@ -4,7 +4,6 @@
  *
  */
 import React, { Component } from "react";
-import Button from 'bee-button';
 import AcGrids from '../../src'
 
 const column = [
