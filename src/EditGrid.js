@@ -68,7 +68,7 @@ class EditGrid extends Component {
         }
         columns.forEach(item => {
             item.oldRender = item.render;
-            if(item.type){
+            if(item.type||item.customizeRender){
                 if(!disabled){
                     if(item.required){
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
@@ -77,9 +77,6 @@ class EditGrid extends Component {
                 if(item.defaultValue)defaultValueKeyValue[item.dataIndex]=item.defaultValue;
                 item.render=(text,record,index)=>{
                     return <RenderColumn
-                                model={item.model}
-                                cRefType={item.cRefType}
-                                displayname={item.displayname}
                                 valueField={item.valueField}
                                 config={item.config}
                                 textAlign={item.textAlign}
@@ -93,14 +90,18 @@ class EditGrid extends Component {
                                 required={item.required}
                                 pattern={item.pattern}
                                 patternMessage={item.patternMessage}
-                                iconStyle={item.iconStyle}
-                                max={item.max}
-                                min={item.min}
-                                step={item.step} 
-                                precision={item.precision}
                                 disabled={disabled?true:item.disabled}
-                                maxLength={item.maxLength}
-                                defaultValue={item.defaultValue}
+                                customizeRender={item.customizeRender}
+                                // cRefType={item.cRefType}
+                                // displayname={item.displayname}
+                                // iconStyle={item.iconStyle}
+                                // max={item.max}
+                                // min={item.min}
+                                // step={item.step} 
+                                // precision={item.precision}
+                                // maxLength={item.maxLength}
+                                // defaultValue={item.defaultValue}
+                                filedProps={item.filedProps}
                             />
                 }
             }else{
@@ -400,6 +401,7 @@ class EditGrid extends Component {
                                 getSelectedDataFunc={this.getSelectedDataFunc}
                                 hoverContent={this.hoverContent}
                                 onRowHover={this.onRowHover}
+                                autoCheckedByClickRows = {false}
                             />
                         </div>
             </div>

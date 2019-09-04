@@ -109,7 +109,7 @@ var EditGrid = function (_Component) {
             }
             columns.forEach(function (item) {
                 item.oldRender = item.render;
-                if (item.type) {
+                if (item.type || item.customizeRender) {
                     if (!disabled) {
                         if (item.required) {
                             item.title = _react2["default"].createElement(
@@ -122,9 +122,6 @@ var EditGrid = function (_Component) {
                     if (item.defaultValue) defaultValueKeyValue[item.dataIndex] = item.defaultValue;
                     item.render = function (text, record, index) {
                         return _react2["default"].createElement(_RenderColumn2["default"], {
-                            model: item.model,
-                            cRefType: item.cRefType,
-                            displayname: item.displayname,
                             valueField: item.valueField,
                             config: item.config,
                             textAlign: item.textAlign,
@@ -138,14 +135,18 @@ var EditGrid = function (_Component) {
                             required: item.required,
                             pattern: item.pattern,
                             patternMessage: item.patternMessage,
-                            iconStyle: item.iconStyle,
-                            max: item.max,
-                            min: item.min,
-                            step: item.step,
-                            precision: item.precision,
                             disabled: disabled ? true : item.disabled,
-                            maxLength: item.maxLength,
-                            defaultValue: item.defaultValue
+                            customizeRender: item.customizeRender
+                            // cRefType={item.cRefType}
+                            // displayname={item.displayname}
+                            // iconStyle={item.iconStyle}
+                            // max={item.max}
+                            // min={item.min}
+                            // step={item.step} 
+                            // precision={item.precision}
+                            // maxLength={item.maxLength}
+                            // defaultValue={item.defaultValue}
+                            , filedProps: item.filedProps
                         });
                     };
                 } else {
@@ -457,7 +458,8 @@ var EditGrid = function (_Component) {
                         paginationObj: "none",
                         getSelectedDataFunc: _this.getSelectedDataFunc,
                         hoverContent: _this.hoverContent,
-                        onRowHover: _this.onRowHover
+                        onRowHover: _this.onRowHover,
+                        autoCheckedByClickRows: false
                     }))
                 )
             );

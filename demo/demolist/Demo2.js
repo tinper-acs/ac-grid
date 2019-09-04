@@ -5,8 +5,6 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
-import Button from 'bee-button';
-import {cb} from '@yonyou/mdf-refer'
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -33,8 +31,10 @@ const column = [
     type:'inputNumber',
     required:true,
     validate:true,
-    defaultValue:'123',
-    precision:2
+    filedProps:{
+      defaultValue:'123',
+      precision:2
+    }
   },
   {
     title: "类型",
@@ -44,25 +44,27 @@ const column = [
     type:'select',
     required:true,
     validate:true,
-    defaultValue:'1',
-    options:[
-      {
-        key:'类型1',value:'1'
-      },
-      {
-        key:'类型2',value:'2'
-      },
-      {
-        key:'类型3',value:'3'
-      },
-    ]
+    filedProps:{
+      defaultValue:'1',
+      options:[
+        {
+          key:'类型1',value:'1'
+        },
+        {
+          key:'类型2',value:'2'
+        },
+        {
+          key:'类型3',value:'3'
+        },
+      ]
+    }
   },
   {
     title: "采购组织",
     dataIndex: "purchasing",
     key: "purchasing",
     width: 150,
-    type:'refer',
+    type:'input',
   },
   {
     title: "采购组",

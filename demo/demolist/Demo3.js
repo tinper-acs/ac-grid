@@ -20,7 +20,9 @@ const column = [
     validate:true,
     pattern:/^2$/,
     patternMessage:'格式错误',
-    maxLength:'9'
+    filedProps:{
+      maxLength:'9'
+    }
   },
   {
     title: "金额",
@@ -31,7 +33,9 @@ const column = [
     type:'inputNumber',
     required:true,
     validate:true,
-    precision:0
+    filedProps:{
+      precision:0
+    }
   },
   {
     title: "类型",
@@ -41,17 +45,19 @@ const column = [
     type:'select',
     required:true,
     validate:true,
-    options:[
-      {
-        key:'类型1',value:'1'
-      },
-      {
-        key:'类型2',value:'2'
-      },
-      {
-        key:'类型3',value:'3'
-      },
-    ]
+    filedProps:{
+      options:[
+        {
+          key:'类型1',value:'1'
+        },
+        {
+          key:'类型2',value:'2'
+        },
+        {
+          key:'类型3',value:'3'
+        },
+      ]
+    }
   },
   {
     title: "采购组织",

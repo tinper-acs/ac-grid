@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -24,9 +26,13 @@ var _SelectField = require('./RowField/SelectField');
 
 var _SelectField2 = _interopRequireDefault(_SelectField);
 
-var _ReferField = require('./RowField/ReferField');
+var _DateField = require('./RowField/DateField');
 
-var _ReferField2 = _interopRequireDefault(_ReferField);
+var _DateField2 = _interopRequireDefault(_DateField);
+
+var _YearField = require('./RowField/YearField');
+
+var _YearField2 = _interopRequireDefault(_YearField);
 
 var _RenderCell = require('./RenderCell');
 
@@ -47,11 +53,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var propTypes = {
-    onChange: _propTypes2["default"].func
+    onChange: _propTypes2["default"].func,
+    filedProps: _propTypes2["default"].object //filed属性
 };
 
 var defaultProps = {
-    onChange: function onChange() {}
+    onChange: function onChange() {},
+    filedProps: {}
 };
 
 var RenderColumn = function (_Component) {
@@ -65,8 +73,9 @@ var RenderColumn = function (_Component) {
         _this.getValue = function (text) {
             var _this$props = _this.props,
                 type = _this$props.type,
-                options = _this$props.options,
-                defaultValue = _this$props.defaultValue;
+                _this$props$filedProp = _this$props.filedProps,
+                options = _this$props$filedProp.options,
+                defaultValue = _this$props$filedProp.defaultValue;
 
             var value = defaultValue ? defaultValue : '';
             if (type && type == 'select') {
@@ -99,145 +108,199 @@ var RenderColumn = function (_Component) {
                 required = _this$props2.required,
                 pattern = _this$props2.pattern,
                 patternMessage = _this$props2.patternMessage,
-                iconStyle = _this$props2.iconStyle,
-                max = _this$props2.max,
-                min = _this$props2.min,
-                step = _this$props2.step,
-                precision = _this$props2.precision,
-                cRefType = _this$props2.cRefType,
-                displayname = _this$props2.displayname,
+                customizeRender = _this$props2.customizeRender,
                 valueField = _this$props2.valueField,
-                config = _this$props2.config,
-                maxLength = _this$props2.maxLength,
-                defaultValue = _this$props2.defaultValue;
+                defaultValue = _this$props2.defaultValue,
+                filedProps = _this$props2.filedProps;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
-            switch (type) {
-                case 'inputNumber':
-                    return _react2["default"].createElement(
-                        'div',
-                        null,
-                        disabled ? _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { overlay: value, inverse: true, placement: placement },
-                            _react2["default"].createElement(
-                                'span',
-                                { className: 'ac-grid-cell' },
-                                value
-                            )
-                        ) : _react2["default"].createElement(
-                            _RenderCell2["default"],
-                            { text: value, textAlign: textAlign },
-                            _react2["default"].createElement(_NumberField2["default"], {
-                                textAlign: textAlign,
-                                field: dataIndex,
-                                validate: validate,
-                                required: required,
-                                value: value,
-                                pattern: pattern,
-                                patternMessage: patternMessage,
-                                iconStyle: iconStyle,
-                                max: max,
-                                min: min,
-                                step: step,
-                                precision: precision,
-                                onChange: function onChange(field, v) {
-                                    _this.props.onChange(index, dataIndex, v);
-                                } })
+            if (customizeRender) {
+                return _react2["default"].createElement(
+                    'div',
+                    null,
+                    disabled ? _react2["default"].createElement(
+                        _beeTooltip2["default"],
+                        { overlay: value, inverse: true, placement: placement },
+                        _react2["default"].createElement(
+                            'span',
+                            { className: 'ac-grid-cell' },
+                            value
                         )
-                    );
-                    break;
-                case 'input':
-                    return _react2["default"].createElement(
-                        'div',
-                        null,
-                        disabled ? _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { overlay: value, inverse: true, placement: placement },
-                            _react2["default"].createElement(
-                                'span',
-                                { className: 'ac-grid-cell' },
-                                value
+                    ) : _react2["default"].createElement(
+                        _RenderCell2["default"],
+                        { type: 'refer', text: value, textAlign: textAlign },
+                        _react2["default"].cloneElement(customizeRender, _extends({
+                            valueField: valueField,
+                            textAlign: textAlign,
+                            field: dataIndex,
+                            validate: validate,
+                            required: required,
+                            value: value,
+                            onChange: function onChange(field, v) {
+                                _this.props.onChange(index, dataIndex, v);
+                            }
+                        }, filedProps))
+                    )
+                );
+            } else {
+                switch (type) {
+                    case 'inputNumber':
+                        return _react2["default"].createElement(
+                            'div',
+                            null,
+                            disabled ? _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    'span',
+                                    { className: 'ac-grid-cell' },
+                                    value
+                                )
+                            ) : _react2["default"].createElement(
+                                _RenderCell2["default"],
+                                { text: value, textAlign: textAlign },
+                                _react2["default"].createElement(_NumberField2["default"], _extends({
+                                    textAlign: textAlign,
+                                    field: dataIndex,
+                                    validate: validate,
+                                    required: required,
+                                    value: value,
+                                    pattern: pattern,
+                                    patternMessage: patternMessage,
+                                    onChange: function onChange(field, v) {
+                                        _this.props.onChange(index, dataIndex, v);
+                                    }
+                                    // iconStyle={iconStyle}
+                                    // max={max}
+                                    // min={min}
+                                    // step={step} 
+                                    // precision={precision}
+                                }, filedProps))
                             )
-                        ) : _react2["default"].createElement(
-                            _RenderCell2["default"],
-                            { text: value, textAlign: textAlign },
-                            _react2["default"].createElement(_TextField2["default"], {
-                                maxLength: maxLength,
-                                textAlign: textAlign,
-                                field: dataIndex,
-                                validate: validate,
-                                required: required,
-                                value: value,
-                                pattern: pattern,
-                                patternMessage: patternMessage,
-                                onChange: function onChange(field, v) {
-                                    _this.props.onChange(index, dataIndex, v);
-                                } })
-                        )
-                    );
-                    break;
-                case 'select':
-                    value = value ? value : defaultValue;
-                    return _react2["default"].createElement(
-                        'div',
-                        null,
-                        disabled ? _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { inverse: true, placement: placement, overlay: _this.getValue(value) },
-                            _react2["default"].createElement(
-                                'span',
-                                { className: 'ac-grid-cell' },
-                                _this.getValue(value)
+                        );
+                        break;
+                    case 'input':
+                        return _react2["default"].createElement(
+                            'div',
+                            null,
+                            disabled ? _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    'span',
+                                    { className: 'ac-grid-cell' },
+                                    value
+                                )
+                            ) : _react2["default"].createElement(
+                                _RenderCell2["default"],
+                                { text: value, textAlign: textAlign },
+                                _react2["default"].createElement(_TextField2["default"], _extends({
+                                    textAlign: textAlign,
+                                    field: dataIndex,
+                                    validate: validate,
+                                    required: required,
+                                    value: value,
+                                    pattern: pattern,
+                                    patternMessage: patternMessage,
+                                    onChange: function onChange(field, v) {
+                                        _this.props.onChange(index, dataIndex, v);
+                                    }
+                                }, filedProps))
                             )
-                        ) : _react2["default"].createElement(
-                            _RenderCell2["default"],
-                            { text: _this.getValue(value), textAlign: textAlign },
-                            _react2["default"].createElement(_SelectField2["default"], {
-                                textAlign: textAlign,
-                                data: options,
-                                field: dataIndex,
-                                validate: validate,
-                                required: required,
-                                value: value,
-                                onChange: function onChange(field, v) {
-                                    _this.onChange(index, dataIndex, v);
-                                } })
-                        )
-                    );
-                    break;
-                case 'refer':
-                    return _react2["default"].createElement(
-                        'div',
-                        null,
-                        disabled ? _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { overlay: value, inverse: true, placement: placement },
-                            _react2["default"].createElement(
-                                'span',
-                                { className: 'ac-grid-cell' },
-                                value
+                        );
+                        break;
+                    case 'select':
+                        value = value ? value : defaultValue;
+                        return _react2["default"].createElement(
+                            'div',
+                            null,
+                            disabled ? _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { inverse: true, placement: placement, overlay: _this.getValue(value) },
+                                _react2["default"].createElement(
+                                    'span',
+                                    { className: 'ac-grid-cell' },
+                                    _this.getValue(value)
+                                )
+                            ) : _react2["default"].createElement(
+                                _RenderCell2["default"],
+                                { text: _this.getValue(value), textAlign: textAlign },
+                                _react2["default"].createElement(_SelectField2["default"], _extends({
+                                    textAlign: textAlign,
+                                    data: options,
+                                    field: dataIndex,
+                                    validate: validate,
+                                    required: required,
+                                    value: value,
+                                    onChange: function onChange(field, v) {
+                                        _this.onChange(index, dataIndex, v);
+                                    }
+                                }, filedProps))
                             )
-                        ) : _react2["default"].createElement(
-                            _RenderCell2["default"],
-                            { type: 'refer', text: value, textAlign: textAlign },
-                            _react2["default"].createElement(_ReferField2["default"], {
-                                cRefType: cRefType,
-                                displayname: displayname,
-                                valueField: valueField,
-                                config: config,
-                                textAlign: textAlign,
-                                field: dataIndex,
-                                validate: validate,
-                                required: required,
-                                value: value,
-                                onChange: function onChange(field, v) {
-                                    _this.props.onChange(index, dataIndex, v);
-                                } })
-                        )
-                    );
-                    break;
+                        );
+                        break;
+                    case 'datepicker':
+                        return _react2["default"].createElement(
+                            'div',
+                            null,
+                            disabled ? _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    'span',
+                                    { className: 'ac-grid-cell' },
+                                    value
+                                )
+                            ) : _react2["default"].createElement(
+                                _RenderCell2["default"],
+                                { text: value, textAlign: textAlign },
+                                _react2["default"].createElement(_DateField2["default"], _extends({
+                                    textAlign: textAlign,
+                                    field: dataIndex,
+                                    validate: validate,
+                                    required: required,
+                                    value: value,
+                                    pattern: pattern,
+                                    patternMessage: patternMessage,
+                                    onChange: function onChange(field, v) {
+                                        _this.props.onChange(index, dataIndex, v);
+                                    }
+                                }, filedProps))
+                            )
+                        );
+                        break;
+                    case 'year':
+                        return _react2["default"].createElement(
+                            'div',
+                            null,
+                            disabled ? _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    'span',
+                                    { className: 'ac-grid-cell' },
+                                    value
+                                )
+                            ) : _react2["default"].createElement(
+                                _RenderCell2["default"],
+                                { text: value, textAlign: textAlign },
+                                _react2["default"].createElement(_YearField2["default"], _extends({
+                                    textAlign: textAlign,
+                                    field: dataIndex,
+                                    validate: validate,
+                                    required: required,
+                                    value: value,
+                                    pattern: pattern,
+                                    patternMessage: patternMessage,
+                                    onChange: function onChange(field, v) {
+                                        _this.props.onChange(index, dataIndex, v);
+                                    }
+                                }, filedProps))
+                            )
+                        );
+                        break;
+                }
             }
         };
 

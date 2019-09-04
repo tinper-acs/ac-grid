@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import TextField from './RowField/TextField';
 import NumberField from './RowField/NumberField';
 import SelectField from './RowField/SelectField';
-import ReferField from './RowField/ReferField';
+import DateField from './RowField/DateField';
+import YearField from './RowField/YearField';
 import RenderCell from './RenderCell';
-import ToolTip from 'bee-tooltip'
+import ToolTip from 'bee-tooltip';
 
 const propTypes = {
-    onChange:PropTypes.func
+    onChange:PropTypes.func,
+    filedProps:PropTypes.object,//filed属性
 }
 
 const defaultProps = {
-    onChange:()=>{}
+    onChange:()=>{},
+    filedProps:{}
 }
 
 class RenderColumn extends Component {
@@ -28,7 +31,7 @@ class RenderColumn extends Component {
     
 
     getValue=(text)=>{
-        let { type,options,defaultValue } = this.props;
+        let { type,filedProps:{ options,defaultValue } } = this.props;
         let value = defaultValue?defaultValue:'';
         if(type&&type=='select'){
             options.forEach(item => {
@@ -55,106 +58,159 @@ class RenderColumn extends Component {
         let { type, value,index,dataIndex,
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
-            iconStyle, max, min, step, precision,
-            cRefType,displayname,valueField,config,maxLength,
-            defaultValue
+            customizeRender,valueField,
+            defaultValue,filedProps
         } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
-        switch (type) {
-            case 'inputNumber':
-                return (<div>
+        if(customizeRender){
+            return (<div>
+                {
+                    disabled?
+                    <ToolTip overlay={value} inverse placement={placement}>
+                        <span className='ac-grid-cell'>{value}</span>
+                    </ToolTip>:<RenderCell type='refer' text = {value} textAlign={textAlign}>
+                    {
+                        React.cloneElement(customizeRender,{
+                            valueField:valueField,
+                            textAlign:textAlign,
+                            field:dataIndex,
+                            validate:validate,
+                            required:required,
+                            value:value,
+                            onChange:(field, v)=>{this.props.onChange(index,dataIndex,v)},
+                            ...filedProps
+                        })
+                    }
+                    </RenderCell>
+                }
+            </div>)
+        }else{
+            switch (type) {
+                case 'inputNumber':
+                    return (<div>
+                            {
+                                disabled?
+                                <ToolTip overlay={value} inverse placement={placement}>
+                                    <span className='ac-grid-cell'>{value}</span>
+                                </ToolTip>
+                                :<RenderCell text = {value} textAlign={textAlign}>
+                                    <NumberField 
+                                        textAlign={textAlign}
+                                        field={dataIndex} 
+                                        validate={validate} 
+                                        required={required} 
+                                        value={value} 
+                                        pattern={pattern}
+                                        patternMessage={patternMessage}
+                                        onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                        // iconStyle={iconStyle}
+                                        // max={max}
+                                        // min={min}
+                                        // step={step} 
+                                        // precision={precision}
+                                        {...filedProps}
+                                        />
+                                </RenderCell>
+                            }
+                        </div>);
+                break;
+                case 'input':
+                    return (<div>
                         {
                             disabled?
                             <ToolTip overlay={value} inverse placement={placement}>
                                 <span className='ac-grid-cell'>{value}</span>
                             </ToolTip>
                             :<RenderCell text = {value} textAlign={textAlign}>
-                                <NumberField 
+                                <TextField 
                                     textAlign={textAlign}
-                                field={dataIndex} 
-                                validate={validate} 
-                                required={required} 
-                                value={value} 
-                                pattern={pattern}
-                                patternMessage={patternMessage}
-                                iconStyle={iconStyle}
-                                max={max}
-                                min={min}
-                                step={step} 
-                                precision={precision}
-                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
-                            </RenderCell>
-                        }
-                    </div>);
-            break;
-            case 'input':
-                return (<div>
-                    {
-                        disabled?
-                        <ToolTip overlay={value} inverse placement={placement}>
-                            <span className='ac-grid-cell'>{value}</span>
-                        </ToolTip>
-                        :<RenderCell text = {value} textAlign={textAlign}>
-                            <TextField 
-                                maxLength={maxLength}
-                                textAlign={textAlign}
-                                field={dataIndex}  
-                                validate={validate} 
-                                required={required} 
-                                value={value} 
-                                pattern={pattern}
-                                patternMessage={patternMessage}
-                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
-                        </RenderCell>
-                    }
-                </div>);
-            break;
-            case 'select':
-                value = value?value:defaultValue;
-                return (<div>
-                        {
-                            disabled?
-                            <ToolTip inverse placement={placement} overlay={this.getValue(value)}>
-                                <span className='ac-grid-cell'>{this.getValue(value)}</span>
-                            </ToolTip>
-                            :<RenderCell text ={this.getValue(value)} textAlign={textAlign}>
-                                <SelectField 
-                                    textAlign={textAlign}
-                                    data={options}
                                     field={dataIndex}  
                                     validate={validate} 
                                     required={required} 
                                     value={value} 
-                                    onChange={(field, v)=>{this.onChange(index,dataIndex,v)}} />
+                                    pattern={pattern}
+                                    patternMessage={patternMessage}
+                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    {...filedProps}
+                                />
                             </RenderCell>
                         }
-                    </div>
-                )
-            break;
-            case 'refer':
+                    </div>);
+                break;
+                case 'select':
+                    value = value?value:defaultValue;
+                    return (<div>
+                            {
+                                disabled?
+                                <ToolTip inverse placement={placement} overlay={this.getValue(value)}>
+                                    <span className='ac-grid-cell'>{this.getValue(value)}</span>
+                                </ToolTip>
+                                :<RenderCell text ={this.getValue(value)} textAlign={textAlign}>
+                                    <SelectField 
+                                        textAlign={textAlign}
+                                        data={options}
+                                        field={dataIndex}  
+                                        validate={validate} 
+                                        required={required} 
+                                        value={value} 
+                                        onChange={(field, v)=>{this.onChange(index,dataIndex,v)}} 
+                                        {...filedProps}
+                                        />
+                                </RenderCell>
+                            }
+                        </div>
+                    )
+                break;
+                case 'datepicker':
                     return (<div>
                         {
                             disabled?
                             <ToolTip overlay={value} inverse placement={placement}>
                                 <span className='ac-grid-cell'>{value}</span>
-                            </ToolTip>:<RenderCell type='refer' text = {value} textAlign={textAlign}>
-                            <ReferField 
-                                cRefType={cRefType}
-                                displayname={displayname}
-                                valueField={valueField}
-                                config={config}
-                                textAlign={textAlign}
-                                field={dataIndex}  
-                                validate={validate} 
-                                required={required} 
-                                value={value} 
-                                onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}/>
+                            </ToolTip>
+                            :<RenderCell text = {value} textAlign={textAlign}>
+                                <DateField 
+                                    textAlign={textAlign}
+                                    field={dataIndex}  
+                                    validate={validate} 
+                                    required={required} 
+                                    value={value} 
+                                    pattern={pattern}
+                                    patternMessage={patternMessage}
+                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    {...filedProps}
+                                />
                             </RenderCell>
                         }
-                    </div>)
-            break;
+                    </div>);
+                break;
+                case 'year':
+                    return (<div>
+                        {
+                            disabled?
+                            <ToolTip overlay={value} inverse placement={placement}>
+                                <span className='ac-grid-cell'>{value}</span>
+                            </ToolTip>
+                            :<RenderCell text = {value} textAlign={textAlign}>
+                                <YearField 
+                                    textAlign={textAlign}
+                                    field={dataIndex}  
+                                    validate={validate} 
+                                    required={required} 
+                                    value={value} 
+                                    pattern={pattern}
+                                    patternMessage={patternMessage}
+                                    onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    {...filedProps}
+                                />
+                            </RenderCell>
+                        }
+                    </div>);
+                break;
+            }
         }
+        
         
     }
     render() {
