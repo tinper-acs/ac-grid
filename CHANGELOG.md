@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/tinper-bee/ac-grids/compare/v0.1.1...v0.1.2) (2019-09-06)
+
+
+### Features
+
+* **ac-grids:** 升级bee-table ([caafe0d](https://github.com/tinper-bee/ac-grids/commit/caafe0d))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/tinper-bee/ac-grids/compare/v0.1.0...v0.1.1) (2019-09-04)
 
