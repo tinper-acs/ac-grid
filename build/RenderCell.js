@@ -73,12 +73,12 @@ var RenderCell = function (_Component) {
                 );
             } else {
                 return _react2["default"].cloneElement(_this.props.children, {
-                    onBlur: function onBlur() {
-                        _this.setState({
-                            visible: true,
-                            enter: false
-                        });
-                    }
+                    // onBlur:()=>{
+                    //     this.setState({
+                    //         visible:true,
+                    //         enter:false
+                    //     })
+                    // }
                 });
             }
         };

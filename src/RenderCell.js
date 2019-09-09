@@ -49,12 +49,12 @@ class RenderCell extends Component {
             )
         }else{
             return React.cloneElement(this.props.children,{
-                onBlur:()=>{
-                    this.setState({
-                        visible:true,
-                        enter:false
-                    })
-                }
+                // onBlur:()=>{
+                //     this.setState({
+                //         visible:true,
+                //         enter:false
+                //     })
+                // }
             })
         }
     }
