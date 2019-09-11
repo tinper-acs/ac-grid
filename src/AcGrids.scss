@@ -89,7 +89,8 @@
                     padding: 0;
                     padding-left: 12px;
                     height: 30px;
-
+                    font-size: 13px;
+                    border-color: #d0d0d0;
                     .ac-grid-cell {
                         display: block;
                         width: 100%;
@@ -103,6 +104,30 @@
             }
 
         }
+
+        .u-table-content .u-table-fixed-right {
+            .u-table-thead-th{
+                padding-left: 20px;
+            }
+            .u-table-body-outer{
+                .u-table-tbody{
+                    tr td{
+                        padding-left: 0;
+                        .ac-grid-cell{
+                            .ac-btns span.ac-btns-item{
+                                margin: 0 6px;
+                            }
+                            .ac-btns span.ac-btns-item:first-child{
+                                margin-left: 20px
+                            }
+                            .ac-btns span.ac-btns-item:last-child{
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        } 
     }
 
 }

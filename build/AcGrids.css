@@ -8614,7 +8614,9 @@ ul {
       .ac-grids .u-table .u-table-tbody tr td {
         padding: 0;
         padding-left: 12px;
-        height: 30px; }
+        height: 30px;
+        font-size: 13px;
+        border-color: #d0d0d0; }
         .ac-grids .u-table .u-table-tbody tr td .ac-grid-cell {
           display: block;
           width: 100%;
@@ -8623,6 +8625,16 @@ ul {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden; }
+    .ac-grids .u-table .u-table-content .u-table-fixed-right .u-table-thead-th {
+      padding-left: 20px; }
+    .ac-grids .u-table .u-table-content .u-table-fixed-right .u-table-body-outer .u-table-tbody tr td {
+      padding-left: 0; }
+      .ac-grids .u-table .u-table-content .u-table-fixed-right .u-table-body-outer .u-table-tbody tr td .ac-grid-cell .ac-btns span.ac-btns-item {
+        margin: 0 6px; }
+      .ac-grids .u-table .u-table-content .u-table-fixed-right .u-table-body-outer .u-table-tbody tr td .ac-grid-cell .ac-btns span.ac-btns-item:first-child {
+        margin-left: 20px; }
+      .ac-grids .u-table .u-table-content .u-table-fixed-right .u-table-body-outer .u-table-tbody tr td .ac-grid-cell .ac-btns span.ac-btns-item:last-child {
+        margin-right: 0; }
 
 .ac-grids-wrapper .u-input-group {
   border-spacing: 0; }
