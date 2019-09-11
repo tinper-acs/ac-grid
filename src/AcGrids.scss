@@ -44,7 +44,7 @@
                     padding: 0;
                     height: 35px;
                     padding-left: 12px;
-
+                    font-size: 13px;
                     .u-table-thead-th-drag-gap .online {
                         height: 12px;
                         width: 1px;
@@ -64,7 +64,7 @@
                 transition: none;
 
                 &:nth-child(2n) {
-                    background: #FAFAFA;
+                    background: #ffffff;
                 }
 
                 &:nth-child(2n + 1) {
@@ -124,6 +124,9 @@
 
     .u-select {
         width: 85px;
+        .u-select-selection{
+            border-color: #d0d0d0;
+        }
     }
 
     .u-pagination-list>.active>a,
@@ -146,6 +149,7 @@
     .u-pagination-list>li>a,
     .u-pagination-list>li>span {
         background: #fff;
+        border-color: #d0d0d0;
     }
 
     .u-pagination-total {
