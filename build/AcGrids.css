@@ -8471,17 +8471,19 @@ ul {
 
 .ac-btns span.ac-btns-item {
   margin-right: 6px;
-  color: #0073e1; }
+  color: #0073e1;
+  font-size: 13px; }
   .ac-btns span.ac-btns-item[disabled] {
     color: #dfe1e6; }
 
 .ac-btns button.ac-btns-item.u-button {
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  font-size: 13px; }
   .ac-btns button.ac-btns-item.u-button:last-child {
     margin-right: 0; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-write {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    border-color: #a5adba;
+    border-color: #d0d0d0;
     color: #111;
     background-color: #fff; }
     .ac-btns button.ac-btns-item.u-button.ac-btns-write:hover {
@@ -8522,7 +8524,7 @@ ul {
   .ac-btns button.ac-btns-item.u-button.u-button[disabled], .ac-btns button.ac-btns-item.u-button.u-button[disabled]:hover {
     background: #fff;
     color: #dfe1e6;
-    border-color: #a5adba;
+    border-color: #d0d0d0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
 
 .u-button-group .ac-btns .u-button {
@@ -8608,9 +8610,9 @@ ul {
       .ac-grids .u-table .u-table-tbody tr:nth-child(2n + 1) {
         background: #ffffff; }
       .ac-grids .u-table .u-table-tbody tr:hover, .ac-grids .u-table .u-table-tbody tr.u-table-row-hover {
-        background: #EBECF0; }
+        background: #F3F3F3; }
       .ac-grids .u-table .u-table-tbody tr.u-table-row.selected, .ac-grids .u-table .u-table-tbody tr.u-table-row.ref-multiple-table-row-selected {
-        background: #FFF7E7; }
+        background: #E4E4E4; }
       .ac-grids .u-table .u-table-tbody tr td {
         padding: 0;
         padding-left: 12px;
@@ -8703,12 +8705,14 @@ ul {
     border-color: #a5adba;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
   .ac-edit-grid-panel-btns .u-button:hover {
-    background-color: #ffffff;
+    background-color: white;
     border-color: #e14c46;
     color: #e14c46; }
   .ac-edit-grid-panel.close {
     margin-left: 8px;
-    margin-right: 8px; }
+    margin-right: 8px;
+    border: 1px solid #D0D0D0;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
 
 .ac-edit-grid .copy-to-here {
   cursor: pointer;

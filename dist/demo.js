@@ -98617,12 +98617,12 @@
 	                );
 	            } else {
 	                return _react2['default'].cloneElement(_this.props.children, {
-	                    // onBlur:()=>{
-	                    //     this.setState({
-	                    //         visible:true,
-	                    //         enter:false
-	                    //     })
-	                    // }
+	                    onBlur: function onBlur() {
+	                        _this.setState({
+	                            visible: true,
+	                            enter: false
+	                        });
+	                    }
 	                });
 	            }
 	        };
@@ -99192,6 +99192,14 @@
 	        'hotkey': '',
 	        'className': 'ac-btns-export'
 	    },
+	    'import': { //导入
+	        'colors': 'write',
+	        'name_zh_CN': '导入',
+	        'name_zh_TW': '導入',
+	        'name_en_US': 'Import',
+	        'hotkey': '',
+	        'className': 'ac-btns-import'
+	    },
 	    'save': { //保存
 	        'colors': 'primary',
 	        'name_zh_CN': '保存',
@@ -99248,6 +99256,14 @@
 	        'hotkey': '',
 	        'className': 'ac-btns-pbmapprove'
 	    },
+	    'appoint': { //指派
+	        'colors': 'write',
+	        'name_zh_CN': '指派',
+	        'name_zh_TW': '指派',
+	        'name_en_US': 'Appoint',
+	        'hotkey': '',
+	        'className': 'ac-btns-appoint'
+	    },
 	    'printpreview': { //打印预览
 	        'colors': 'write',
 	        'name_zh_CN': '打印预览',
@@ -99268,6 +99284,13 @@
 	        'name_zh_TW': '上傳',
 	        'name_en_US': 'Upload',
 	        'className': 'ac-btns-upload'
+	    },
+	    'reupload': { //重新上传
+	        'colors': 'primary',
+	        'name_zh_CN': '重新上传',
+	        'name_zh_TW': '重新上傳',
+	        'name_en_US': 'Re-upload',
+	        'className': 'ac-btns-reupload'
 	    },
 	    'download': { //下载
 	        'colors': 'write',

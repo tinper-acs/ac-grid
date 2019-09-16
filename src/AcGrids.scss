@@ -73,7 +73,7 @@
 
                 &:hover,
                 &.u-table-row-hover {
-                    background: #EBECF0;
+                    background: #F3F3F3;
 
                 }
 
@@ -81,7 +81,7 @@
 
                     &.selected,
                     &.ref-multiple-table-row-selected {
-                        background: #FFF7E7;
+                        background: #E4E4E4;
                     }
                 }
 
@@ -226,7 +226,7 @@
             }
 
             .u-button:hover {
-                background-color: #ffffff;
+                background-color: hsl(0, 0%, 100%);
                 border-color: #e14c46;
                 color: #e14c46;
             }
@@ -235,6 +235,8 @@
         &.close {
             margin-left: 8px;
             margin-right: 8px;
+            border: 1px solid #D0D0D0;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
         }
     }
 
