@@ -84,7 +84,9 @@
                         background: #E4E4E4;
                     }
                 }
-
+                &.sumrow{
+                    background: #FEFBF3;
+                }
                 td {
                     padding: 0;
                     padding-left: 12px;
@@ -237,6 +239,7 @@
             margin-right: 8px;
             border: 1px solid #D0D0D0;
             box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+            border-radius: 3px;
         }
     }
 
