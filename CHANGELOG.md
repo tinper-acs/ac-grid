@@ -1,3 +1,13 @@
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/tinper-bee/ac-grids/compare/v0.1.8...v0.1.9) (2019-09-24)
+
+
+### Features
+
+* **ac-grids:** 最大化显示不全 ([989fc19](https://github.com/tinper-bee/ac-grids/commit/989fc19))
+
+
+
 <a name="0.1.8"></a>
 ## [0.1.8](https://github.com/tinper-bee/ac-grids/compare/v0.1.7...v0.1.8) (2019-09-24)
 
