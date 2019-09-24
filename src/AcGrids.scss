@@ -203,6 +203,10 @@
         background: #fff;
         width: 100%;
         z-index: 2;
+        overflow: auto;
+        .u-checkbox .u-checkbox-label:before{
+            top: -10px
+        }
     }
 
 
