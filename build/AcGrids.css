@@ -8715,6 +8715,8 @@ ul {
   overflow: auto; }
   .ac-edit-grid.max .u-checkbox .u-checkbox-label:before {
     top: -10px; }
+  .ac-edit-grid.max .u-checkbox .u-checkbox-label:after {
+    top: -10px; }
 
 .ac-edit-grid-panel {
   display: flex;
