@@ -1,3 +1,8 @@
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/tinper-bee/ac-grids/compare/v0.2.5...v0.2.6) (2019-12-24)
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/tinper-bee/ac-grids/compare/v0.2.4...v0.2.5) (2019-12-24)
 
