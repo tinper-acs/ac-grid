@@ -140,6 +140,7 @@ var RenderColumn = function (_Component) {
                             required: required,
                             value: value,
                             onValidate: onValidate,
+                            index: index,
                             onChange: function onChange(field, v) {
                                 _this.props.onChange(index, dataIndex, v);
                             }

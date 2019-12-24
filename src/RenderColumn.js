@@ -80,6 +80,7 @@ class RenderColumn extends Component {
                             required:required,
                             value:value,
                             onValidate:onValidate,
+                            index:index,
                             onChange:(field, v)=>{this.props.onChange(index,dataIndex,v)},
                             ...filedProps
                         })
