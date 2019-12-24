@@ -1,3 +1,13 @@
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/tinper-bee/ac-grids/compare/v0.2.4...v0.2.5) (2019-12-24)
+
+
+### Features
+
+* **ac-grids:** 表格校验 ([853ab75](https://github.com/tinper-bee/ac-grids/commit/853ab75))
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/tinper-bee/ac-grids/compare/v0.2.3...v0.2.4) (2019-11-28)
 
