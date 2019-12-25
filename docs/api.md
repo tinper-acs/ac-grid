@@ -78,6 +78,7 @@ const EditGrid = AcGrids.EditGrid;
 
  ## 注意事项
 
- `field`这里代表 render出来的表单元素。例如：`type:'input'`，则 `formcontrol` 即为`field`
+ - `field`这里代表 render出来的表单元素。例如：`type:'input'`，则 `formcontrol` 即为`field`
+ - `EditGrid` 不支持自定义行列合并
 
  ## 更新日志

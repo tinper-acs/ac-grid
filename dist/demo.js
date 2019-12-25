@@ -38210,29 +38210,33 @@
 	            }
 	            columns.forEach(function (item) {
 	                item.oldRender = item.render;
-	                item.render = function (text, record, index) {
-	                    if (showTooltip) {
-	                        var placement = 'left';
-	                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-	                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        return _react2["default"].createElement(
-	                            _beeTooltip2["default"],
-	                            { overlay: value, inverse: true, placement: placement },
-	                            _react2["default"].createElement(
+	                if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+	                    item.render = item.oldRender;
+	                } else {
+	                    item.render = function (text, record, index) {
+	                        if (showTooltip) {
+	                            var placement = 'left';
+	                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+	                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            return _react2["default"].createElement(
+	                                _beeTooltip2["default"],
+	                                { overlay: value, inverse: true, placement: placement },
+	                                _react2["default"].createElement(
+	                                    "span",
+	                                    null,
+	                                    value
+	                                )
+	                            );
+	                        } else {
+	                            var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            return _react2["default"].createElement(
 	                                "span",
-	                                null,
-	                                value
-	                            )
-	                        );
-	                    } else {
-	                        var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        return _react2["default"].createElement(
-	                            "span",
-	                            { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
-	                            _value
-	                        );
-	                    }
-	                };
+	                                { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
+	                                _value
+	                            );
+	                        }
+	                    };
+	                }
 	            });
 	            _this.setState({
 	                columns: columns
@@ -98864,7 +98868,6 @@
 	        var _this = (0, _possibleConstructorReturn3["default"])(this, _Component.call(this, props));
 	
 	        _this.onValidate = function (errors, filed, fileds, index) {
-	            console.log(index + ': ' + filed + ':' + errors);
 	            var current = _this.errors[index] || {};
 	            if (errors) {
 	                current[filed] = errors[0].message;
@@ -98928,20 +98931,24 @@
 	                        });
 	                    };
 	                } else {
-	                    item.render = function (text, record, index) {
-	                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        var placement = 'left';
-	                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-	                        return _react2["default"].createElement(
-	                            _beeTooltip2["default"],
-	                            { overlay: value, inverse: true, placement: placement },
-	                            _react2["default"].createElement(
-	                                "span",
-	                                { className: "ac-grid-cell" },
-	                                value
-	                            )
-	                        );
-	                    };
+	                    if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+	                        item.render = item.oldRender;
+	                    } else {
+	                        item.render = function (text, record, index) {
+	                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            var placement = 'left';
+	                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+	                            return _react2["default"].createElement(
+	                                _beeTooltip2["default"],
+	                                { overlay: value, inverse: true, placement: placement },
+	                                _react2["default"].createElement(
+	                                    "span",
+	                                    { className: "ac-grid-cell" },
+	                                    value
+	                                )
+	                            );
+	                        };
+	                    }
 	                }
 	            });
 	            _this.setState({
@@ -99680,6 +99687,7 @@
 	                            required: required,
 	                            value: value,
 	                            onValidate: onValidate,
+	                            index: index,
 	                            onChange: function onChange(field, v) {
 	                                _this.props.onChange(index, dataIndex, v);
 	                            }
