@@ -1,3 +1,13 @@
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/tinper-bee/ac-grids/compare/v0.2.6...v0.2.7) (2019-12-25)
+
+
+### Features
+
+* **ac-grids:** 支持自定义行列合并 ([b3a75de](https://github.com/tinper-bee/ac-grids/commit/b3a75de))
+
+
+
 <a name="0.2.6"></a>
 ## [0.2.6](https://github.com/tinper-bee/ac-grids/compare/v0.2.5...v0.2.6) (2019-12-24)
 
