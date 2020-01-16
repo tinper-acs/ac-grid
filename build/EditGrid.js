@@ -85,7 +85,8 @@ var defaultProps = {
     onOpenChange: function onOpenChange() {},
     onDel: function onDel() {},
     showIndex: true,
-    excludeKeys: []
+    excludeKeys: [],
+    getSelectedDataFunc: function getSelectedDataFunc() {}
 };
 
 var EditGrid = function (_Component) {
@@ -117,14 +118,6 @@ var EditGrid = function (_Component) {
         _this.setDataColumn = function (disabled, col, da) {
             var columns = (0, _lodash4["default"])(col);
             var defaultValueKeyValue = {};
-            if (_this.props.showIndex) {
-                columns.unshift({
-                    title: "序号",
-                    dataIndex: "index",
-                    key: "index",
-                    width: 100
-                });
-            }
             columns.forEach(function (item) {
                 item.oldRender = item.render;
                 if (item.renderType || item.customizeRender) {
@@ -206,7 +199,7 @@ var EditGrid = function (_Component) {
             _this.props.onChange(data);
         };
 
-        _this.getSelectedDataFunc = function (selectData) {
+        _this.getSelectedDataFunc = function (selectData, record, index, newData) {
             var data = _this.resetChecked(_this.state.data);
             var selectDataIds = [];
             selectData.forEach(function (item) {
@@ -222,6 +215,7 @@ var EditGrid = function (_Component) {
                 data: data
             });
             _this.props.onChange(data);
+            _this.props.getSelectedDataFunc(selectData, record, index, newData);
         };
 
         _this.resetChecked = function (dataValue) {
