@@ -98749,9 +98749,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Grid = __webpack_require__(272);
+	var _AcGrids = __webpack_require__(271);
 	
-	var _Grid2 = _interopRequireDefault(_Grid);
+	var _AcGrids2 = _interopRequireDefault(_AcGrids);
 	
 	var _RenderColumn = __webpack_require__(658);
 	
@@ -99199,7 +99199,7 @@
 	                _react2["default"].createElement(
 	                    "div",
 	                    { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-	                    _react2["default"].createElement(_Grid2["default"], _extends({}, otherProps, {
+	                    _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
 	                        noReplaceColumns: true,
 	                        columns: columns,
 	                        data: data,

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import AcGird from "./Grid";
+import AcGird from "./AcGrids";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
