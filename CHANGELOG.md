@@ -1,5 +1,10 @@
-<a name="0.2.11"></a>
-## [0.2.11](https://github.com/tinper-bee/ac-grids/compare/v0.2.10...v0.2.11) (2020-01-16)
+<a name="0.2.12"></a>
+## [0.2.12](https://github.com/tinper-bee/ac-grids/compare/v0.2.10...v0.2.12) (2020-05-18)
+
+
+### Features
+
+* **ac-grids:** EditGrid willReceive的时候更新columns ([d586503](https://github.com/tinper-bee/ac-grids/commit/d586503))
 
 
 
