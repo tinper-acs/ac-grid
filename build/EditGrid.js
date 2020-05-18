@@ -506,7 +506,7 @@ var EditGrid = function (_Component) {
                 data: nextProps.data
             });
         }
-        if ('disabled' in nextProps) {
+        if ('disabled' in nextProps || !(0, _lodash2["default"])(nextProps.columns, this.state.columns)) {
             this.setDataColumn(nextProps.disabled, nextProps.columns, nextProps.data);
         }
     };

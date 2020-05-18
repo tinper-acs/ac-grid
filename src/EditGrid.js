@@ -193,7 +193,7 @@ class EditGrid extends Component {
                 data:nextProps.data
             })
         }
-        if('disabled' in nextProps){
+        if('disabled' in nextProps||(!isequal(nextProps.columns,this.state.columns))){
             this.setDataColumn(nextProps.disabled,nextProps.columns,nextProps.data)
         }
     }
