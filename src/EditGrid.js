@@ -156,7 +156,9 @@ class EditGrid extends Component {
         let data = this.resetChecked(this.state.data)
         let selectDataIds = []
         selectData.forEach((item)=>{
-            data[item.index-1]._checked=!data[item.index-1]._checked;
+            if(data[item.index-1]){
+                data[item.index-1]._checked=!data[item.index-1]._checked;
+            }
             let id = 'selectDataId'+this.selectDataId;
             data.selectDataId = id;
             selectDataIds.push(id);
