@@ -105,6 +105,7 @@ class EditGrid extends Component {
                                 customizeRender={item.customizeRender}
                                 onValidate={this.onValidate}
                                 filedProps={item.filedProps}
+                                record={record}
                             />
                 }
             }else{
