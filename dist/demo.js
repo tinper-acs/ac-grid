@@ -98840,6 +98840,7 @@
 	                delete current[filed];
 	            }
 	            _this.errors[index] = current;
+	            _this.props.onValidate && _this.props.onValidate(_this.errors);
 	        };
 	
 	        _this.validate = function () {
@@ -98884,7 +98885,8 @@
 	                            disabled: disabled ? true : item.disabled,
 	                            customizeRender: item.customizeRender,
 	                            onValidate: _this.onValidate,
-	                            filedProps: item.filedProps
+	                            filedProps: item.filedProps,
+	                            record: record
 	                        });
 	                    };
 	                } else {
@@ -99408,7 +99410,8 @@
 	                valueField = _this$props2.valueField,
 	                defaultValue = _this$props2.defaultValue,
 	                filedProps = _this$props2.filedProps,
-	                onValidate = _this$props2.onValidate;
+	                onValidate = _this$props2.onValidate,
+	                record = _this$props2.record;
 	
 	            var placement = 'left';
 	            if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -99436,6 +99439,7 @@
 	                            value: value,
 	                            onValidate: onValidate,
 	                            index: index,
+	                            record: record,
 	                            onChange: function onChange(field, v) {
 	                                _this.props.onChange(index, dataIndex, v);
 	                            }

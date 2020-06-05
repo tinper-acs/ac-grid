@@ -65,6 +65,7 @@ class EditGrid extends Component {
            delete current[filed];
         }
         this.errors[index] = current;
+        this.props.onValidate&&this.props.onValidate(this.errors);
     }
     validate = ()=>{
         if(Object.keys(this.errors).length){
