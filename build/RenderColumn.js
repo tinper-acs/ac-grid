@@ -255,7 +255,7 @@ var RenderColumn = function (_Component) {
                         );
                         break;
                     case 'datepicker':
-                        value = value._isAMomentObject ? value.format('YYYY-MM-DD') : value;
+                        value = value && value._isAMomentObject ? value.format('YYYY-MM-DD') : value;
                         return _react2["default"].createElement(
                             'div',
                             null,

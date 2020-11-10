@@ -176,7 +176,7 @@ class RenderColumn extends Component {
                     )
                 break;
                 case 'datepicker':
-                    value = value._isAMomentObject ? value.format('YYYY-MM-DD') : value;
+                    value = value && value._isAMomentObject ? value.format('YYYY-MM-DD') : value;
                     return (<div>
                         {
                             disabled?
